@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,11 +15,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.stamppyProject.model.business.Stamp;
-import org.stamppyProject.model.business.Tshirt;
 import org.stamppyProject.model.enumerations.UserTypeEnum;
 
 
@@ -49,17 +48,13 @@ public class User implements Serializable{
 	
 	private String lastName;
 	
+	@Enumerated(EnumType.STRING)
 	private UserTypeEnum userType;
 	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name="User_Profile")
 	private List<Profile> profiles;
-	
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="seller")
-	private List<Tshirt> tshirts;
-	
-	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="seller")
-	private List<Stamp> stamps;
+
 
 	/**
 	 * @return the id
@@ -158,6 +153,27 @@ public class User implements Serializable{
 	 */
 	public void setProfiles(List<Profile> profiles) {
 		this.profiles = profiles;
+	}
+
+	/**
+	 * @return the userType
+	 */
+	public UserTypeEnum getUserType() {
+		return userType;
+	}
+
+	/**
+	 * @param userType the userType to set
+	 */
+	public void setUserType(UserTypeEnum userType) {
+		this.userType = userType;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
 	}
 	
 	
