@@ -13,12 +13,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.stamppyProject.model.business.Stamp;
+import org.stamppyProject.model.business.Tshirt;
+import org.stamppyProject.model.enumerations.UserTypeEnum;
 
 
 
 @Entity
-@Table(name="usr")
+@Table(name="Usr")
 @NamedQueries({
 @NamedQuery(name="user.findAll", query="SELECT u FROM User u"),
 @NamedQuery(name="user.findByUsername", query="SELECT u FROM User u WHERE u.username = :username"),
@@ -44,9 +49,17 @@ public class User implements Serializable{
 	
 	private String lastName;
 	
+	private UserTypeEnum userType;
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="user_profile")
+	@JoinTable(name="User_Profile")
 	private List<Profile> profiles;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="seller")
+	private List<Tshirt> tshirts;
+	
+	@OneToMany(fetch=FetchType.LAZY, cascade = CascadeType.ALL, mappedBy="seller")
+	private List<Stamp> stamps;
 
 	/**
 	 * @return the id
