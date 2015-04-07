@@ -9,8 +9,8 @@ import javax.persistence.PersistenceContextType;
 
 import org.stamppyProject.model.business.Tshirt;
 
-import EntityToDtoMapper.TotalProductJsonMapper;
-import business.DTO.TotalProductJsonDTO;
+import business.DTO.ProductJsonDTO;
+import business.entityToDtoMapper.ProductJsonMapper;
 
 @Stateless
 public class ProductDAOBean implements ProductDAO {
@@ -20,7 +20,7 @@ public class ProductDAOBean implements ProductDAO {
 	
 	@Override
 	@SuppressWarnings("unchecked")
-	public TotalProductJsonDTO getAvailableTshirts() {	
+	public ProductJsonDTO getAvailableTshirts() {	
 		List<Tshirt> tshirts = em.createNamedQuery("tshirt.findAllAvailable")
 				.getResultList();
 		for(Tshirt t:tshirts){
@@ -31,8 +31,14 @@ public class ProductDAOBean implements ProductDAO {
 					.setParameter("tshirt", t)
 					.getResultList());
 		}
-		TotalProductJsonDTO result = TotalProductJsonMapper.convert(tshirts);
+		ProductJsonDTO result = ProductJsonMapper.convertToProductJsonDTO(tshirts);
 		return result;
+	}
+	
+	@Override
+	public void insertTshirt(Tshirt tshirt) {
+		em.persist(tshirt);
+		
 	}
 
 }

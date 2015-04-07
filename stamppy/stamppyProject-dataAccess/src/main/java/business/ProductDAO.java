@@ -1,8 +1,12 @@
 package business;
 
-import business.DTO.TotalProductJsonDTO;
+import org.stamppyProject.model.business.Tshirt;
+
+import business.DTO.ProductJsonDTO;
 
 public interface ProductDAO {
 	
-	public TotalProductJsonDTO getAvailableTshirts();
+	public ProductJsonDTO getAvailableTshirts();
+	
+	public void insertTshirt(Tshirt tshirt);
 }

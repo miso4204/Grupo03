@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.stamppyProject.model.business.Tshirt;
 
-public class TotalProductJsonDTO {
+public class ProductJsonDTO {
 	
 	private Integer total;
 	
