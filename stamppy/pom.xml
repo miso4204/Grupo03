@@ -8,6 +8,7 @@
   <modules>
   	<module>stamppyProject-model</module>
   	<module>stamppyProject-dataAccess</module>
+  	<module>stamppyProject-businessLogic</module>
     <module>stamppyProject-service</module>  
     <module>stamppyProject-ear</module>
   </modules>
