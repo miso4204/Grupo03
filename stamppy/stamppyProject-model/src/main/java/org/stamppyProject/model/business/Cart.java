@@ -1,6 +1,7 @@
 package org.stamppyProject.model.business;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,7 +23,8 @@ import org.stamppyProject.model.security.User;
 
 @Entity
 @NamedQueries({
-@NamedQuery(name="Cart.findAll", query="SELECT c FROM Cart c")
+@NamedQuery(name="Cart.findAll", query="SELECT c FROM Cart c"),
+@NamedQuery(name="Cart.findCartByUserStatus", query="SELECT c FROM Cart c where c.user =:user and c.status =:status")
 })
 public class Cart implements Serializable{
 	
@@ -81,6 +83,9 @@ public class Cart implements Serializable{
 	 * @return the products
 	 */
 	public List<Product> getProducts() {
+		if(products==null){
+			products = new ArrayList<Product>();
+		}
 		return products;
 	}
 

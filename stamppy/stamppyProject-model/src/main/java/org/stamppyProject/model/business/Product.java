@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import org.stamppyProject.model.enumerations.ColorEnum;
+import org.stamppyProject.model.enumerations.SizeEnum;
 import org.stamppyProject.model.security.User;
 
 /**
- * Entity implementation class for Entity: Stamp
+ * Entity implementation class for Entity: Product
  *
  */
 @Entity
@@ -31,6 +35,16 @@ public class Product implements Serializable {
 	private Double price;
 	
 	private Double shippingPrice;
+	
+	@Enumerated(EnumType.STRING)
+	private SizeEnum size;
+	
+	@Enumerated(EnumType.STRING)
+	private ColorEnum color;
+	
+	private String url;
+	
+	private String text;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	private User user;
@@ -127,6 +141,63 @@ public class Product implements Serializable {
 	public void setCarts(List<Cart> carts) {
 		this.carts = carts;
 	}
+
+	/**
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public SizeEnum getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(SizeEnum size) {
+		this.size = size;
+	}
+
+	/**
+	 * @return the color
+	 */
+	public ColorEnum getColor() {
+		return color;
+	}
+
+	/**
+	 * @param color the color to set
+	 */
+	public void setColor(ColorEnum color) {
+		this.color = color;
+	}
+
+	/**
+	 * @return the text
+	 */
+	public String getText() {
+		return text;
+	}
+
+	/**
+	 * @param text the text to set
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
    
+	
 	
 }
