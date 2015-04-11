@@ -22,7 +22,7 @@ public class Rating implements Serializable{
 	private Integer ratings;
 	
 	@OneToOne(mappedBy="rating")
-	private Tshirt tshirt;
+	private Stamp stamp;
 
 	/**
 	 * @return the id
@@ -67,17 +67,17 @@ public class Rating implements Serializable{
 	}
 
 	/**
-	 * @return the tshirt
+	 * @return the stamp
 	 */
-	public Tshirt getTshirt() {
-		return tshirt;
+	public Stamp getStamp() {
+		return stamp;
 	}
 
 	/**
-	 * @param tshirt the tshirt to set
+	 * @param tshirt the stamp to set
 	 */
-	public void setTshirt(Tshirt tshirt) {
-		this.tshirt = tshirt;
+	public void setStamp(Stamp stamp) {
+		this.stamp = stamp;
 	}
 	
 	

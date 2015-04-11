@@ -73,7 +73,7 @@
     </dependency>
     <dependency>
        <groupId>com.uniandes.hexagram</groupId>
-       <artifactId>stamppyProject-dataAccess</artifactId>
+       <artifactId>stamppyProject-businessLogic</artifactId>
        <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>

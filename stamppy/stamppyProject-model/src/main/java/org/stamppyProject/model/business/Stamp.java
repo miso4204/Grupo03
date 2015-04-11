@@ -1,12 +1,23 @@
 package org.stamppyProject.model.business;
 
 import java.io.Serializable;
-import java.lang.Double;
-import java.lang.Long;
-import java.lang.String;
+import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CollectionTable;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
+import org.stamppyProject.model.enumerations.StampStatusEnum;
 import org.stamppyProject.model.security.User;
 
 /**
@@ -14,7 +25,10 @@ import org.stamppyProject.model.security.User;
  *
  */
 @Entity
-
+@NamedQueries({
+@NamedQuery(name="Stamp.findAll", query="Select s from Stamp s"),
+@NamedQuery(name="Stamp.findByStatus", query="Select s from Stamp s where s.status=:status")
+})
 public class Stamp implements Serializable {
 
 	   
@@ -24,12 +38,22 @@ public class Stamp implements Serializable {
 	
 	private String name;
 	
-	private String url;
-	
 	private Double price;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.EAGER)
+	private Rating rating;
+	
+	private String url;
+	
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name ="tags")
+	private List<String> keyWords;
+	
+	@ManyToOne(fetch=FetchType.EAGER)
 	private User seller;
+	
+	@Enumerated(EnumType.STRING)
+	private StampStatusEnum status;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -50,13 +74,8 @@ public class Stamp implements Serializable {
 	public void setName(String name) {
 		this.name = name;
 	}   
-	public String getUrl() {
-		return this.url;
-	}
 
-	public void setUrl(String url) {
-		this.url = url;
-	}   
+
 	public Double getPrice() {
 		return this.price;
 	}
@@ -64,6 +83,7 @@ public class Stamp implements Serializable {
 	public void setPrice(Double price) {
 		this.price = price;
 	}   
+	
 	public User getSeller() {
 		return this.seller;
 	}
@@ -71,5 +91,55 @@ public class Stamp implements Serializable {
 	public void setSeller(User seller) {
 		this.seller = seller;
 	}
+	/**
+	 * @return the rating
+	 */
+	public Rating getRating() {
+		return rating;
+	}
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(Rating rating) {
+		this.rating = rating;
+	}
+	/**
+	 * @return the url
+	 */
+	public String getUrl() {
+		return url;
+	}
+	/**
+	 * @param url the url to set
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	/**
+	 * @return the keyWords
+	 */
+	public List<String> getKeyWords() {
+		return keyWords;
+	}
+	/**
+	 * @param keyWords the keyWords to set
+	 */
+	public void setKeyWords(List<String> keyWords) {
+		this.keyWords = keyWords;
+	}
+	/**
+	 * @return the status
+	 */
+	public StampStatusEnum getStatus() {
+		return status;
+	}
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(StampStatusEnum status) {
+		this.status = status;
+	}	
+	
+	
    
 }

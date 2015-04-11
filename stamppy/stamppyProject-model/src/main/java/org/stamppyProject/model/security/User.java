@@ -1,22 +1,18 @@
 package org.stamppyProject.model.security;
 
 import java.io.Serializable;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.stamppyProject.model.enumerations.UserTypeEnum;
 
 
@@ -25,7 +21,7 @@ import org.stamppyProject.model.enumerations.UserTypeEnum;
 @Table(name="Usr")
 @NamedQueries({
 @NamedQuery(name="user.findAll", query="SELECT u FROM User u"),
-@NamedQuery(name="user.findByUsername", query="SELECT u FROM User u WHERE u.username = :username"),
+@NamedQuery(name="user.findByUsername", query="SELECT u FROM User u WHERE u.username = :username")
 }) 
 public class User implements Serializable{
 	
@@ -50,10 +46,6 @@ public class User implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	private UserTypeEnum userType;
-	
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name="User_Profile")
-	private List<Profile> profiles;
 
 
 	/**
@@ -66,6 +58,7 @@ public class User implements Serializable{
 	/**
 	 * @param id the id to set
 	 */
+	@JsonIgnore
 	public void setId(long id) {
 		this.id = id;
 	}
@@ -138,21 +131,6 @@ public class User implements Serializable{
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	/**
-	 * @return the profiles
-	 */
-	
-	public List<Profile> getProfiles() {
-		return profiles;
-	}
-
-	/**
-	 * @param profiles the profiles to set
-	 */
-	public void setProfiles(List<Profile> profiles) {
-		this.profiles = profiles;
 	}
 
 	/**

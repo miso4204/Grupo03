@@ -8,32 +8,25 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.stamppyProject.model.security.User;
+import org.stamppyProject.businessLogic.security.IUser;
+import org.stamppyProject.businessLogic.security.dto.UserJson;
+
 
 @Stateless
 @Path("/user-service")
 public class UserService {
 	
 	@EJB
-	private UserDAO userDAO;
+	private IUser userBean;
 	
-	 
-//	 @GET
-//		@Path("/{param}")
-//		public Response printMessage(@PathParam("param") String msg) {
-//	 
-//			String result = "Restful example : " + msg;
-//	 
-//			return Response.status(200).entity(result).build();
-//	 
-//		}
     
      @POST
-     @Path("/users/register")
+     @Path("/register")
      @Consumes(MediaType.APPLICATION_JSON)
-     public Response registerUser(User user)
+     public Response registerUser(UserJson userJson)
      {
-    	userDAO.register(user);
+    	userBean.registerUser(userJson);;
         return Response.status(200).build();
      }
+     
 }
