@@ -1,0 +1,61 @@
+<div class="col-md-12">
+
+</div>
+<div class="panel panel-default">
+	<!-- product slides -->
+	<div class="col-md-6 panel panel-info no-padding" >
+		<carousel>
+			<slide ng-repeat="image in productInfo.images" active="image.active">
+				<img ng-src="{{image.image}}" class="img-responsive center-block">
+				<div class="carousel-caption">
+				</div>
+				<div class="panel-footer panel-primary"><h4>{{image.text}}</h4></div>
+			</slide>
+		</carousel>
+	</div>
+	<!-- End product slides -->
+	<!-- Product Info-->
+	<div class="col-md-6 panel">
+		<p><h2 class="no-padding no-margin">{{productInfo.name}}</h2></p>
+		<p>
+			<span class="rating">
+				<i class="fa fa-star fa-2x"></i>
+				<i class="fa fa-star fa-2x"></i>
+				<i class="fa fa-star fa-2x"></i>
+				<i class="fa fa-star fa-2x"></i>
+				<i class="fa fa-star fa-2x"></i>
+			</span>
+			<strong>({{productInfo.ratings}})</strong>
+		</p>
+		<p><h3>Talla :&nbsp;</h3></p>
+		<span class="label label-success" ng-repeat="size in productInfo.availableSizes" style="margin-right:3px;">&nbsp;{{size.display}}</span>
+
+		<p><h3>Color:&nbsp;</h3></p>
+		<div class="btn-group color-grid">
+          <label class="btn"  ng-model="productOrder.selectedColor" ng-repeat="color in productInfo.availableColors" btn-radio="'{{color.name}}'" style='background:{{color.code}}'>&nbsp;</label>
+        </div>
+		
+		<span ng-repeat="color in product.availableColors" style="background:{{color.code}}; border : 1px solid #D3D3D3; margin-right:3px;" tooltip="{{color.name}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+		<p><h3>Descripcion:&nbsp;</h3></p>
+		<p>
+			<ul>
+				<li>100% Cotton Imported</li>
+				<li>Button closure</li>
+				<li>Machine Wash</li>
+				<li>Gingham long-sleeve slim-fit button-front shirt with button-through welt pocket at chest</li>
+				<li>Button-down collar</li>
+				<li>Shirttail hemline</li>
+			</ul>
+		</p>
+		<div class="text-right">
+			<p><h3 class="no-padding no-margin">Precio</h3> <h2 class="no-padding no-margin">$ {{productInfo.price}}</h2></p>
+		</div>
+		<div class="panel panel-success text-right">
+			<button class="btn btn-warning"><i class="fa fa-list-ol"></i>&nbsp; Agrega al lista de deseados </button>
+			<button class="btn btn-success"><i class="fa fa-shopping-cart"></i>&nbsp; Agrega al carrito </button>
+		</div>
+	</div>
+	<!-- End Product Info-->
+	
+</div>
+<div class="col-md-12">Reviews</div>

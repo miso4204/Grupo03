@@ -1,0 +1,64 @@
+
+<div class="row">
+	<!-- Login Form -->
+	<div class="col-md-6" >
+		<div class="panel panel-body panel-primary col-md-7">
+			<div ng-show="error" class="alert alert-danger">{{error}}</div>
+			<form class="form-signin " name="loginForm" ng-submit="login(credentials)" method="POST">
+			  	<h2 class="no-margin"><i class="fa fa-sign-in"></i>&nbsp;&nbsp;Iniciar Sesión</h2>
+			    <h5 class="form-signin-heading">* Campos Obligatorios</h5>
+			    <div class="input">
+			    	<input type="email" name="email" id="inputEmail" class="form-control" ng-model="credentials.user" placeholder="Correo Electrónico *" required >
+		        </div>
+		        <div class="input">
+		        	<input type="password" id="inputPassword" class="form-control"  ng-model="credentials.password"placeholder="Contraseña *" required>
+		        </div>
+		        <div class="text-right">
+			    	<button class="btn btn-primary" type="submit">Iniciar Sesión Ahora</button>
+			    	<br>
+			      	<a href="index.html">¿Has olvidado la contraseña?</a>
+			    </div>
+			</form>
+		</div>
+	</div>
+	<!-- End login form -->
+	<!-- Sign up form -->
+	<div class="col-md-6">
+		<div class="panel panel-body panel-primary col-md-10">
+			<form class="form-register" name="registerForm">
+			<h2 class="form-register-heading">Registrarse</h2>
+	      	<h4 class="form-register-heading">Bienvenido a Stampy Colombia. Registrate y sé parte de nuestra tienda de moda online. (* Campos Obligatorios)</h4>
+		  	<div class="col-md-12 no-padding">
+		  		<div>
+		      		<div class="input">
+		      			<input type="nombre" id="inputNombre" class="form-control" ng-model="fullName" placeholder="Nombre completo *" required autofocus>
+		      		</div>
+		      		<div class="input">
+		      			<input type="email" id="inputEmail1" class="form-control"  ng-model="email" placeholder="Correo Electrónico *" required autofocus>
+		      		</div>
+		      		<div class="input">
+		      			<input type="password" id="inputPassword1" class="form-control" ng-model="password"  ng-minlength="6" placeholder="Contraseña *" required>
+		      		</div>
+		      		<div class="input">
+		      			<input type="password" id="inputConfPassword" class="form-control" ng-model="passwordConfirm" placeholder="Confirmar Contraseña *" required>
+		      		</div>
+				    <div class="row input btn-group col-md-12">
+				        <div class="sexo1 col-md-6">
+				          <input type="Radio" name="sex" ng-model="sex"btn-radio="'M'" checked> <i class="fa fa-male"></i> Hombre
+				        </div>
+				        <div class="sexo1 col-md-6">
+				          <input type="Radio" name="sex" ng-model="sex" btn-radio="'F'"> <i class="fa fa-female"></i> Mujer
+				        </div>  
+			      	</div>
+			      	<div class="text-right">
+			      		<button class="btn btn-primary " ng-click="Save()" type="submit">Crear Cuenta</button>
+			      	</div>
+		      	</div>  
+		  	</div>    
+			</form>
+		</div>
+	</div>
+	<!-- End sing up form -->
+</div>
+
+

@@ -1,0 +1,207 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  padding: 0;
+  background-color: #eee;
+  background-image: url(https://download.unsplash.com/photo-1416339698674-4f118dd3388b);
+  background-position: center center;
+  background-repeat: none;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  background-size: cover;
+  -o-background-size: cover;
+  opacity: 1;  
+}
+
+/* Everything but the jumbotron gets side spacing for mobile first views */
+.header,
+.marketing,
+.footer {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+/* Custom page header */
+.header {
+  border-bottom: 1px solid #e5e5e5;
+  margin-bottom: 10px;
+}
+/* Make the masthead heading the same height as the navigation */
+.header h3 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 40px;
+  padding-bottom: 19px;
+}
+
+/* Custom page footer */
+.footer {
+  padding-top: 19px;
+  color: #777;
+  border-top: 1px solid #e5e5e5;
+}
+
+.container-narrow > hr {
+  margin: 30px 0;
+}
+
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+
+/* Supporting marketing content */
+.marketing {
+  margin: 40px 0;
+}
+.marketing p + h4 {
+  margin-top: 28px;
+}
+/*Generic helper classes*/
+
+.no-margin{
+  margin:0px !important;
+}
+.no-padding{
+  padding: 0px !important;
+}
+.inline-block{
+  display: inline-block!important;
+}
+.invalid-field{
+  /*TODO*/
+}
+.valid-field{
+  /*TODO*/
+}
+.main-panel{
+  margin-top:100px;
+  height: 100%;
+}
+
+
+
+/*Suport for catalog left filter*/
+.color-grid label{
+  margin:0px 5px 5px 0px;
+  font-size: 8px;
+  display: block !important;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #D3D3D3;
+}
+.color-grid label:hover{
+  border-style: solid;
+  border-width: 2px;
+  border-color: #66CCFF;
+}
+.filter-container .btn.active, .filter-container .btn:active {
+    border-style: solid!important;
+    border-width: 2px!important;
+    border-color: #66CCFF!important;
+    background-image: none!important;
+    outline: 0px none!important;
+    box-shadow: 0px 0px 3px 1px #66CCFF !important;
+}
+.color-grid .btn.active, .color-grid .btn:active {
+    border-style: solid!important;
+    border-width: 2px!important;
+    border-color: #66CCFF!important;
+    background-image: none!important;
+    outline: 0px none!important;
+    box-shadow: 0px 0px 3px 1px #66CCFF !important;
+}
+.filter-container{
+  width: 100%;
+  margin-left:20px;
+}
+
+/*Custom adjustments*/
+/*Remove spinnners from input number*/
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+input[type=number] {
+    -moz-appearance:textfield;
+}
+#view-options .glyphicon{
+    font-size: 23px;
+} 
+#searchbox .form-control{
+  height: 41px !important;
+  font-size: 23px;
+  color:#000A51;
+}
+#view-options button{
+  height: 41px !important;
+  font-size: 16px;
+}
+#view-options> .panel-body> div > div{
+  height: 41px;
+}
+.rating{
+  color:#FFCC00;
+}
+.carousel-control:hover,.carousel-control{
+  background-image:none !important;
+}
+.carousel-control{
+  color:#000000 !important;
+  margin-bottom: 5px!important;
+}
+.carousel-indicators li{
+  border: 1px solid #337AB7!important;
+}
+
+.carousel-indicators .active{
+  background-color:#337AB7 !important;
+}
+.carousel-indicators {
+    bottom: 27px !important;
+}
+div.input{
+  margin-bottom: 5px;
+}
+/* Responsive: Portrait tablets and up */
+@media screen and (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+
+  /* Remove the padding we set earlier */
+  .header,
+  .marketing,
+  .footer {
+    padding-left: 0;
+    padding-right: 0;
+  }
+  /* Space out the masthead */
+  .header {
+    margin-bottom: 30px;
+  }
+  /* Remove the bottom border on the jumbotron for visual effect */
+  .jumbotron {
+    border-bottom: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
