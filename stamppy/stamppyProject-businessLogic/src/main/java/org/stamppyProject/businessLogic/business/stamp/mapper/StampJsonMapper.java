@@ -27,7 +27,8 @@ public class StampJsonMapper {
 		stampJson.setPrice(stamp.getPrice());
 		stampJson.setUrl(stamp.getUrl());
 		stampJson.setKeyWords(stamp.getKeyWords());
-		stampJson.setRating(RatingJsonMapper.convertToJsonMapper(stamp.getRating()));
+		if(stamp.getRating()!=null)
+			stampJson.setRating(RatingJsonMapper.convertToJsonMapper(stamp.getRating()));
 		return stampJson;
 	}
 	
