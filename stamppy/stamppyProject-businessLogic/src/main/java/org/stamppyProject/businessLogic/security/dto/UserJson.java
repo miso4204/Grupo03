@@ -4,6 +4,7 @@ package org.stamppyProject.businessLogic.security.dto;
 
 import org.stamppyProject.model.enumerations.UserTypeEnum;
 
+
 public class UserJson {
 
 	private Long id;

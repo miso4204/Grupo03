@@ -30,6 +30,7 @@ public class Product implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private Long id;
 	
+	@ManyToOne(fetch=FetchType.EAGER)
 	private Stamp stamp;
 	
 	private Double price;

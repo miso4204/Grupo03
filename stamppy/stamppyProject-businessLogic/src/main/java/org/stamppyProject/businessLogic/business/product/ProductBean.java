@@ -27,6 +27,7 @@ public class ProductBean implements IProduct {
 	@EJB
 	private ICartDAO cartDAO;
 	
+	
 	@Override
 	public void insertProduct(ProductJson productJson) {
 		Product product = ProductJsonMapper.convertToProduct(productJson);

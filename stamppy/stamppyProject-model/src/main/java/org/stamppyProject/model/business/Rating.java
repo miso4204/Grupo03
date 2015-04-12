@@ -6,9 +6,14 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 
 @Entity
+@NamedQueries({
+@NamedQuery(name="Rating.findByStamp", query="Select r from Rating r where r.stamp.id=:stampId"),
+})
 public class Rating implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
@@ -17,9 +22,9 @@ public class Rating implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY) 
 	private Long id;
 	
-	private Double averageRating;
+	private Double averageRating = 0.0;
 	
-	private Integer ratings;
+	private Integer ratings = 0;
 	
 	@OneToOne(mappedBy="rating")
 	private Stamp stamp;

@@ -2,14 +2,13 @@ package org.stamppyProject.businessLogic.business.stamp.dto;
 
 import java.util.List;
 
-import org.stamppyProject.model.business.Rating;
 
 public class StampJson {
 	
 	private Long id;
 	
 	private String name;
-	
+
 	private Double price;
 	
 	private String url;
@@ -18,7 +17,7 @@ public class StampJson {
 	
 	private Long artistId;
 	
-	private Rating rating;
+	private RatingJson rating;
 	
 
 	/**
@@ -108,14 +107,14 @@ public class StampJson {
 	/**
 	 * @return the rating
 	 */
-	public Rating getRating() {
+	public RatingJson getRating() {
 		return rating;
 	}
 
 	/**
 	 * @param rating the rating to set
 	 */
-	public void setRating(Rating rating) {
+	public void setRating(RatingJson rating) {
 		this.rating = rating;
 	}
 	
