@@ -14,7 +14,7 @@ angular
     'ngCookies',
     'ngResource',
     'ngRoute',
-    'ui.bootstrap'
+    'ui.bootstrap',
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -34,6 +34,22 @@ angular
       .when('/catalog/:productId',{
         templateUrl:'views/productDetail.html',
         controller:'productDetailCtrl',
+      })
+      .when('/stamps',{
+        templateUrl:'views/stampCatalog.html',
+        controller:'stampCatalogCtrl',
+      })
+      .when('/stamps/:id',{
+        templateUrl:'views/stampDetail.html',
+        controller:'stampDetailCtrl',
+      })
+      .when('/authors',{
+        templateUrl:'views/authorCatalog.html',
+        controller:'authorCatalogCtrl',
+      })
+      .when('/authors/:id',{
+        templateUrl:'views/authorDetail.html',
+        controller:'authorDetailCtrl',
       })
       .when('/login',{
         templateUrl:'views/login.html',

@@ -1,0 +1,73 @@
+<div layout="row">
+  <!-- side navigation -->
+  <div class="col-md-2 panel panel-primary no-padding no-margin">
+    <div class="panel-heading">Filtros</div>
+    <div class="panel-body no-padding">
+   		<div>
+   			<div ng-repeat="category in filter.categories"class="stamp-category">
+   				<i class="fa fa-tag fa-2x"></i>
+				<span>{{category}}</span>				
+   			</div>
+   		</div>
+    </div>
+  </div>
+  <!-- End side Navigation -->
+  <!-- ******************* -->
+  <!-- catalog panel -->
+  <div class="col-md-10 panel panel-info no-padding ">
+    <!-- view options -->
+    <div id="view-options" class="panel panel-default no-margin">
+      <div class="panel-body no-padding">
+        <!-- view mode -->
+        <div class="col-md-3 btn-group no-padding">
+          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
+            <span class="glyphicon glyphicon-th"></span>
+          </label>
+          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'list'" tooltip="Ver en modo lista">
+            <span class="glyphicon glyphicon-th-list"></span>
+          </label>
+        </div>
+        <!-- End view mode -->
+        <!-- search box -->
+        <div class="col-md-6 no-padding" id="searchbox">
+          <div class="input-group no-padding">
+            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="filters.searchBox"></input>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" aria-hidden="true" ng-click="filter=filterFuction">Buscar</button>
+            </span>
+          </div>
+        </div>
+        <!-- End search box -->
+        <!-- sort mode -->
+        <div class="col-md-3 no-padding">
+          <div class="btn-group no-padding" dropdown>
+            <button class="btn btn-default" type="button" >Odernar por:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
+              <span class="caret"></span>
+              <span class="sr-only"> Split!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="">Precio mayor - menor</a></li>
+              <li><a href="">Precio menor - mayor</a></li>
+              <li><a href="">Calificacion</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- End sort mode -->
+      </div>
+    </div>
+    <!-- End view options -->
+
+    <!-- Stamps -->
+    <div class="panel panel-info">
+      <div class="panel-body">
+      	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
+        	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End Stamps -->
+    <pre>{{viewOptions}}</pre>
+  </div>
+  <!-- End catalog panel -->
+</div>

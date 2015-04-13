@@ -1,17 +1,17 @@
-<div class="panel col-md-4">
-	<div>
-		<img class="img-thumbnail" src="{{product.imgUrl}}">
+<div div class="grid-item">
+	<div class="text-center">
+		<img class="img-thumbnail" src="{{stamp.url}}">
 		<div class="caption">
-			<h4 class="no-margin"><a href="#/catalog/{{product.productId}}">{{product.name}}</a></h5>
-			<p class="no-margin"><strong>$ {{product.price}}</strong></p>
+			<h3 class="no-margin"><a href="#/stamps/{{stamp.id}}">{{stamp.name}}</a></h3>
+			<p class="no-margin"><strong>$ {{stamp.price}}</strong></p>
 			<span class="rating">
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=1" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=2" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=3" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=4" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=5" class="fa fa-star"></i>
 			</span>
-			<span>({{product.ratings}})</span>
+			<span>({{stamp.ratings}})</span>
 		</div>
 	</div>	
 </div>

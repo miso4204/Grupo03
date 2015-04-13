@@ -13,7 +13,7 @@
  			restrict:'EAC',
  			template: '<ng-include src="getTemplateUrl()"/>',
  			scope:{
- 				product:'=product',
+ 				stamp:'=stamp',
  				viewMode:'=viewMode',
  			},
  			link:function($scope){

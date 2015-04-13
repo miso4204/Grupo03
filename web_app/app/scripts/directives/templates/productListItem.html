@@ -1,37 +1,28 @@
 <div class="panel col-md-12">
 	<div class="col-md-3">
-		<img class="img-thumbnail" src="{{product.imgUrl}}"</img>
+		<img class="img-thumbnail" src="{{stamp.url}}"</img>
 	</div>
 	<div class="col-md-6">
-		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;<a href="#/catalog/{{product.productId}}">{{product.name}}</a></span></p>
-		<p><strong>Tallas Disponibles:&nbsp;</strong>
-			<span class="label label-success" ng-repeat="size in product.availableSizes" style="margin-right:3px;">&nbsp;{{size.display}}</span>
-		</p>
-		<p>
-			<strong>Colores Disponibles:&nbsp;</strong>
-			<span ng-repeat="color in product.availableColors" style="background:{{color.code}}; border : 1px solid #D3D3D3; margin-right:3px;" tooltip="{{color.name}}">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-		</p>
+		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;<a href="#/stamps/{{stamp.id}}">{{stamp.name}}</a></span></p>
+		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="#/authors/{{stamp.author.id}}">{{stamp.author.name}}</a></span></p>
 		<p>
 			<strong>Calificación:&nbsp;</strong>
 			<span class="rating">
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
-				<i class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=1" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=2" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=3" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=4" class="fa fa-star"></i>
+				<i ng-show="stamp.rating>=5" class="fa fa-star"></i>
 			</span>
-			<span>({{product.ratings}})</span>
+			<span>({{stamp.ratings}})</span>
 		</p>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-3 no-padding no-margin">
 		<p>
-			<h3 class= "text-right no-margin">${{product.price}}</h3>
+			<h3 class= "text-right no-margin">${{stamp.price}}</h3>
 		</p>
 		<p class="text-right ">
-			<span class="text-right "><i class="fa fa-truck"></i> Envio : <span class="label label-success">{{product.shippingPrice === 0 ? "Gratis!" : "$ "+product.shippingPrice }}</span></span>
-		</p>
-		<p class="text-right ">
-			<button class="btn btn-warning"><i class="fa fa-shopping-cart"></i>&nbsp; Agrega al carrito </button>
+			<button class="btn btn-danger"><i class="fa fa-paint-brush"></i>&nbsp; Agregalo a una camiseta </button>
 		</p>
 	</div>
 </div>

@@ -126,7 +126,48 @@ body {
   margin-left:20px;
 }
 
+.stamp-category{
+  padding :10px;
+  border-bottom: dotted rgb(51,122,183);
+}
+.stamp-category span{
+  font-size: 1.6em;
+  padding-left: 0.3em;
+  color:#138E57
+}
+.stamp-category:hover{
+  cursor: pointer;
+  background-color :#ADEBFF;
+}
+/*masonry support*/
+.masonry{
+    -moz-column-count: 6;
+    -webkit-column-count: 6;
+    column-count: 6;
+    -moz-column-gap: 1em;
+    -webkit-column-gap: 2em;
+    column-gap: 2em;
+}
+.masonry .grid-item{
+   padding: 1px;
+  border-radius: 3px;
+   background-color: #FFF;
+   display: inline-block;
+   margin: 0 0 1em;
+   width: 100%;
+}
+.masonry .grid-item  .img-thumbnail{
+  width:90%
+}
+.masonry .grid-item .caption{
+  width:90%;
+  margin:auto;
+  padding: 4px;
+  background-color: #eee
+}
+
 /*Custom adjustments*/
+
 /*Remove spinnners from input number*/
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -174,6 +215,11 @@ input[type=number] {
 div.input{
   margin-bottom: 5px;
 }
+
+
+
+
+
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
