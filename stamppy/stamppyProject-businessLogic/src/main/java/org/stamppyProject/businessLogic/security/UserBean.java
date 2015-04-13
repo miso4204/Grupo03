@@ -3,6 +3,9 @@ package org.stamppyProject.businessLogic.security;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.stamppyProject.businessLogic.business.stamp.Stamp;
+import org.stamppyProject.businessLogic.business.stamp.dto.StampJson;
+import org.stamppyProject.businessLogic.business.stamp.mapper.StampJsonMapper;
 import org.stamppyProject.businessLogic.security.dto.UserJson;
 import org.stamppyProject.businessLogic.security.mapper.UserJsonMapper;
 import org.stamppyProject.dataAccess.business.cart.ICartDAO;
@@ -33,4 +36,14 @@ public class UserBean implements IUser{
 		}
 	}
 	
+	@Override
+	public void updateUser(UserJson userJson) {
+		User user = UserJsonMapper.convertToUser(userJson);		
+		userDAO.updateUser(user);
+	}
+	
+	@Override
+	public UserJson getSUser(Long id) {
+		return UserJsonMapper.convertToUser(userDAO.getUser(id));
+	}	
 }
