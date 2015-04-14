@@ -1,15 +1,21 @@
 package org.stamppyProject.businessLogic.business.cart;
 
+import java.util.Date;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.stamppyProject.businessLogic.business.cart.dto.CartJson;
+import org.stamppyProject.businessLogic.business.cart.dto.PaymentJson;
 import org.stamppyProject.businessLogic.business.cart.mapper.CartJsonMapper;
+import org.stamppyProject.businessLogic.business.cart.mapper.PaymentJsonMapper;
 import org.stamppyProject.dataAccess.business.cart.ICartDAO;
 import org.stamppyProject.dataAccess.business.payment.IPaymentDAO;
 import org.stamppyProject.dataAccess.security.IUserDAO;
 import org.stamppyProject.model.business.Cart;
+import org.stamppyProject.model.business.Payment;
 import org.stamppyProject.model.business.Product;
+import org.stamppyProject.model.enumerations.PaymentStatusEnum;
 
 
 @Stateless
@@ -42,5 +48,18 @@ public class CartBean implements ICart {
 		cart.getProducts().remove(tmp);
 		cartDAO.updateCart(cart);
 	}
-
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public String purchaseProducts(PaymentJson paymentJson) {
+		Payment payment = PaymentJsonMapper.convertToPayment(paymentJson);
+		Date date = new Date();
+		if(date.getSeconds() % 4 == 0){
+			payment.setStatus(PaymentStatusEnum.REJECTED);
+		}else{
+			payment.setStatus(PaymentStatusEnum.APPROVED);
+		}
+		paymentDAO.savePayment(payment);
+		return payment.getStatus().name();
+	}
 }

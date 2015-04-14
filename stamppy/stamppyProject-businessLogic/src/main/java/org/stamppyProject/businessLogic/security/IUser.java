@@ -9,6 +9,8 @@ public interface IUser {
 	
 	public void updateUser(UserJson userJson);
 	
-	public UserJson getSUser(Long id);
+	public UserJson login(UserJson userJson);
+	
+	public UserJson getUser(Long id);
 
 }

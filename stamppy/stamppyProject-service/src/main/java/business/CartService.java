@@ -14,6 +14,7 @@ import javax.ws.rs.core.Response;
 
 import org.stamppyProject.businessLogic.business.cart.ICart;
 import org.stamppyProject.businessLogic.business.cart.dto.CartJson;
+import org.stamppyProject.businessLogic.business.cart.dto.PaymentJson;
 import org.stamppyProject.businessLogic.business.product.IProduct;
 import org.stamppyProject.businessLogic.business.product.dto.ProductJson;
 
@@ -45,12 +46,14 @@ public class CartService {
 	@DELETE
 	@Path("/cart/{cartId}/{productId}")
 	public Response removeStamp(@PathParam("cartId") Long cartId, @PathParam("productId") Long productId){
-		cartBean.removeItem(cartId, productId);;
+		cartBean.removeItem(cartId, productId);
 		return Response.status(200).build();
 	}
 	
-	
-	
-	
-
+	@POST
+	@Path("/payment")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public String purchase(PaymentJson paymentJson){
+		return cartBean.purchaseProducts(paymentJson);
+	}
 }

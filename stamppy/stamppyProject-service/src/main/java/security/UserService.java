@@ -16,7 +16,6 @@ import javax.ws.rs.core.Response;
 import org.stamppyProject.businessLogic.security.IUser;
 import org.stamppyProject.businessLogic.security.dto.UserJson;
 
-import business.StampJson;
 
 
 @Stateless
@@ -28,7 +27,7 @@ public class UserService {
 	
     
      @POST
-     @Path("/register")
+     @Path("/user")
      @Consumes(MediaType.APPLICATION_JSON)
      public Response registerUser(UserJson userJson){
     	userBean.registerUser(userJson);
@@ -43,11 +42,12 @@ public class UserService {
  		return Response.status(200).build();
  	}
  	
- 	@GET
-	@Path("/user/{id}")
-	@Produces("application/json")
-	public UserJson getStamp(@PathParam("id") Long id){
-		return userBean.getSUser(id);
+ 	@POST
+	@Path("/login")
+ 	@Consumes(MediaType.APPLICATION_JSON)
+ 	@Produces("application/json")
+	public UserJson logIn(UserJson userJson){
+		return userBean.login(userJson);
 	}
  	
  	@DELETE
@@ -55,5 +55,14 @@ public class UserService {
 	public Response removeUser(@PathParam("id") Long id){
  		return Response.status(200).build();
  	}
+ 	
+ 	@GET
+ 	@Path("/user/{id}")
+ 	@Produces("application/json")
+ 	public UserJson getUser(@PathParam("id") Long id){
+ 		return userBean.getUser(id);
+ 	}
+ 	
+ 	
      
 }
