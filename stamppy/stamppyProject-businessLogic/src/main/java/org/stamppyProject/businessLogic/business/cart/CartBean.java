@@ -15,6 +15,7 @@ import org.stamppyProject.dataAccess.security.IUserDAO;
 import org.stamppyProject.model.business.Cart;
 import org.stamppyProject.model.business.Payment;
 import org.stamppyProject.model.business.Product;
+import org.stamppyProject.model.enumerations.CartStatusEnum;
 import org.stamppyProject.model.enumerations.PaymentStatusEnum;
 
 
@@ -53,11 +54,14 @@ public class CartBean implements ICart {
 	@Override
 	public String purchaseProducts(PaymentJson paymentJson) {
 		Payment payment = PaymentJsonMapper.convertToPayment(paymentJson);
+		payment.setCart(cartDAO.getCart(paymentJson.getCartId()));
 		Date date = new Date();
 		if(date.getSeconds() % 4 == 0){
 			payment.setStatus(PaymentStatusEnum.REJECTED);
 		}else{
 			payment.setStatus(PaymentStatusEnum.APPROVED);
+			payment.getCart().setStatus(CartStatusEnum.CHECKOUT);
+			cartDAO.updateCart(payment.getCart());
 		}
 		paymentDAO.savePayment(payment);
 		return payment.getStatus().name();
