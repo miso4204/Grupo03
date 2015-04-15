@@ -3,6 +3,7 @@ package org.stamppyProject.businessLogic.security;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.stamppyProject.businessLogic.MethodResponseEnum;
 import org.stamppyProject.businessLogic.security.dto.UserJson;
 import org.stamppyProject.businessLogic.security.mapper.UserJsonMapper;
 import org.stamppyProject.dataAccess.business.cart.ICartDAO;
@@ -22,14 +23,20 @@ public class UserBean implements IUser{
 	private ICartDAO cartDAO;
 	
 	@Override
-	public void registerUser(UserJson userJson) {
+	public MethodResponseEnum registerUser(UserJson userJson) {
 		User user = UserJsonMapper.convertToUser(userJson);
-		userDAO.insertUser(user);
-		if(user.getUserType().equals(UserTypeEnum.CLIENT)){
-			Cart cart = new Cart();
-			cart.setUser(user);
-			cart.setStatus(CartStatusEnum.TEMP);
-			cartDAO.saveCart(cart);
+		User tmp = getUser(user.getUsername());
+		if(tmp==null){
+			userDAO.insertUser(user);
+			if(user.getUserType().equals(UserTypeEnum.CLIENT)){
+				Cart cart = new Cart();
+				cart.setUser(user);
+				cart.setStatus(CartStatusEnum.TEMP);
+				cartDAO.saveCart(cart);
+			}
+			return MethodResponseEnum.OK;
+		}else{
+			return MethodResponseEnum.FAILED;
 		}
 	}
 	
@@ -52,5 +59,9 @@ public class UserBean implements IUser{
 	@Override
 	public UserJson getUser(Long id) {
 		return UserJsonMapper.convertToUserJson(userDAO.getUser(id));
+	}
+	
+	private User getUser(String username){
+		return userDAO.getUser(username);
 	}
 }

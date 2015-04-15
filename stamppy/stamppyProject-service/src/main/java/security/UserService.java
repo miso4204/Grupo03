@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.stamppyProject.businessLogic.MethodResponseEnum;
 import org.stamppyProject.businessLogic.security.IUser;
 import org.stamppyProject.businessLogic.security.dto.UserJson;
 
@@ -30,8 +31,11 @@ public class UserService {
      @Path("/user")
      @Consumes(MediaType.APPLICATION_JSON)
      public Response registerUser(UserJson userJson){
-    	userBean.registerUser(userJson);
-        return Response.status(200).build();
+    	MethodResponseEnum resp = userBean.registerUser(userJson);
+    	if(resp.equals(MethodResponseEnum.OK))
+    		return Response.status(200).build();
+    	else
+    		return Response.status(405).build();
      }
      
  	@PUT

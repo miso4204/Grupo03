@@ -51,4 +51,16 @@ public class UserDAO implements IUserDAO{
 		
 	}
 	
+	@Override
+	public User getUser(String username) {
+		try {
+			return (User)em.createNamedQuery("user.findByUsername")
+					.setParameter("username", username)
+					.getSingleResult();
+					
+		} catch (NoResultException e) {
+			return null;
+		}
+	}
+	
 }

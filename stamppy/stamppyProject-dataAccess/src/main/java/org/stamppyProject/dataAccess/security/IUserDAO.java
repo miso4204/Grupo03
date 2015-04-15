@@ -15,5 +15,7 @@ public interface IUserDAO {
 	
 	public User getLoginUser(String username, String password);
 	
+	public User getUser(String username);
+	
 	
 }
