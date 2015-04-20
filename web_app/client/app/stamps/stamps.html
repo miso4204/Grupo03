@@ -1,20 +1,7 @@
 <div layout="row">
-  <!-- side navigation -->
-  <div class="col-md-2 panel panel-primary no-padding no-margin">
-    <div class="panel-heading">Filtros</div>
-    <div class="panel-body no-padding">
-   		<div>
-   			<div ng-repeat="category in filter.categories"class="stamp-category">
-   				<i class="fa fa-tag fa-2x"></i>
-				<span>{{category}}</span>				
-   			</div>
-   		</div>
-    </div>
-  </div>
-  <!-- End side Navigation -->
   <!-- ******************* -->
   <!-- catalog panel -->
-  <div class="col-md-10 panel panel-info no-padding ">
+  <div class="col-md-12 panel panel-info no-padding ">
     <!-- view options -->
     <div id="view-options" class="panel panel-default no-margin">
       <div class="panel-body no-padding">
@@ -60,7 +47,7 @@
 
     <!-- Stamps -->
     <div class="panel panel-info">
-      <div class="panel-body">
+      <div class="panel-body stamp-catalog">
       	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
         	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
         </div>

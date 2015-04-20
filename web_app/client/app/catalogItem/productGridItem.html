@@ -1,17 +1,48 @@
 <div div class="grid-item">
-	<div class="text-center">
-		<img class="img-thumbnail" src="{{stamp.url}}">
-		<div class="caption">
-			<h3 class="no-margin"><a href="#/stamps/{{stamp.id}}">{{stamp.name}}</a></h3>
-			<p class="no-margin"><strong>$ {{stamp.price}}</strong></p>
-			<span class="rating">
-				<i ng-show="stamp.rating>=1" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=2" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=3" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=4" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=5" class="fa fa-star"></i>
-			</span>
-			<span>({{stamp.ratings}})</span>
+	<div class="stamp-wrapper">
+		<div class="stamp-image-section">
+			<div class="stamp-wrapper">
+				<img class="" src="{{stamp.url}}">
+			</div>
+			<div class="stamp-hover-options">
+				<div class="stamp-buttons">
+					<div class="stamp-it-button">
+						<button href="/test" type="button" class="btn btn-danger">
+							<a href="">
+								<span> Stampar!</span>
+								<i class="fa fa-paint-brush"></i>
+							</a>
+						</button>
+					</div>
+					<div class="like-box">
+						<button type="button" class="btn btn-default">
+							<i class="fa fa-smile-o"></i>
+						</button>
+					</div>
+				</div>
+				<div class="stamp-footer">
+					<div class="stamp-price">$ {{stamp.price/1000}} mil</div>
+					<div class="stamp-expand"><i class="fa fa-arrows-alt"></i></div>
+				</div>
+			</div>
 		</div>
-	</div>	
+		<div class="stamp-caption-section">
+			<div class="info-section">
+				<!-- href="#/stamps/{{stamp.id}}" -->
+				<h5 class="no-padding no-margin">{{stamp.name}}</h5>
+				<span class="stamp-rating">{{stamp.rating ? stamp.rating.averageRating:0}} <i class="fa fa-star"></i></span>
+			</div>
+		</div>
+		<div class="stamp-author-info-section">
+			<a href="">
+				<div class="author-image">
+					<img src="https://cdn4.iconfinder.com/data/icons/superheroes/512/batman-512.png">
+				</div>
+				<div class="author">
+					<h6 class="no-padding no-margin author-name">{{stamp.author.name}}</h6>
+					<span>5 <i class="fa fa-trophy"></i> </span>
+				</div>
+			</a>
+		</div>	
+	</div>
 </div>

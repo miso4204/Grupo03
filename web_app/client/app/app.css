@@ -139,31 +139,168 @@ body {
   cursor: pointer;
   background-color :#ADEBFF;
 }
+
+/*Stamp Gallery*/
+.stamp-catalog{
+  background-color: #EBEBEB !important;
+}
+
 /*masonry support*/
 .masonry{
-    -moz-column-count: 6;
-    -webkit-column-count: 6;
-    column-count: 6;
-    -moz-column-gap: 1em;
-    -webkit-column-gap: 2em;
-    column-gap: 2em;
+  -moz-column-count: 4;
+  -webkit-column-count: 4;
+  column-count: 4;
+  -moz-column-gap: 1em;
+  -webkit-column-gap: 2em;
+  column-gap: 2em;
 }
 .masonry .grid-item{
    padding: 1px;
-  border-radius: 3px;
+   border-radius: 6px;
    background-color: #FFF;
    display: inline-block;
    margin: 0 0 1em;
    width: 100%;
+   padding: 0px;
+   box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.22);
 }
-.masonry .grid-item  .img-thumbnail{
-  width:90%
+.stamp-wrapper{
+  height: 100% !important;
+  padding: 0px;
+  margin: 0px;
 }
-.masonry .grid-item .caption{
-  width:90%;
+.grid-item .stamp-image-section img{
+  max-width:100%;
+  max-height:100%;
+  border-radius: 6px 6px 0px 0px;
+  display: block;
   margin:auto;
-  padding: 4px;
-  background-color: #eee
+}
+
+.grid-item .stamp-image-section {
+  text-align: center;
+  position: relative;
+  vertical-align: top;
+}
+
+.stamp-hover-options{
+  background: rgba(41, 128, 185, 0.7);
+  bottom: 0;
+  color: white;
+  left: 0;
+  opacity: 0;
+  padding: 10px;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  right: 0;
+  -webkit-transition: 0.6s;
+  transition: 0.6s;
+  border-radius: 6px 6px 0px 0px;
+  font-weight: bold;
+}
+.stamp-hover-options:hover{
+  opacity: 1;
+
+}
+.stamp-it-button{
+  display: inline-block;
+  float:left;
+}
+.stamp-it-button a{
+  color:#FFF;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.stamp-it-button a span{
+  font-weight: bold
+}
+.like-box{
+  display: inline-block;
+  float:right;
+}
+.like-box i{
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 19px
+}
+
+.stamp-hover-options .stamp-footer{
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width:100%;
+}
+.stamp-hover-options .stamp-footer .stamp-price{
+  display: inline-block;
+  font-size: 21px
+}
+.stamp-hover-options .stamp-footer .stamp-expand{
+  background-color:rgba(255,0,0,0.6);
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  display: inline-block;
+  padding: 0px 6px 0px 6px;
+  font-size: 21px;
+  border-radius: 3px 0px 0px 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;  
+}
+.stamp-hover-options .stamp-footer .stamp-expand:hover{
+  background-color:rgba(255,0,0,1);
+  font-size: 23px;
+  border-radius: 3px 0px 0px 0px; 
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.stamp-hover-options .stamp-price{
+  clear: both;
+}
+.stamp-caption-section{
+  border-top: solid rgba(0, 0, 0, 0.22) 1px;
+}
+.stamp-caption-section .info-section {
+  margin: 9px 16px;
+}
+.stamp-author-info-section{
+  padding: 9px 6px 0px 9px;
+  border-top: solid rgba(0, 0, 0, 0.22) 1px;
+  border-radius: 0px 0px 6px 6px;
+  height:56px;
+}
+.stamp-author-info-section:hover{
+  background: none repeat scroll 0% 0% #F1F1F1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+}
+.stamp-author-info-section .author-image{
+  float: left;
+  width: 25% ;
+  padding: 0px 9px 9px 0px;
+}
+.stamp-author-info-section .author-image img{
+  max-height: 37px;
+  max-width: 37px;
+  border-radius: 50%
+}
+.stamp-author-info-section .author{
+  float: left
+}
+.stamp-author-info-section a{
+  text-decoration: none !important;
+  color: #717171;
+  text-decoration: none;
+  display:block;
+  width: 100%;
+}
+.author-name{
+  color: #999;
+}
+.stamp-rating{
+  color:#CCCCCC;
 }
 
 /*Custom adjustments*/
@@ -216,8 +353,36 @@ div.input{
   margin-bottom: 5px;
 }
 
+/*Responsive Stamps Gallery*/
 
-
+@media screen  and (max-width: 650px){
+  .masonry{
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+  }
+}
+@media screen  and (min-width: 651px) and (max-width:950px) {
+  .masonry{
+    -moz-column-count: 3;
+    -webkit-column-count: 3;
+    column-count: 3;
+  }
+}
+@media screen  and (min-width: 950px) and (max-width:1200px) {
+  .masonry{
+    -moz-column-count: 5;
+    -webkit-column-count: 5;
+    column-count: 5;
+  }
+}
+@media screen  and (min-width: 1200px){
+  .masonry{
+    -moz-column-count: 6;
+    -webkit-column-count: 6;
+    column-count: 6;
+  }
+}
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
   .container {
@@ -240,22 +405,6 @@ div.input{
     border-bottom: 0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /**
  * Bootstrap Fonts
