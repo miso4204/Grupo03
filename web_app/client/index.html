@@ -21,9 +21,11 @@
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
+      <link rel="stylesheet" href="app/authors/authors.css">
       <link rel="stylesheet" href="app/catalogItem/catalogItem.css">
       <link rel="stylesheet" href="app/login/login.css">
       <link rel="stylesheet" href="app/main/main.css">
+      <link rel="stylesheet" href="app/pay/pay.css">
       <link rel="stylesheet" href="app/stamps/stamps.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
@@ -74,7 +76,7 @@
                   <!-- End user options dropdown -->
 
                   <li ng-if="authenticated">
-                      <a href="cart.html"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">2</span></a>
+                      <a href="#pay"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">2</span></a>
                   </li>
               </ul>
             </div>
@@ -117,6 +119,8 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
+          <script src="app/authors/authors.controller.js"></script>
+          <script src="app/authors/authors.js"></script>
           <script src="app/catalogItem/catalogItem.directive.js"></script>
           <script src="app/login/login.controller.js"></script>
           <script src="app/login/login.js"></script>
@@ -129,6 +133,11 @@
           <script src="app/stamps/stamps.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
+          <script src="app/pay/pay.controller.js"></script>
+          <script src="app/pay/pay.js"></script>
+          <script src="app/payService/payService.service.js"></script>
+          <script src="app/registerService/registerService.service.js"></script>
+          
           <!-- endinjector -->
         <!-- endbuild -->
 </body>

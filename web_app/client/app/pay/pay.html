@@ -1,0 +1,180 @@
+	<div class="row">
+        <div class="col-md-6" >
+        <!-- Formulario Pago -->
+    	        <h2>Método de Pago</h2>
+                 
+              <!-- Pago Tarjeta Crédito -->
+              <button class ="btn botonpay1 btn-primary" ng-click="ShowForm1()"> 
+                  <i class="fa fa-credit-card"></i> Tarjeta de Crédito <i class="fa fa-cc-amex"></i> <i class="fa fa-cc-mastercard"></i> <i class="fa fa-cc-visa"></i> </button>
+              
+                <form ng-show="formVisibility1" class="form-pay">      
+	                <h3 class="form-pay-heading">Detalles del Pago</h3>
+	                <br>
+	                <label for="inputTT" class="label-pay">Tipo de Tarjeta de Crédito *</label>
+	                <br>
+	                <select type="tipoTar" id="inputTT" class="btn form-control" required autofocus> 
+	                      <option>VISA</option>
+	                      <option>MASTERCARD</option>
+	                      <option>AMEX</option>
+	                </select>
+	                <br>
+	                <label for="inputNT" class="label-pay">Número de Tarjeta de Crédito *</label>
+	                <input type="number" id="inputNT" class="form-control" required autofocus>
+	                <label for="inputNombre" class="label-pay">Nombre y Apellidos *</label>
+	                <input type="nombre" id="inputNombre" class="form-control"  required>
+	                <label for="inputFE" class="label-pay">Fecha Expiración *</label>
+	                <div class="form-inline">
+	                  <select type="fechaExp" id="inputFE" class="form-control"  required> 
+	                      <option>2015</option>
+	                      <option>2016</option>
+	                      <option>2017</option>
+	                      <option>2018</option>
+	                      <option>2019</option>
+	                      <option>2020</option>
+	                      <option>2021</option>
+	                      <option>2022</option>
+	                      <option>2023</option>
+	                      <option>2024</option>
+	                      <option>2025</option>
+	                      <option>2026</option>
+	                      <option>2027</option>
+	                      <option>2028</option>
+	                </select>
+	                <select type="fechaExp" id="inputFE" class="form-control"  required> 
+	                      <option>01</option>
+	                      <option>02</option>
+	                      <option>03</option>
+	                      <option>04</option>
+	                      <option>05</option>
+	                      <option>06</option>
+	                      <option>07</option>
+	                      <option>08</option>
+	                      <option>09</option>
+	                      <option>10</option>
+	                      <option>11</option>
+	                      <option>12</option>
+	                </select>
+	                </div>
+	                
+	                <label for="inputNC" class="label-pay">Número de Cuotas *</label>
+	                <select type="nroCuota" id="inputNC" class="form-control"  required> 
+	                      <option>01</option>
+	                      <option>02</option>
+	                      <option>03</option>
+	                      <option>04</option>
+	                      <option>05</option>
+	                      <option>06</option>
+	                      <option>07</option>
+	                      <option>08</option>
+	                      <option>09</option>
+	                      <option>10</option>
+	                      <option>11</option>
+	                      <option>12</option>
+	                </select>
+	                <label for="inputCS" class="label-pay">Código Seguridad *</label>
+	                <input type="number" id="inputCS" class="form-control"  required>
+	                <div class="checkbox">
+	                  <label>
+	                    <input type="checkbox" value="remember-me"> Recordarme
+	                  </label>
+	                </div>
+	                <button class="botonpay btn btn-lg btn-success btn-block" type="submit">Pagar ${{getTotal() | number:0}}</button>
+                </form>
+            
+              <!-- Pago PSE -->
+                <button class ="btn botonpay1 btn-primary" ng-click="ShowForm2()"> 
+                  Pago PSE <img src="img/pay/pse.jpg" WIDTH=34 HEIGHT=36 alt=""> </button>
+                <br>
+                <form ng-show="formVisibility2" class="form-pay">  
+	                <label for="inputBanco" class="label-pay">ID Banco *</label>
+	                <select type="banco" id="inputBanco" class="form-control"  required> 
+	                      <option>BANCO AV VILLAS</option>
+	                      <option>BANCO CAJA SOCIAL</option>
+	                      <option>BANCO COLPATRIA</option>
+	                      <option>BANCO DAVIVIENDA</option>
+	                      <option>BANCO DE BOGOTÁ</option>
+	                      <option>BANCO DE OCCIDENTE</option>
+	                      <option>BANCOLOMBIA</option>
+	                </select>
+	                <label for="inputTCli" class="label-pay">Tipo de Cliente *</label>
+	                <select type="tipoCliente" id="inputTCli" class="form-control"  required> 
+	                      <option>Persona Natural</option>
+	                      <option>Persona Jurídica</option>
+	                </select>
+	                <label for="inputTid" class="label-pay">Tipo de Identificación *</label>
+	                <select type="tipoID" id="inputTid" class="form-control"  required> 
+	                      <option>CC</option>
+	                      <option>CE</option>
+	                      <option>PASSPORT</option>
+	                    </select>
+	                <label for="inputNid" class="label-pay">Número de Identificación *</label>
+	                <input type="number" id="inputNid" class="form-control" required autofocus>
+	                <label for="inputClave" class="label-pay">Clave *</label>
+	                <input type="password" id="inputClave" class="form-control" required autofocus>
+	                <button class="botonpay btn btn-lg btn-success btn-block" type="submit">Pagar ${{getTotal() | number:0}}</button>
+	               </form>
+	              
+	             
+	              	<!-- Pago Contra Entrega -->
+	                <button class ="btn botonpay1 btn-primary" ng-click="ShowForm3()"> 
+	                  Pago Contra Entrega <i class="fa fa-truck"></i> </button>
+	                <br>
+	                <br>
+	                <form ng-show="formVisibility3" class="form-pay">  
+	                	<button class="botonpay btn btn-lg btn-success btn-block" type="submit">Continuar</button>
+              		</form>       
+        
+        </div>  
+
+        <!-- Detalle Carrito de Compras -->
+        <div class="col-md-6">
+          <div class="wrapper1">
+            <center><h2>Resumen Pedido</h2></center>
+            <div class="wrapper2">
+              <div class= "row" ng-repeat="prod in prods">
+                <div class=" listprod col-md-2">
+                  <img ng-src="{{prod.url}}" WIDTH=79 HEIGHT=85>
+                </div>
+                <div class="listprod col-md-9">
+                    <label class="prod">{{prod.name}}</label>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <label class="prod">Género: </label> 
+                        <label class="prod">Color :</label> 
+                        <label class="prod">Talla :</label> 
+                      </div> 
+                      <div class="col-md-3">
+                        <label class="desprod">{{prod.genero}}</label> 
+                        <label class="desprod">{{prod.color}}</label> 
+                        <label class="desprod">{{prod.talla}}</label> 
+                      </div> 
+                      <div class="col-md-3">
+                        <label class="prod">Cantidad:</label> 
+                        <label class="prod">Valor:</label>  
+                      </div>
+                      <div class="col-md-3">
+                        <label class="desprod">{{prod.cantidad}}</label> <br>
+                        <label class="desprod">$ {{(prod.valor)*(prod.cantidad)}}</label> 
+                      </div> 
+                    </div>
+                </div>
+              </div>
+            </div>
+            
+            <center><h2>Costo Pedido </h2></center>
+            <div class="wrapper2">
+              <div class= "row " >
+                <div class="col-md-5 col-md-offset-1">
+                  <label class="prod"><h4>Total Productos:</h4></label>
+                  <label class="prod"><h4>Valor Total Productos:</h4></label> 
+                </div>
+                <div class="col-md-4 col-md-offset-1">
+                  <label class="prod"><h4>  {{getCantidad()}}</h4></label> <br>
+                  <label class="prod"><h4>$ {{getTotal() | number:0}}</h4></label> 
+                </div>
+
+              </div>
+          </div>
+          <br>
+
+        </div>
