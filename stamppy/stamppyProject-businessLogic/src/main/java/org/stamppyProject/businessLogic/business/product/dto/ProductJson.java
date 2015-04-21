@@ -1,5 +1,6 @@
 package org.stamppyProject.businessLogic.business.product.dto;
 
+import org.stamppyProject.businessLogic.business.stamp.dto.RatingJson;
 import org.stamppyProject.model.enumerations.ColorEnum;
 import org.stamppyProject.model.enumerations.SizeEnum;
 
@@ -23,6 +24,8 @@ public class ProductJson {
 	private String text;
 
 	private Long userId;
+	
+	private RatingJson rating;
 
 	/**
 	 * @return the id
@@ -148,6 +151,20 @@ public class ProductJson {
 	 */
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	/**
+	 * @return the rating
+	 */
+	public RatingJson getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(RatingJson rating) {
+		this.rating = rating;
 	}
 	
 	

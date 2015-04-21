@@ -2,6 +2,7 @@ package org.stamppyProject.model.business;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -46,6 +47,8 @@ public class Cart implements Serializable{
 	
 	@Enumerated(EnumType.STRING)
 	private CartStatusEnum status;
+	
+	private Date checkoutDate;
 
 	/**
 	 * @return the id
@@ -127,6 +130,22 @@ public class Cart implements Serializable{
 	 */
 	public void setStatus(CartStatusEnum status) {
 		this.status = status;
+	}
+
+
+	/**
+	 * @return the checkoutDate
+	 */
+	public Date getCheckoutDate() {
+		return checkoutDate;
+	}
+
+
+	/**
+	 * @param checkoutDate the checkoutDate to set
+	 */
+	public void setCheckoutDate(Date checkoutDate) {
+		this.checkoutDate = checkoutDate;
 	}
 	
 	

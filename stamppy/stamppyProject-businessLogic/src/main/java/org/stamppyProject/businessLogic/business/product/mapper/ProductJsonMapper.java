@@ -1,6 +1,11 @@
 package org.stamppyProject.businessLogic.business.product.mapper;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.stamppyProject.businessLogic.business.product.dto.ProductJson;
+import org.stamppyProject.businessLogic.business.product.dto.ProductsByRatingJson;
+import org.stamppyProject.businessLogic.business.stamp.mapper.RatingJsonMapper;
 import org.stamppyProject.model.business.Product;
 
 public class ProductJsonMapper {
@@ -25,7 +30,24 @@ public class ProductJsonMapper {
 		productJson.setColor(product.getColor());
 		productJson.setUrl(product.getUrl());
 		productJson.setText(product.getText());
+		if(product.getRating()!=null)
+			productJson.setRating(RatingJsonMapper.convertToRatingJson(product.getRating()));
 		productJson.setUserId(product.getUser().getId());
 		return productJson;
+	}
+	
+	public static ProductsByRatingJson convertToProductsByRatingJson(List<Product> products){
+		ProductsByRatingJson productsByRatingJson = new ProductsByRatingJson();
+		if(products != null){
+			productsByRatingJson.setProductsNumber(products.size());
+			List<ProductJson> psj = new ArrayList<ProductJson>();
+			for(Product p : products){
+				ProductJson pj = new ProductJson();
+				pj = convertToProductJson(p);
+				psj.add(pj);
+			}
+			productsByRatingJson.setProducts(psj);
+		}
+		return productsByRatingJson;
 	}
 }

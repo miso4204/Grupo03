@@ -12,6 +12,8 @@ public class RatingJson {
 	private Double calification;
 	
 	private Long stampId;
+	
+	private Long productId;
 
 	/**
 	 * @return the id
@@ -82,6 +84,21 @@ public class RatingJson {
 	public void setCalification(Double calification) {
 		this.calification = calification;
 	}
+
+	/**
+	 * @return the productId
+	 */
+	public Long getProductId() {
+		return productId;
+	}
+
+	/**
+	 * @param productId the productId to set
+	 */
+	public void setProductId(Long productId) {
+		this.productId = productId;
+	}
+	
 	
 	
 }

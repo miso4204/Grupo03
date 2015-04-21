@@ -13,6 +13,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.stamppyProject.businessLogic.InitBean;
 import org.stamppyProject.businessLogic.business.stamp.IStamp;
 import org.stamppyProject.businessLogic.business.stamp.dto.AvailableStampsJson;
 import org.stamppyProject.businessLogic.business.stamp.dto.RatingJson;
@@ -24,6 +25,9 @@ public class StampService {
 	
 	@EJB
 	private IStamp stampBean;
+	
+	@EJB
+	private InitBean initBean;
 	
 	@POST
 	@Path("/stamp")
@@ -69,5 +73,19 @@ public class StampService {
 		stampBean.setRating(ratingJson);
 		return Response.status(200).build();
 	}
+	
+	@GET
+	@Path("/stamp/{lowerBound}/{upperBound}")
+	@Produces("application/json")
+	public Response getStampsByRating(@PathParam("lowerBound") Double lowerBound,
+			@PathParam("upperBound") Double upperBound){
+		if(initBean.getSearchRateDesigns()){
+			return Response.ok(stampBean.getByRatings(lowerBound, upperBound)).build();
+		}else{
+			return Response.status(404).build();
+		}
+	}
+	
+	
 
 }

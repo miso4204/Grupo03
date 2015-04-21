@@ -12,6 +12,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 import org.stamppyProject.model.enumerations.ColorEnum;
 import org.stamppyProject.model.enumerations.SizeEnum;
@@ -22,7 +25,10 @@ import org.stamppyProject.model.security.User;
  *
  */
 @Entity
-
+@NamedQueries({
+@NamedQuery(name="Product.findAllSalesByPeriodAndCartStatus", query="Select p from Product p join p.carts c where c.status = :cartStatus and c.checkoutDate >= :lowerBound and c.checkoutDate <= :upperBound"),
+@NamedQuery(name="Product.findAllSalesByArtistAndCartStatus", query="Select p from Product p join p.carts c where c.status = :cartStatus and p.stamp.seller.id = :artistId"),
+})
 public class Product implements Serializable {
 
 	   
@@ -52,6 +58,9 @@ public class Product implements Serializable {
 	
 	@ManyToMany(mappedBy="products")
 	private List<Cart> carts;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	private Rating rating;
 	
 	private static final long serialVersionUID = 1L;
 
@@ -197,6 +206,20 @@ public class Product implements Serializable {
 	 */
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	/**
+	 * @return the rating
+	 */
+	public Rating getRating() {
+		return rating;
+	}
+
+	/**
+	 * @param rating the rating to set
+	 */
+	public void setRating(Rating rating) {
+		this.rating = rating;
 	}
    
 	

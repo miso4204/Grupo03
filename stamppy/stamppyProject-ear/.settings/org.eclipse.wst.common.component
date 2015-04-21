@@ -5,5 +5,11 @@
         <dependent-module archiveName="stamppyProject-service-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/stamppyProject-service/stamppyProject-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="ratingReport-service-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/ratingReport-service/ratingReport-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="salesReport-service-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/salesReport-service/salesReport-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

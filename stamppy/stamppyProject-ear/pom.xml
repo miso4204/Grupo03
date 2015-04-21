@@ -25,6 +25,16 @@
                        		<groupId>com.uniandes.hexagram</groupId>
                            <artifactId>stamppyProject-service</artifactId>
                        </webModule>
+                       
+                       <webModule>
+                       		<groupId>com.uniandes.hexagram</groupId>
+                           <artifactId>ratingReport-service</artifactId>
+                       </webModule>
+                       
+                       <webModule>
+                       		<groupId>com.uniandes.hexagram</groupId>
+                           <artifactId>salesReport-service</artifactId>
+                       </webModule>
                  </modules>
             </configuration>
          </plugin>
@@ -37,6 +47,20 @@
   	<dependency>
   		<groupId>com.uniandes.hexagram</groupId>
   		<artifactId>stamppyProject-service</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<type>war</type>
+  		
+  	</dependency>
+  	<dependency>
+  		<groupId>com.uniandes.hexagram</groupId>
+  		<artifactId>ratingReport-service</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  		<type>war</type>
+  	</dependency>
+  	
+  	<dependency>
+  		<groupId>com.uniandes.hexagram</groupId>
+  		<artifactId>salesReport-service</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
   		<type>war</type>
   	</dependency>

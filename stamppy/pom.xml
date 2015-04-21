@@ -10,6 +10,9 @@
   	<module>stamppyProject-dataAccess</module>
   	<module>stamppyProject-businessLogic</module>
     <module>stamppyProject-service</module>  
+    <!--  variability-->
+    <module>ratingReport-service</module>
+    <module>salesReport-service</module>
     <module>stamppyProject-ear</module>
   </modules>
   <properties>

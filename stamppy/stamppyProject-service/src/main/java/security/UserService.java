@@ -35,7 +35,7 @@ public class UserService {
     	if(resp.equals(MethodResponseEnum.OK))
     		return Response.status(200).build();
     	else
-    		return Response.status(405).build();
+    		return Response.status(204).build();
      }
      
  	@PUT

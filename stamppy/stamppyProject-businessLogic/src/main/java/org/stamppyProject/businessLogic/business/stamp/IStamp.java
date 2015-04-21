@@ -17,5 +17,7 @@ public interface IStamp {
 	public void updateStamp(StampJson stampJson);
 	
 	public void setRating(RatingJson ratingJson);
+	
+	public AvailableStampsJson getByRatings(Double lowerBound, Double upperBound); 
 
 }

@@ -13,6 +13,11 @@ import javax.persistence.OneToOne;
 @Entity
 @NamedQueries({
 @NamedQuery(name="Rating.findByStamp", query="Select r from Rating r where r.stamp.id=:stampId"),
+@NamedQuery(name="Rating.findAllStamps", query="Select r from Rating r where r.stamp is not null order by r.averageRating desc"),
+@NamedQuery(name="Rating.findAllStampsByArtist", query="Select r from Rating r where r.stamp is not null and r.stamp.seller.id=:artistId order by r.averageRating desc"),
+@NamedQuery(name="Rating.findByProduct", query="Select r from Rating r where r.product.id=:productId"),
+@NamedQuery(name="Rating.findProductsByBoundaries", query="Select r from Rating r where r.product is not null and r.averageRating>=:lowerBound and r.averageRating<=:upperBound"),
+@NamedQuery(name="Rating.findStampByBoundaries", query="Select r from Rating r where r.stamp is not null and r.averageRating>=:lowerBound and r.averageRating<=:upperBound")
 })
 public class Rating implements Serializable{
 	
@@ -28,6 +33,9 @@ public class Rating implements Serializable{
 	
 	@OneToOne(mappedBy="rating")
 	private Stamp stamp;
+	
+	@OneToOne(mappedBy="rating")
+	private Product product;
 
 	/**
 	 * @return the id
@@ -84,6 +92,22 @@ public class Rating implements Serializable{
 	public void setStamp(Stamp stamp) {
 		this.stamp = stamp;
 	}
+
+	/**
+	 * @return the product
+	 */
+	public Product getProduct() {
+		return product;
+	}
+
+	/**
+	 * @param product the product to set
+	 */
+	public void setProduct(Product product) {
+		this.product = product;
+	}
+
+	
 	
 	
 

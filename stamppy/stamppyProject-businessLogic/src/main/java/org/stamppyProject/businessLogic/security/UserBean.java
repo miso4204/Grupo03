@@ -3,6 +3,7 @@ package org.stamppyProject.businessLogic.security;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.stamppyProject.businessLogic.InitBean;
 import org.stamppyProject.businessLogic.MethodResponseEnum;
 import org.stamppyProject.businessLogic.security.dto.UserJson;
 import org.stamppyProject.businessLogic.security.mapper.UserJsonMapper;
@@ -21,6 +22,9 @@ public class UserBean implements IUser{
 	
 	@EJB
 	private ICartDAO cartDAO;
+	
+	@EJB
+	private InitBean initBean;
 	
 	@Override
 	public MethodResponseEnum registerUser(UserJson userJson) {
@@ -42,7 +46,9 @@ public class UserBean implements IUser{
 	
 	@Override
 	public void updateUser(UserJson userJson) {
-		User user = UserJsonMapper.convertToUser(userJson);		
+		User newUser = UserJsonMapper.convertToUser(userJson);	
+		User oldUser = userDAO.getUser(newUser.getId());
+		User user = UserBuilder.updateUserBuilder(initBean.getUserBuilder(), newUser, oldUser);
 		userDAO.updateUser(user);
 	}
 

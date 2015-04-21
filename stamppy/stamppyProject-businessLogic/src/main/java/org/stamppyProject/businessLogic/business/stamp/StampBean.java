@@ -1,5 +1,8 @@
 package org.stamppyProject.businessLogic.business.stamp;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -61,7 +64,7 @@ public class StampBean implements IStamp{
 	
 	@Override
 	public void setRating(RatingJson ratingJson) {
-		Rating rating = ratingDAO.getRating(ratingJson.getStampId());
+		Rating rating = ratingDAO.getRatingByStamp(ratingJson.getStampId());
 		if(rating!=null){
 			rating.setRatings(rating.getRatings()+1);
 			rating.setAverageRating((rating.getAverageRating()+ratingJson.getCalification())/rating.getRatings());
@@ -76,6 +79,17 @@ public class StampBean implements IStamp{
 			stampDAO.updateStamp(rating.getStamp());
 		}
 		
+	}
+	
+	@Override
+	public AvailableStampsJson getByRatings(Double lowerBound,
+			Double upperBound) {
+		List<Rating> ratings = ratingDAO.getRatingS(lowerBound, upperBound);
+		List<Stamp> stamps = new ArrayList<Stamp>();
+		for(Rating r:ratings){
+			stamps.add(r.getStamp());
+		}
+		return StampJsonMapper.convertToAvailableStampsJson(stamps);
 	}
 
 }
