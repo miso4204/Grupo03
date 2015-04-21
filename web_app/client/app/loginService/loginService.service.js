@@ -6,18 +6,6 @@ angular.module('webAppApp')
     function (Base64, $http, $cookieStore, $rootScope, $timeout) {
         return {
             Login : function (credentials, callback) {
-
-                /* Dummy authentication for testing, uses $timeout to simulate api call
-                 ----------------------------------------------*/
-                // $timeout(function(){
-                //     var response = { success: credentials.user === 'test@test' && credentials.password === 'test' };
-                //     if(!response.success) {
-                //         response.message = 'Usuario o contraseña son incorrectas';
-                //     }
-                //     callback(response);
-                // }, 1000);
-
-
                 /* Use this for real authentication
                  ----------------------------------------------*/
                  console.log("Solicitando credenciales con los siguientes datos:  " + credentials.username + "*****" + credentials.password)

@@ -15,6 +15,7 @@
       <!-- bower:css -->
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+      <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -57,8 +58,8 @@
                   <li class="hidden">
                       <a href=""></a>
                   </li>
-                  <li>
-                      <a href="#login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó  Registrarse </a>
+                  <li ng-if="!authenticated">
+                      <a href="/login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó  Registrarse </a>
                   </li>
                   <!-- user options dropdown -->
                   <li ng-if="authenticated" dropdown>
@@ -113,6 +114,7 @@
       <script src="bower_components/angular-route/angular-route.js"></script>
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
+      <script src="bower_components/angular-ui-select/dist/select.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
