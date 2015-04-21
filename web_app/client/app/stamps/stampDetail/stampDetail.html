@@ -1,0 +1,113 @@
+<div class="row">
+	<div class="col-md-12 panel panel-default stamp-detail-panel">	
+		<div class="col-md-10 col-md-offset-1" >
+			<!-- Shirt viewer-->
+			<div class=" panel panel-default col-md-8 shirt-viewer">
+				<div class="shirt-canvas">
+					<div class="shirt-background">
+						<img src="{{shirtOptions.gender[currentProduct.gender].url}}" style="background-color:{{shirtOptions.color[currentProduct.color].code}}">
+					</div>
+					<div class="shirt-printable-area">
+					<div class="printable-area-banner">
+						<span>AREA IMPRIMIBLE</span>
+					</div>
+						<div class="shirt-stamp">
+							<img src="{{stamp.url}}">
+						</div>
+						<div class="shirt-text" style="color:{{shirtOptions.color[currentProduct.text.color].code}}">
+							<span>{{currentProduct.text.value}}</span>
+						</div>
+					</div>
+				</div>	
+			</div>	
+			<!-- End shirt viewer -->
+
+			<!-- Shirt Options -->
+			<div class=" panel col-md-3 shirt-options">
+				<!-- Options -->
+				<div class="shirt-buy-options">
+					<!-- Shirt gender -->
+					<div class="shirt-gender">
+						<div class="label-wrapper">
+							<span> Género </span>
+						</div>
+						<div class="btn-group">
+							<span>
+								<i class="fa fa-male"></i>
+								<input type="radio" ng-model="currentProduct.gender" value="male">
+							</span>
+							<span>
+								<i class="fa fa-female"></i>
+								<input type="radio" ng-model="currentProduct.gender" value="female">
+							</span>
+						</div>
+					</div>
+					<!-- End Shirt gender -->
+					<!-- shirt size -->
+					<div class="shirt-size">
+						<div class="label-wrapper">
+							<span> Talla </span>
+						</div>
+						 <div class="btn-group">
+					        <label class="btn btn-default"  ng-repeat="(size, props) in shirtOptions.size" ng-model="currentProduct.size" btn-radio="'{{props.value}}'">{{props.value}}</label>
+					    </div>
+					</div>
+					<!-- End shirt size -->
+					<!-- Shirt Color -->
+					<div class="shirt-color">
+						<div class="label-wrapper">
+							<span> Color </span>
+						</div>
+						<div class="btn-group color-grid">
+		                  <label class="btn"  ng-model="currentProduct.color" ng-repeat="(color, props) in shirtOptions.color" btn-radio="'{{props.name}}'" style='background:{{props.code}}' title="{{props.name}}">&nbsp;</label>
+		                </div>
+					</div>	
+					<!-- End shirt color -->
+
+					<!-- Shirt text -->
+					<div class="shirt-text">
+						<div class="label-wrapper">
+							<span> Texto </span>
+						</div>
+						<input type="text" class="form-control" placeholder="Texto" ng-model="currentProduct.text.value">
+						<div class="btn-group color-grid">
+		                  <label class="btn"  ng-model="currentProduct.text.color" ng-repeat="(color, props) in shirtOptions.color" btn-radio="'{{props.name}}'" style='background:{{props.code}}' title="{{props.name}}"></label>
+		                </div>
+					</div>
+					<!-- End shirt text -->
+					<div class="social-box"></div>
+				</div>
+				<!-- End buy options -->
+				<div class="add-to-cart">
+					<!-- shirt price -->
+					<div class="shirt-price row">
+						<div clas="row">
+							<span class="item-desc col-md-6 no-padding"> Stampa</span>
+							<span class="item-price col-md-6 no-padding">$ {{stamp.price}}</span>
+						</div>
+						<div clas="row">
+							<span class="item-desc col-md-6 no-padding">Camiseta</span>
+							<span class="item-price col-md-6 no-padding">$ {{shirtOptions.gender[currentProduct.gender].price}}</span>
+						</div>
+						<div clas="row">
+							<span class="item-desc col-md-6 no-padding">Total:</span>
+							<span class="item-price col-md-6 no-padding">$ {{stamp.price + shirtOptions.gender[currentProduct.gender].price}}</span>
+						</div>
+					</div>
+					<!-- End shirt Price -->
+					<!-- add to cart button -->
+					<div class="add-to-cart-button row">
+						<button class="btn btn-success col-md-12">
+							<i class="fa fa-cart-plus"></i>
+							<span>Agregar al carrito</span>
+						</button>
+					</div>
+					<!-- End add to cart button -->
+				</div>
+			</div>
+			<!-- End Shirt Options	 -->
+		</div>
+	</div>
+<!-- 	<pre>{{currentProduct}}</pre>
+	<pre>{{stamp}}</pre> -->
+</div>

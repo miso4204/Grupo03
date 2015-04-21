@@ -1,0 +1,18 @@
+.shirt-background img{
+  max-height: 100%;
+  max-width: 100%
+}
+.shirt-printable-area{
+  position: absolute;
+  top: 150px;
+  left: 175px;
+  max-width: 50% !important;;
+  max-height: 50% !important;;
+}
+.shirt-printable-area .shirt-stamp img{
+  max-height: 100px!important;;
+  max-height: 100px!important;;
+}
+.shirt-canvas{
+  position: relative
+}

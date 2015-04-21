@@ -1,7 +1,84 @@
 'use strict';
 
 angular.module('webAppApp')
-  .controller('StampDetailCtrl', function ($scope , $routeparms) {
-  	$scope.id=$routeParams.id;
-    $scope.message = 'Hello';
+  .controller('StampDetailCtrl',
+  	function ($scope,$routeParams, Stamp) {
+  		$scope.stamp = Stamp.get({id:$routeParams.id},
+  			console.log($scope.stamp)
+  		);
+  		$scope.shirtOptions={
+  			gender:{
+  				female:{
+  					value:"F",
+  					name:"Mujer",
+  					url:"http://i.imgur.com/EFb17uK.png",
+  					price:12000
+	  			},
+	  			male:{
+	  				value:"M",
+	  				name:"Hombre",
+	  				url:"http://i.imgur.com/UTpxQpN.png",
+	  				price:15000
+	  			}
+  			},
+  			color:{
+  				red:{
+  					name:"red",
+  					code:"#FF1919"
+  				},
+  				blue:{
+  					name:"blue",
+  					code:"#000066"
+  				},
+  				yellow:{
+  					name:"yellow",
+  					code:"#FFCC00"
+  				},
+  				green:{
+  					name:"green",
+  					code:"#009900"
+  				},
+  				white:{
+  					name:"white",
+  					code:"#FFFFFF"
+  				},
+  				gray:{
+  					name:"gray",
+  					code:"#B2B2B2"
+  				},
+  				black:{
+  					name:"black",
+  					code:"#000000"
+  				},
+  			},
+  			size:{
+  				small:{
+  					name:"Small",
+  					value:"S"
+  				},
+  				medium:{
+  					name:"Medium",
+  					value:"M"
+  				},
+  				large:{
+  					name:"Large",
+  					value:"L"
+  				},
+  				xlarge:{
+  					name:"Extra Large",
+  					value:"XL"
+  				},
+  			}
+  		}
+ 		
+  		$scope.currentProduct={
+  			size:"M",
+  			color:"green",
+  			gender:"male",
+  			stamp:$routeParams.id,
+  			text:{
+  				color:"red",
+  				value:""
+  			}
+  		}
   });
