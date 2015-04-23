@@ -11,6 +11,7 @@ import javax.ws.rs.core.Response;
 import org.stamppyProject.businessLogic.InitBean;
 import org.stamppyProject.businessLogic.reports.IRatingReport;
 
+
 @Stateless
 @Path("/ratingReport-service")
 public class RatingReportService {
@@ -35,7 +36,7 @@ public class RatingReportService {
 	@GET
 	@Path("/rating/{artistId}")
 	@Produces("application/json")
-	public Response getStampsByRatingAndArtist(@PathParam("lowerBound") Long artistId){
+	public Response getStampsByRatingAndArtist(@PathParam("artistId") Long artistId){
 		try {
 			if(initBean.getReportRatingDesignArtist())
 				return Response.ok(ratingReportBean.getAllRatingStampsByArtist(artistId)).build();
@@ -45,5 +46,4 @@ public class RatingReportService {
 			return Response.status(500).build();
 		}
 	}
-
 }

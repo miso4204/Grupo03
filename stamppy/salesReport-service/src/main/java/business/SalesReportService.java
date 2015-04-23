@@ -37,7 +37,7 @@ public class SalesReportService {
 	@GET
 	@Path("/rating/{artistId}")
 	@Produces("application/json")
-	public Response getStampsByRating(@PathParam("lowerBound") Long artistId){
+	public Response getStampsByRating(@PathParam("artistId") Long artistId){
 		try {
 			if(initBean.getReportRatingDesignArtist())
 				return Response.ok(salesReportBean.getSalesByArtist(artistId)).build();
