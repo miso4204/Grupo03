@@ -7,7 +7,7 @@ angular.module('webAppApp')
     	return{
     		Register : function (dataUser, callback) {
                 dataUser.id = null;
-                $http.post('http://estampate.jelasticlw.com.br/stamppyProject-service/rest/user-service/user/', dataUser)
+                $http.post('http://uniandes-msls.rhcloud.com/stamppyProject-service/rest/user-service/user/', dataUser)
                 .success(function (response, status) {
                       console.log("Register success!!!");
                       if(status == 200){

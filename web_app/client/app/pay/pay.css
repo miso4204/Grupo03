@@ -1,0 +1,29 @@
+.botonpay {
+  margin-bottom: 10px;
+  width: 300px ;
+}
+.botonpay1 {
+  margin-bottom: 10px;
+  width: 500px ;
+  font-size: 30px; 
+}
+.wrapper1{
+  background-color: #BDBDBD;
+  border-radius: 5px;
+}
+
+.wrapper2{
+  background-color: #fff;
+  border-radius: 5px;
+  margin: 8px;
+  border-color: #000000;
+}
+.listprod{
+  margin: 10px ;
+}
+.prod{
+  font-weight: bold;
+}
+.desprod{
+  font-weight: normal;  
+}

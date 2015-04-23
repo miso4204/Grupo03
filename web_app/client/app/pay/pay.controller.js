@@ -1,56 +1,91 @@
 'use strict';
 
 angular.module('webAppApp')
-  .controller('PayCtrl', ['$scope', '$routeParams','$rootScope', '$location', 'payService', 
-		function($scope,$routeParams,$rootScope,$location,payService){
-    $scope.prods = [
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 1, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/S05454_01_laydown.jpg?sw=230&sfrm=jpg"},
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 1, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/G92151_000_plp_model.jpg?sw=230&sfrm=jpg"},
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 1, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/S05454_01_laydown.jpg?sw=230&sfrm=jpg"},
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 2, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/S05454_01_laydown.jpg?sw=230&sfrm=jpg"},
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 1, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/G92151_000_plp_model.jpg?sw=230&sfrm=jpg"},
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 1, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/S05454_01_laydown.jpg?sw=230&sfrm=jpg"},
-		{name: 'Camiseta portero primera equipación Real Madrid Replica', genero: "Hombre", color: "Azul/Blanco", talla: "L", valor: 219900, cantidad: 1, url: "http://demandware.edgesuite.net/sits_pod20-adidas/dw/image/v2/aaqx_prd/on/demandware.static/Sites-adidas-CO-Site/Sites-adidas-products/es_CO/v1428309236102/zoom/S05454_01_laydown.jpg?sw=230&sfrm=jpg"}
-	];
+  .controller('PayCtrl',['$scope', '$routeParams','$rootScope', '$location', 'Cart', 'payService', 
+        function($scope,$routeParams,$rootScope,$location,Cart,payService){
+            $scope.payForm1={};
+            $scope.payForm2={};
+            $scope.payForm3={}; 
+            $scope.products = [];
+            $scope.dataPay = {};
+            var result = {};
+            result= Cart.get({id:$rootScope.userId},
+                function(){
+                    $scope.products=result.products;
+                    console.log($scope.products);
+                    $rootScope.nroProdCart = $scope.getCantidad();
+                    $scope.dataPay.price = $scope.getTotal();
+                    $scope.dataPay.cartId = result.id;
+                    console.log($scope.dataPay)
+                }
+            );
 
-	$scope.formVisibility1 =false;
-	$scope.formVisibility2 =false;
-	$scope.formVisibility3 =false;
+            $scope.formVisibility1 =false;
+            $scope.formVisibility2 =false;
+            $scope.formVisibility3 =false;
 
-    $scope.ShowForm1 =function(){
-		$scope.formVisibility1 =true; 
-		$scope.formVisibility2 =false; 
-		$scope.formVisibility3 =false;   	
-    }
+            $scope.ShowForm1 =function(){
+                $scope.formVisibility1 =true; 
+                $scope.formVisibility2 =false; 
+                $scope.formVisibility3 =false;      
+            }
 
-    $scope.ShowForm2 =function(){
-		$scope.formVisibility1 =false; 
-		$scope.formVisibility2 =true; 
-		$scope.formVisibility3 =false;
-    }
+            $scope.ShowForm2 =function(){
+                $scope.formVisibility1 =false; 
+                $scope.formVisibility2 =true; 
+                $scope.formVisibility3 =false;
+            }
 
-    $scope.ShowForm3 =function(){
-		$scope.formVisibility1 =false; 
-		$scope.formVisibility2 =false; 
-		$scope.formVisibility3 =true;   	
-    }
+            $scope.ShowForm3 =function(){
+                $scope.formVisibility1 =false; 
+                $scope.formVisibility2 =false; 
+                $scope.formVisibility3 =true;       
+            }
 
-    $scope.getTotal=function(){
-    	var total = 0;
-    	for (var i = 0; i < $scope.prods.length; i++) {
-    	 	var product = $scope.prods[i];
-    	 	total += (product.valor * product.cantidad);
-    	};
-    	return total;
-    }
+            $scope.getTotal=function(){
+                var total = 0;
+                for (var i = 0; i < $scope.products.length; i++) {
+                    var product = $scope.products[i];
+                    total += (product.price);
+                };
+                return total;
+            }
 
-    $scope.getCantidad=function(){
-    	var totalCant = 0;
-    	for (var i = 0; i < $scope.prods.length; i++) {
-    	 	var product1 = $scope.prods[i];
-    	 	totalCant += (product1.cantidad);
-    	};
-    	return totalCant;
-    }
+            $scope.getCantidad=function(){
+                var totalCant = 0;
+                for (var i = 0; i < $scope.products.length; i++) {
+                    totalCant += 1;
+                };
+                return totalCant;
+            }
 
- 	}])
+            $scope.pay = function (dataPay) {
+                console.log($location)
+                console.log(dataPay)
+                payService.Pay(dataPay,function(response, status) {
+                    console.log(status);
+                    if(status == 200) {
+                        console.log("Register responsed" + response)
+                        $scope.regSuccess= "Registro exitoso, por favor Inicie Sesión";
+                        $scope.regSuccessShow = true;
+                        $scope.regErrorShow = false;
+                        $scope.dataPay.type = "CREDIT_CARD";
+                    } else {
+                        console.log(status);
+                        console.log("register failed" + response)
+                        if(status == 204){
+                            $scope.regError= "El usuario " + dataUser.username + " ya existe.";
+                        } else {
+                            $scope.regError= "Se ha presentado un problema con el proceso de Registro";
+                        }
+                        console.log("error");
+                        $scope.regSuccessShow = false;
+                        $scope.regErrorShow = true;
+                    }
+                });
+                };
+
+    }])
+
+
+	

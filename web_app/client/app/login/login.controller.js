@@ -1,11 +1,13 @@
 'use strict';
 
 angular.module('webAppApp')
-  .controller('LoginCtrl',['$scope', '$routeParams','$rootScope', '$location', 'loginService', 'registerService',
-		function($scope,$routeParams,$rootScope,$location,loginService,registerService){
+  .controller('LoginCtrl',['$scope', '$routeParams','$rootScope', '$location', 'loginService', 'registerService', 'Cart',
+		function($scope,$routeParams,$rootScope,$location,loginService,registerService,Cart){
 			$rootScope.authenticated = false;
 			$scope.loginForm={};
 			$scope.registerForm={};
+            $scope.products = [];
+
 			loginService.ClearCredentials();
 			$scope.login = function (credentials) {
 				console.log($location)
@@ -15,6 +17,16 @@ angular.module('webAppApp')
                 		console.log("login responsed" + JSON.stringify(response))
                     	loginService.SetCredentials(credentials);
                     	$rootScope.authenticated = true;
+                        $rootScope.userId = response.id;
+                        var result = {};
+                        result= Cart.get({id:$rootScope.userId},
+                            function(){
+                                $scope.products=result.products;
+                                console.log($scope.products);
+                                $rootScope.nroProdCart = $scope.getCantidad();
+                                console.log($rootScope.nroProdCart);
+                            }
+                        );
                     	$location.path('/stamps');
                 	} else {
                 		console.log("login failed" + JSON.stringify(response))
@@ -32,6 +44,8 @@ angular.module('webAppApp')
             $scope.register = function (dataUser) {
                 console.log($location)
                 console.log($scope.dataUser)
+                $scope.regSuccessShow = false;
+                $scope.regErrorShow = false;
                 if(($scope.dataUser.password.length) >= 6){
                     if($scope.dataUser.password == $scope.passwordConfirm){
                         registerService.Register(dataUser,function(response, status) {
@@ -73,4 +87,12 @@ angular.module('webAppApp')
                     $scope.regErrorShow = true;
                 };
             };
+
+            $scope.getCantidad=function(){
+                var totalCant = 0;
+                for (var i = 0; i < $scope.products.length; i++) {
+                    totalCant += 1;
+                };
+                return totalCant;
+            }
 	}])
