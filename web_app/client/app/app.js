@@ -39,6 +39,10 @@ angular.module('webAppApp', [
         templateUrl:'pay/pay.html',
         controller:'PayCtrl'
       })
+      .when('/cart',{
+        templateUrl:'cart/cart.html',
+        controller:'CartCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });

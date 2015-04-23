@@ -9,7 +9,7 @@ angular.module('webAppApp')
                 /* Use this for real authentication
                  ----------------------------------------------*/
                  console.log("Solicitando credenciales con los siguientes datos:  " + credentials.username + "*****" + credentials.password)
-                $http.post('https://estampate.jelasticlw.com.br/stamppyProject-service/rest/user-service/login', { username: credentials.username, password: credentials.password })
+                $http.post('https://uniandes-msls.rhcloud.com/stamppyProject-service/rest/user-service/login', { username: credentials.username, password: credentials.password })
                    .success(function (response) {
                     console.log("Login success!!!")
                        response.success=true;
