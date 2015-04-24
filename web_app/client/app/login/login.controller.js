@@ -7,6 +7,10 @@ angular.module('webAppApp')
 			$scope.loginForm={};
 			$scope.registerForm={};
             $scope.products = [];
+            $scope.dataUser = {};
+            $scope.dataUser.email = "";
+            $scope.dataUser.password = "";
+            $scope.passwordConfirm = "";
 
 			loginService.ClearCredentials();
 			$scope.login = function (credentials) {

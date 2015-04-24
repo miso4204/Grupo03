@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" ng-show="payVisibility">
     <div class="col-md-6" >
     	<div class="panel panel-body panel-primary col-md-10">
         <!-- Formulario Pago -->
@@ -79,7 +79,7 @@
                 <input type="number" id="inputCS" class="form-control"  required>
                	<br>
 
-                <button class="botonpay btn btn-lg btn-success btn-block" type="submit">Pagar ${{getTotal() | number:0}}</button>
+                <center><button class="botonpay btn btn-lg btn-success btn-block" type="submit">Pagar ${{getTotal() | number:0}}</button></center>
             </form>
             <br>
             <br>
@@ -88,16 +88,16 @@
             <button class ="btn botonpay1 btn-primary" ng-click="ShowForm2()"> 
           		Pago PSE <img src="img/pay/pse.jpg" WIDTH=34 HEIGHT=36 alt=""> </button>
             <br>
-            <form ng-show="formVisibility2" class="form-pay" name="payForm2" ng-submit="pay2(dataPay2)" method="POST">        
+            <form ng-show="formVisibility2" class="form-pay" name="payForm2" ng-submit="pay(dataPay)" method="POST">        
                 <label for="inputBanco" class="label-pay">ID Banco *</label>
-                <select type="banco" id="inputBanco" class="form-control"  required> 
-                      <option>BANCO AV VILLAS</option>
-                      <option>BANCO CAJA SOCIAL</option>
-                      <option>BANCO COLPATRIA</option>
-                      <option>BANCO DAVIVIENDA</option>
-                      <option>BANCO DE BOGOTÁ</option>
-                      <option>BANCO DE OCCIDENTE</option>
-                      <option>BANCOLOMBIA</option>
+                <select type="banco" id="inputBanco" class="form-control" ng-model="dataPay.type" ng-init="datapay.type='PSE'" required> 
+                      <option value="PSE">BANCO AV VILLAS</option>
+                      <option value="PSE">BANCO CAJA SOCIAL</option>
+                      <option value="PSE">BANCO COLPATRIA</option>
+                      <option value="PSE">BANCO DAVIVIENDA</option>
+                      <option value="PSE">BANCO DE BOGOTÁ</option>
+                      <option value="PSE">BANCO DE OCCIDENTE</option>
+                      <option value="PSE">BANCOLOMBIA</option>
                 </select>
 
                 <label for="inputTCli" class="label-pay">Tipo de Cliente *</label>
@@ -117,10 +117,10 @@
                 <input type="number" id="inputNid" class="form-control" required autofocus>
 
                 <label for="inputClave" class="label-pay">Clave *</label>
-                <input type="password" id="inputClave" class="form-control" required autofocus>
+                <input type="pass" id="inputClave" class="form-control" required autofocus>
                 <br>
 
-                <button class="botonpay btn btn-lg btn-success btn-block" type="submit">Pagar ${{getTotal() | number:0}}</button>
+                <center><button class="botonpay btn btn-lg btn-success btn-block" type="submit">Pagar ${{getTotal() | number:0}}</button></center>
           	</form>
           	<br>
 	             
@@ -129,8 +129,8 @@
               	Pago Contra Entrega <i class="fa fa-truck"></i> </button>
             <br>
             <br>
-            <form ng-show="formVisibility3" class="form-pay" name="payForm3" ng-submit="pay3(dataPay3)" method="POST">      >  
-        		<button class="botonpay btn btn-lg btn-success btn-block" type="submit">Continuar</button>
+            <form ng-show="formVisibility3" class="form-pay" name="payForm3" > 
+        		<center><button class="botonpay btn btn-lg btn-success btn-block" type="submit">Continuar</button></center>
       		</form> 
 
     	</div>  
@@ -141,6 +141,11 @@
       	<div class="wrapper1 col-md-10">
             <center><h2>Resumen Pedido</h2></center>
             <div class="wrapper2">
+                <div ng-show="nroProdsCart">
+                  <br>
+                  <center><h5 >No ha agregado productos a su carrito de compras.</h5></center>
+                  <br>
+                </div>
               	<div class= "row" ng-repeat="product in products">
 	                <div class=" listprod col-md-2">
 	                  	<img ng-src="{{product.url}}" WIDTH=79 HEIGHT=85>
@@ -187,3 +192,47 @@
 		</div>
     </div>
 </div>
+
+<div class="row" ng-show="APPROVEDShow">
+    <div class="col-md-6 col-md-offset-3" >
+      <div class="panel panel-body panel-primary">
+        <!-- Formulario Pago -->
+          <center><h2>Datos Transacción</h2></center>   
+              <!-- Pago Tarjeta Crédito -->
+          <h4>Su transacción fue realizada exitosamente.</h4>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="prod">Estado Transacción:</label>
+              <br>
+              <label class="prod">Número de Pedido:</label>
+              <br>
+              <label class="prod">Valor:</label>
+              <br>
+            </div> 
+            <div class="col-md-6">
+              <label class="desprod">{{responsePay.status}}</label>
+              <br>
+              <label class="desprod">{{dataPay.cartId}}</label>
+              <br>
+              <label class="desprod">$ {{responsePay.price | number:0}}</label>
+              <br>
+            </div>
+          </div>
+          <center><button class="botonpay btn btn-lg btn-success btn-block" ng-click="terminar()">Terminar</button></center> 
+      </div>  
+    </div>  
+</div>
+
+<div class="row" ng-show="REJECTEDShow">
+    <div class="col-md-6 col-md-offset-3" >
+      <div class="panel panel-body panel-primary">
+        <!-- Formulario Pago -->
+          <center><h2>Transacción Rechazada</h2></center>   
+              <!-- Pago Tarjeta Crédito -->
+          <h4>Por favor revise sus datos de compra o intente más tarde.</h4>
+          <center><button class="botonpay btn btn-lg btn-success btn-block" ng-click="regresar()">Regresar</button></center>            
+      </div>  
+    </div>  
+</div>
+

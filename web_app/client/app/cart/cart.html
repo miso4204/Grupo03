@@ -3,6 +3,11 @@
 	<div class="wrapper1 col-md-7 col-md-offset-1">
 		<center><h2>Resumen Pedido</h2></center>
         <div class="wrapper2">
+            <div ng-show="nroProdsCart">
+              <br>
+              <center><h5 >No ha agregado productos a su carrito de compras.</h5></center>
+              <br>
+            </div>
           	<div class= "row" ng-repeat="product in products">
                 <div class=" listprod col-md-1">
                   	<img ng-src="{{product.url}}" WIDTH=79 HEIGHT=85>
@@ -48,6 +53,7 @@
           	</div>
       	</div>
 		<br>
+    <center><label ng-show="ErrorCartShow" class="alert alert-danger">"Debe agregar productos a su carrito de Compras."</label></center>
 		<center><button class="botonpay btn btn-lg btn-success btn-block" ng-click="goPay()">Checkout</button></center>
 	</div>
 </div>

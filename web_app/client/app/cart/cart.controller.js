@@ -4,6 +4,7 @@ angular.module('webAppApp')
   .controller('CartCtrl', ['$scope', '$routeParams','$rootScope', '$location', 'Cart', 'DelCart',
   	function($scope,$routeParams,$rootScope,$location,Cart,DelCart) {
     
+    $scope.ErrorCartShow = false;
     $scope.products = [];
     var result = {};
     result= Cart.get({id:$rootScope.userId},
@@ -13,6 +14,11 @@ angular.module('webAppApp')
             $scope.idCart = result.id;
             $rootScope.nroProdCart = $scope.getCantidad();
             console.log($scope.dataPay)
+            if ($rootScope.nroProdCart == 0){
+                $scope.nroProdsCart = true;
+            } else {
+                $scope.nroProdsCart = false;
+            }
         }
     );
 
@@ -27,6 +33,11 @@ angular.module('webAppApp')
 			            $scope.idCart = result.id;
 			            $rootScope.nroProdCart = $scope.getCantidad();
 			            console.log($scope.dataPay)
+                        if ($rootScope.nroProdCart == 0){
+                            $scope.nroProdsCart = true;
+                        } else {
+                            $scope.nroProdsCart = false;
+                        }
 			        }
 			    );
 	      		$location.path('/cart');
@@ -43,7 +54,12 @@ angular.module('webAppApp')
     };
 
     $scope.goPay=function(){
-        $location.path('/pay');
+        if ($rootScope.nroProdCart == 0){
+            $scope.ErrorCartShow = true;
+        } else {
+            $scope.ErrorCartShow = false;
+            $location.path('/pay');
+        }
     };
 
     $scope.getCantidad=function(){
