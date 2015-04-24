@@ -3,17 +3,18 @@
 angular.module('webAppApp')
   .controller('LoginCtrl',['$scope', '$routeParams','$rootScope', '$location', 'loginService', 'registerService', 'Cart',
 		function($scope,$routeParams,$rootScope,$location,loginService,registerService,Cart){
-			$rootScope.authenticated = false;
 			$scope.loginForm={};
 			$scope.registerForm={};
             $scope.products = [];
-			loginService.ClearCredentials();
+            $scope.dataUser = {};
+            $scope.dataUser.email = "";
+            $scope.dataUser.password = "";
+            $scope.passwordConfirm = "";
             $scope.test=function(){
                 console.log("hola");
             };
             $scope.logout=function() {
-                console.log("logout");
-                loginService.logout();
+              loginService.ClearCredentials();
             };
 			$scope.login = function (credentials) {
 				$scope.dataLoading = true;

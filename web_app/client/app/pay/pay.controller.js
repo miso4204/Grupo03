@@ -8,6 +8,10 @@ angular.module('webAppApp')
             $scope.payForm3={}; 
             $scope.products = [];
             $scope.dataPay = {};
+            $scope.responsePay = {}
+            $scope.payVisibility = true;
+            $scope.APPROVEDShow = false;
+            $scope.REJECTEDShow = false;
             var result = {};
             result= Cart.get({id:$rootScope.userId},
                 function(){
@@ -17,6 +21,11 @@ angular.module('webAppApp')
                     $scope.dataPay.price = $scope.getTotal();
                     $scope.dataPay.cartId = result.id;
                     console.log($scope.dataPay)
+                    if ($rootScope.nroProdCart == 0){
+                        $scope.nroProdsCart = true;
+                    } else {
+                        $scope.nroProdsCart = false;
+                    }
                 }
             );
 
@@ -59,28 +68,42 @@ angular.module('webAppApp')
                 return totalCant;
             }
 
+            $scope.terminar=function(){
+                $location.path('/stamps');
+            };
+
+            $scope.regresar=function(){
+                $location.path('/cart');
+            };
+
             $scope.pay = function (dataPay) {
                 console.log($location)
                 console.log(dataPay)
                 payService.Pay(dataPay,function(response, status) {
                     console.log(status);
+                    $scope.payVisibility = false;
                     if(status == 200) {
-                        console.log("Register responsed" + response)
-                        $scope.regSuccess= "Registro exitoso, por favor Inicie Sesión";
-                        $scope.regSuccessShow = true;
-                        $scope.regErrorShow = false;
-                        $scope.dataPay.type = "CREDIT_CARD";
-                    } else {
-                        console.log(status);
-                        console.log("register failed" + response)
-                        if(status == 204){
-                            $scope.regError= "El usuario " + dataUser.username + " ya existe.";
+                        $scope.responsePay = response;
+                        if (response.status == "APPROVED"){
+                            $scope.APPROVEDShow = true;
+                            result= Cart.get({id:$rootScope.userId},
+                                function(){
+                                    $scope.products=result.products;
+                                    console.log($scope.products);
+                                    $rootScope.nroProdCart = $scope.getCantidad();
+                                    console.log($scope.dataPay)
+                                    if ($rootScope.nroProdCart == 0){
+                                        $scope.nroProdsCart = true;
+                                    } else {
+                                        $scope.nroProdsCart = false;
+                                    }
+                                }
+                            );
                         } else {
-                            $scope.regError= "Se ha presentado un problema con el proceso de Registro";
+                            $scope.REJECTEDShow = true;
                         }
-                        console.log("error");
-                        $scope.regSuccessShow = false;
-                        $scope.regErrorShow = true;
+                    } else {
+                        $scope.REJECTEDShow = true;
                     }
                 });
                 };
