@@ -7,31 +7,31 @@ angular.module('webAppApp')
 			$scope.loginForm={};
 			$scope.registerForm={};
             $scope.products = [];
-
 			loginService.ClearCredentials();
+            $scope.test=function(){
+                console.log("hola");
+            };
+            $scope.logout=function() {
+                console.log("logout");
+                loginService.logout();
+            };
 			$scope.login = function (credentials) {
-				console.log($location)
 				$scope.dataLoading = true;
-				loginService.Login(credentials,function(response) {
+				loginService.login(credentials,function(response) {
             		if(response.success) {
                 		console.log("login responsed" + JSON.stringify(response))
-                    	loginService.SetCredentials(credentials);
-                    	$rootScope.authenticated = true;
-                        $rootScope.userId = response.id;
-                        var result = {};
+                    	var result = {};
                         result= Cart.get({id:$rootScope.userId},
                             function(){
                                 $scope.products=result.products;
-                                console.log($scope.products);
-                                $rootScope.nroProdCart = $scope.getCantidad();
-                                console.log($rootScope.nroProdCart);
+                                $rootScope.nroProdCart=products.length;
                             }
                         );
+                        loginService.SetCredentials(credentials,response,result.products);
                     	$location.path('/stamps');
                 	} else {
                 		console.log("login failed" + JSON.stringify(response))
                 		$scope.error= "Usuario y/o contraseña incorrectas";
-                    	// $scope.error = response.message;
                     	$scope.dataLoading = false;
                     	console.log("error");
                 	}
@@ -87,12 +87,4 @@ angular.module('webAppApp')
                     $scope.regErrorShow = true;
                 };
             };
-
-            $scope.getCantidad=function(){
-                var totalCant = 0;
-                for (var i = 0; i < $scope.products.length; i++) {
-                    totalCant += 1;
-                };
-                return totalCant;
-            }
 	}])

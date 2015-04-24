@@ -59,26 +59,26 @@
                   <li class="hidden">
                       <a href=""></a>
                   </li>
-                  <li ng-if="!authenticated">
+                  <li ng-show="!globals.currentUser.authenticated">
                       <a href="./login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó  Registrarse </a>
                   </li>
                   <!-- user options dropdown -->
-                  <li ng-if="authenticated" dropdown>
-                      <a class="dropdown-toggle" dropdown-toggle>
-                        <i class="fa fa-user fa-fw"></i>User <span class="caret"></span>
+                  <button ng-click="test()">Logout</button>
+                  <li ng-show="globals.currentUser.authenticated" class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" role="buton">
+                        <i class="fa fa-user fa-fw"></i>{{globals.currentUser.username}}<span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" role="menu">
                           <li><a href="#"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>                                
                           <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
                           <li><a href="#"><i class="fa fa-truck fa-fw"></i> Pedidos</a></li>
                           <li class="divider"></li>
-                          <li><a href="./login"><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a></li>
+                          <li ><a ng-click='logout()'><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a></li>
                       </ul> 
                   </li>
                   <!-- End user options dropdown -->
-
-                  <li ng-if="authenticated">
-                      <a href="./cart"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">{{nroProdCart | number:0}}</span></a>
+                  <li ng-show="globals.currentUser.authenticated">
+                      <a href="./cart"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">{{globals.currentUser.products}}</span></a>
                   </li>
               </ul>
             </div>
@@ -87,8 +87,37 @@
         </nav>
       </div> 
       <!-- End header -->
-      <div ng-view="" class="main-panel"></div>
+    <div ng-view="" class="main-panel row"></div>
     </div>
+                     
+    <footer>
+         <pre>O:{{globals}}</pre>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="copyright">Copyright &copy; Hexagram , Universidad de los Andes 2015</span>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline social-buttons">
+                        <li><a href="#"><i class="fa fa-twitter"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-facebook"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <ul class="list-inline quicklinks">
+                        <li><a href="#">Privacy Policy</a>
+                        </li>
+                        <li><a href="#">Terms of Use</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>

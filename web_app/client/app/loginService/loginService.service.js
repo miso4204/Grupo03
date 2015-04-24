@@ -5,25 +5,30 @@ angular.module('webAppApp')
     ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
     function (Base64, $http, $cookieStore, $rootScope, $timeout) {
         return {
-            Login : function (credentials, callback) {
-                /* Use this for real authentication
-                 ----------------------------------------------*/
-                 console.log("Solicitando credenciales con los siguientes datos:  " + credentials.username + "*****" + credentials.password)
+            login : function (credentials, callback) {
+                console.log("Solicitando credenciales con los siguientes datos:  " + credentials.username + "*****" + credentials.password)
+                
                 $http.post('https://uniandes-msls.rhcloud.com/stamppyProject-service/rest/user-service/login', { username: credentials.username, password: credentials.password })
                    .success(function (response) {
-                    console.log("Login success!!!")
+                    console.log("Login success!!!" + response)
                        response.success=true;
                        callback(response);
                    });
-
             },
-     
-            SetCredentials : function (credentials) {
+            logout : function  () {
+                ClearCredentials();
+            },
+            SetCredentials : function (credentials,response, products) {
                 var authdata = Base64.encode(credentials.username + ':' + credentials.password);
-                     $rootScope.globals = {
+                $rootScope.globals = {
                     currentUser: {
                         username: credentials.username,
-                        authdata: credentials.authdata
+                        authdata: credentials.authdata,
+                        userType:response.userType,
+                        userId:response.id,
+                        userEmail:response.email,
+                        authenticated:true,
+                        products:products
                     }
                 };
      
