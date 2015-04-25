@@ -38,6 +38,10 @@ angular.module('webAppApp', [
         templateUrl:'cart/cart.html',
         controller:'CartCtrl'
       })
+      .when('/report',{
+        templateUrl:'report/report.html',
+        controller:'ReportCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });
