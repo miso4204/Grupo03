@@ -53,7 +53,12 @@ public class CartService {
 	@POST
 	@Path("/payment")
 	@Consumes(MediaType.APPLICATION_JSON)
-	public String purchase(PaymentJson paymentJson){
-		return cartBean.purchaseProducts(paymentJson);
+	@Produces("application/json")
+	public Response purchase(PaymentJson paymentJson){
+		try {
+			return Response.ok(cartBean.purchaseProducts(paymentJson)).build();
+		} catch (Exception e) {
+			return Response.status(500).build();
+		}
 	}
 }

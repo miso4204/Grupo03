@@ -13,6 +13,7 @@
     <!--  variability-->
     <module>ratingReport-service</module>
     <module>salesReport-service</module>
+     <!--  variability-->
     <module>stamppyProject-ear</module>
   </modules>
   <properties>
@@ -63,13 +64,15 @@
          </configuration>
       </plugin>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-ejb-plugin</artifactId>
-        <version>${ejb-plugin-version}</version>
-        <configuration>
-                <ejbVersion>${ejb-spec-version}</ejbVersion>
-        </configuration>
-</plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-ejb-plugin</artifactId>
+            <version>${ejb-plugin-version}</version>
+            <configuration>
+                    <ejbVersion>${ejb-spec-version}</ejbVersion>
+            </configuration>
+        </plugin>
+        <!--ASPECTJ-->
+        <!--ASPECTJ-->
    </plugins>
   </pluginManagement>
 </build>

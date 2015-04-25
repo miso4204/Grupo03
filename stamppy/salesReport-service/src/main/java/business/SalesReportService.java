@@ -24,7 +24,7 @@ public class SalesReportService {
 	private ISalesReport salesReportBean;
 	
 	@GET
-	@Path("/rating/{lowerBoud}/{upperBound}")
+	@Path("/sales/{lowerBound}/{upperBound}")
 	@Produces("application/json")
 	public Response getSalesByPeriod(@PathParam("lowerBound") Date lowerBound, @PathParam("upperBound") Date upperBound){
 		try {
@@ -35,7 +35,7 @@ public class SalesReportService {
 	}
 	
 	@GET
-	@Path("/rating/{artistId}")
+	@Path("/sales/{artistId}")
 	@Produces("application/json")
 	public Response getStampsByRating(@PathParam("artistId") Long artistId){
 		try {

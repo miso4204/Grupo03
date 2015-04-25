@@ -9,9 +9,9 @@ import javax.ejb.Startup;
 public class InitBean {
 	
 	/**Search strategy variability**/
-	private static final Boolean SEARCH_RATE_PRODUCTS = Boolean.FALSE;
+	private static final Boolean SEARCH_RATE_PRODUCTS = Boolean.TRUE;
 	
-	private static final Boolean SEARCH_RATE_DESIGNS = Boolean.FALSE;
+	private static final Boolean SEARCH_RATE_DESIGNS = Boolean.TRUE;
 	
 	private Boolean searchRateProducts;
 	
@@ -27,9 +27,9 @@ public class InitBean {
 	private static final String USER_BUILDER_NOT_PASSWORD ="NOT_PASSWORD";
 	
 	/**reports variability**/
-	private static final Boolean REPORT_DESIGN_ARTIST = Boolean.FALSE;
+	private static final Boolean REPORT_DESIGN_ARTIST = Boolean.TRUE;
 	
-	private static final Boolean REPORT_SALES_ARTIST = Boolean.FALSE;
+	private static final Boolean REPORT_SALES_ARTIST = Boolean.TRUE;
 	
 	private Boolean reportRatingDesignArtist;
 	

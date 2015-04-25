@@ -52,7 +52,7 @@ public class CartBean implements ICart {
 	
 	@SuppressWarnings("deprecation")
 	@Override
-	public String purchaseProducts(PaymentJson paymentJson) {
+	public PaymentJson purchaseProducts(PaymentJson paymentJson) {
 		Payment payment = PaymentJsonMapper.convertToPayment(paymentJson);
 		payment.setCart(cartDAO.getCart(paymentJson.getCartId()));
 		Date date = new Date();
@@ -69,6 +69,6 @@ public class CartBean implements ICart {
 			cartDAO.saveCart(cart);
 		}
 		paymentDAO.savePayment(payment);
-		return payment.getStatus().name();
+		return PaymentJsonMapper.convertToPaymentJson(payment);
 	}
 }

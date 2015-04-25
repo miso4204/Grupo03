@@ -9,6 +9,33 @@
   <packaging>ejb</packaging>
   <build>
         <finalName>${project.artifactId}</finalName>
+
+        <!-- ASPECTJ -->
+        
+        <plugins>
+        	<!-- AspectJ configuration -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<version>1.6</version>
+				<configuration>
+					<complianceLevel>1.7</complianceLevel>
+					<source>${java-version}</source>
+            		<target>${java-version}</target>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+							<goal>test-compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+        </plugins>
+
+        <!-- ASPECTJ -->
   </build>
   <dependencies>
   	<dependency>
@@ -21,5 +48,12 @@
   		<version>0.0.1-SNAPSHOT</version>
   		<type>ejb</type>
   	</dependency>
+  	<!-- ASPECTJ -->
+  	<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>1.7.4</version>
+		</dependency>
+      <!-- ASPECTJ -->
   </dependencies>
 </project>

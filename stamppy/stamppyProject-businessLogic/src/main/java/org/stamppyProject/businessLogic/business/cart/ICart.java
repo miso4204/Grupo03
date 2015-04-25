@@ -9,5 +9,5 @@ public interface ICart {
 	
 	public void removeItem(Long cartId, Long productId);
 	
-	public String purchaseProducts(PaymentJson payment);
+	public PaymentJson purchaseProducts(PaymentJson payment);
 }
