@@ -8,23 +8,19 @@ import javax.ejb.Startup;
 @Startup
 public class InitBean {
 	
-	/**Search strategy variability**/
-	private static final Boolean SEARCH_RATE_PRODUCTS = Boolean.TRUE;
+	/**Rating strategy variability**/
+	private static final Boolean RATE_PRODUCTS = Boolean.TRUE;
 	
-	private static final Boolean SEARCH_RATE_DESIGNS = Boolean.TRUE;
+	private static final Boolean RATE_DESIGNS = Boolean.TRUE;
 	
-	private Boolean searchRateProducts;
+	private Boolean rateProducts;
 	
-	private Boolean searchRateDesigns;
+	private Boolean rateDesigns;
 	
 	/**update user builder variability**/
-	private static final String USER_BUILDER_COMPLETE = "COMPLETE";
+	private static final String USER_BUILDER_STRATEGY = "COMPLETE";
 	
-	private static final String USER_BUILDER_NOT_EMAIL_NOT_PASSWORD = "NOT_EMAIL_NOT_PASSWORD";
-	
-	private static final String USER_BUILDER_NOT_EMAIL ="NOT_EMAIL";
-	
-	private static final String USER_BUILDER_NOT_PASSWORD ="NOT_PASSWORD";
+	private String userBuilder;
 	
 	/**reports variability**/
 	private static final Boolean REPORT_DESIGN_ARTIST = Boolean.TRUE;
@@ -36,44 +32,34 @@ public class InitBean {
 	private Boolean reportSalesArtist;
 
 	
-	private String userBuilder;
+	
 	
 	@PostConstruct
 	public void init(){
-		searchRateProducts = SEARCH_RATE_PRODUCTS;
-		searchRateDesigns = SEARCH_RATE_DESIGNS;
-		userBuilder = USER_BUILDER_COMPLETE;
+		rateProducts = RATE_PRODUCTS;
+		rateDesigns = RATE_DESIGNS;
+		userBuilder = USER_BUILDER_STRATEGY;
 		reportRatingDesignArtist = REPORT_DESIGN_ARTIST;
 		reportSalesArtist = REPORT_SALES_ARTIST;
 	}
+	
+	
 
 	/**
-	 * @return the searchRateProducts
+	 * @return the rateProducts
 	 */
-	public Boolean getSearchRateProducts() {
-		return searchRateProducts;
+	public Boolean getRateProducts() {
+		return rateProducts;
 	}
 
-	/**
-	 * @param searchRateProducts the searchRateProducts to set
-	 */
-	public void setSearchRateProducts(Boolean searchRateProducts) {
-		this.searchRateProducts = searchRateProducts;
-	}
 
 	/**
-	 * @return the searchRateDesigns
+	 * @return the rateDesigns
 	 */
-	public Boolean getSearchRateDesigns() {
-		return searchRateDesigns;
+	public Boolean getRateDesigns() {
+		return rateDesigns;
 	}
 
-	/**
-	 * @param searchRateDesigns the searchRateDesigns to set
-	 */
-	public void setSearchRateDesigns(Boolean searchRateDesigns) {
-		this.searchRateDesigns = searchRateDesigns;
-	}
 
 	/**
 	 * @return the userBuilder
@@ -82,12 +68,6 @@ public class InitBean {
 		return userBuilder;
 	}
 
-	/**
-	 * @param userBuilder the userBuilder to set
-	 */
-	public void setUserBuilder(String userBuilder) {
-		this.userBuilder = userBuilder;
-	}
 
 	/**
 	 * @return the reportRatingDesignArtist
@@ -96,12 +76,6 @@ public class InitBean {
 		return reportRatingDesignArtist;
 	}
 
-	/**
-	 * @param reportRatingDesignArtist the reportRatingDesignArtist to set
-	 */
-	public void setReportRatingDesignArtist(Boolean reportRatingDesignArtist) {
-		this.reportRatingDesignArtist = reportRatingDesignArtist;
-	}
 
 	/**
 	 * @return the reportSalesArtist
@@ -110,13 +84,6 @@ public class InitBean {
 		return reportSalesArtist;
 	}
 
-	/**
-	 * @param reportSalesArtist the reportSalesArtist to set
-	 */
-	public void setReportSalesArtist(Boolean reportSalesArtist) {
-		this.reportSalesArtist = reportSalesArtist;
-	}
-	
 	
 
 }

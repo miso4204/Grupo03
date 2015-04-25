@@ -71,21 +71,12 @@ public class StampService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerRating(RatingJson ratingJson){
 		stampBean.setRating(ratingJson);
-		return Response.status(200).build();
-	}
-	
-	@GET
-	@Path("/stamp/{lowerBound}/{upperBound}")
-	@Produces("application/json")
-	public Response getStampsByRating(@PathParam("lowerBound") Double lowerBound,
-			@PathParam("upperBound") Double upperBound){
-		if(initBean.getSearchRateDesigns()){
-			return Response.ok(stampBean.getByRatings(lowerBound, upperBound)).build();
+		if(initBean.getRateDesigns()){
+			return Response.status(200).build();
 		}else{
 			return Response.status(404).build();
 		}
+		
 	}
-	
-	
 
 }

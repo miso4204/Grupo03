@@ -32,25 +32,19 @@ public class ProductService {
 	public ProductJson getProduct(@PathParam("id") Long id){
 		return productBean.getProduct(id);
 	}
-	
-	@GET
-	@Path("/product/{lowerBound}/{upperBound}")
-	@Produces("application/json")
-	public Response getProductsByRating(@PathParam("lowerBound") Double lowerBound,
-			@PathParam("upperBound") Double upperBound){
-		if(initBean.getSearchRateProducts()){
-			return Response.ok(productBean.getByRatings(lowerBound, upperBound)).build();
-		}else{
-			return Response.status(404).build();
-		}
-	}
+
 	
 	@POST
 	@Path("/rating")
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response registerRating(RatingJson ratingJson){
 		productBean.setRating(ratingJson);
-		return Response.status(200).build();
+		if(initBean.getRateProducts()){
+			return Response.status(200).build();
+		}else{
+			return Response.status(404).build();
+		}
+		
 	}
 
 }
