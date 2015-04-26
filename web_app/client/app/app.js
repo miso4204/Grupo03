@@ -5,7 +5,8 @@ angular.module('webAppApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnimate', 'ngSanitize', 'mgcrea.ngStrap', 'ngTable'
 ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
@@ -46,4 +47,11 @@ angular.module('webAppApp', [
         redirectTo: '/login'
       });
     $locationProvider.html5Mode(true);
+  })
+
+.config(function($datepickerProvider) {
+  angular.extend($datepickerProvider.defaults, {
+    dateFormat: 'yyyy/MM/dd',
+    startWeek: 1
   });
+})
