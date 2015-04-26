@@ -22,7 +22,6 @@
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
       <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/authors/authors.css">
       <link rel="stylesheet" href="app/cart/cart.css">
       <link rel="stylesheet" href="app/catalogItem/catalogItem.css">
       <link rel="stylesheet" href="app/login/login.css">
@@ -51,21 +50,21 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand page-scroll" href="#page-top">Stamppy</a>
+              <a class="navbar-brand page-scroll" href="/">Stamppy</a>
             </div>
-
             <div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
                   <li class="hidden">
                       <a href=""></a>
                   </li>
                   <li ng-show="!globals.currentUser.authenticated">
-                      <a href="./login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó  Registrarse </a>
+                      <a href="/login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó  Registrarse </a>
                   </li>
                   <!-- user options dropdown -->
-                  <button ng-click="test()">Logout</button>
+                 
                   <li ng-show="globals.currentUser.authenticated" class="dropdown">
                       <a class="dropdown-toggle" data-toggle="dropdown" role="buton">
+
                         <i class="fa fa-user fa-fw"></i>{{globals.currentUser.username}}<span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" role="menu">
@@ -91,7 +90,6 @@
     </div>
                      
     <footer>
-         <pre>O:{{globals}}</pre>
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
@@ -151,8 +149,6 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/authors/authors.controller.js"></script>
-          <script src="app/authors/authors.js"></script>
           <script src="app/cart/cart.controller.js"></script>
           <script src="app/cart/cart.js"></script>
           <script src="app/cartService/cartService.service.js"></script>
@@ -166,6 +162,7 @@
           <script src="app/pay/pay.js"></script>
           <script src="app/payService/payService.service.js"></script>
           <script src="app/registerService/registerService.service.js"></script>
+          <script src="app/sessionStorage/sessionStorage.service.js"></script>
           <script src="app/stamps/Stamp/Stamp.service.js"></script>
           <script src="app/stamps/stampDetail/stampDetail.controller.js"></script>
           <script src="app/stamps/stamps.controller.js"></script>
