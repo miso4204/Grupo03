@@ -34,7 +34,7 @@ angular.module('webAppApp')
                 result= Cart.get({id:user.userId},
                     function(response){
                         $rootScope.products=response.products;
-                        $rootScope.nroProdCart=$scope.products.length;
+                        $rootScope.nroProdCart=$rootScope.products.length;
                         sessionStorage.set('products',$rootScope.products);
                     }
                 );
