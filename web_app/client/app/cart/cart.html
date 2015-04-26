@@ -33,7 +33,7 @@
                       	</div>
                       	<div class="col-md-2">
                         	<label class="desprod">1</label> <br>
-                        	<label class="desprod">$ {{(product.price)}}</label> 
+                        	<label class="desprod">$ {{(product.price | number:0)}}</label> 
                       	</div> 
                       	<div class="col-md-2">
                         	<a ng-click="deleteFromCart(product)" >Eliminar</a>
@@ -52,7 +52,7 @@
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                   <!-- <label class="prod"><h4>  {{getCantidad()}}</h4></label> <br> -->
-                  <label class="prod"><h4>$ {{getTotal()}}</h4></label> 
+                  <label class="prod"><h4>$ {{getTotal() | number:0}}</h4></label> 
                 </div>
           	</div>
       	</div>

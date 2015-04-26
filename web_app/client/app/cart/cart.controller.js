@@ -35,8 +35,10 @@ angular.module('webAppApp')
 	      		var result = {};
 			    result= Cart.get({id:$rootScope.userId},
 			        function(){
+                        sessionStorage.remove("products");
 			            $rootScope.products=result.products;
 			            console.log($rootScope.products);
+                        sessionStorage.set("products",$rootScope.products);
 			            $scope.idCart = result.id;
 			            $rootScope.nroProdCart = $scope.getCantidad();
 			            console.log($scope.dataPay)
