@@ -456,7 +456,18 @@ body {
   margin: 15px;
 }
 
+/**Author section*/
+.carousel-caption{
+  position: absolute;
+  bottom: 0px;
+}
+.carousel , .carousel-inner, .carousel-inner .item {
+  height: 100%
+}
 
+.carousel-indicators {
+    bottom: 130px !important;
+}
 
 
 
