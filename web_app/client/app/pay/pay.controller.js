@@ -23,7 +23,7 @@ angular.module('webAppApp')
             $scope.APPROVEDShow = false;
             $scope.REJECTEDShow = false;
             var result = {};
-            result= Cart.get({id:$rootScope.userId},
+            result= Cart.get({id:$rootScope.globals.currentUser.userId},
                 function(){
                     $scope.products=result.products;
                     console.log($scope.products);

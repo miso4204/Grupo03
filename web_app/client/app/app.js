@@ -5,7 +5,8 @@ angular.module('webAppApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnimate', 'ngSanitize', 'mgcrea.ngStrap', 'ngTable'
 ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
@@ -38,8 +39,19 @@ angular.module('webAppApp', [
         templateUrl:'cart/cart.html',
         controller:'CartCtrl'
       })
+      .when('/report',{
+        templateUrl:'report/report.html',
+        controller:'ReportCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });
     $locationProvider.html5Mode(true);
+  })
+
+.config(function($datepickerProvider) {
+  angular.extend($datepickerProvider.defaults, {
+    dateFormat: 'yyyy/MM/dd',
+    startWeek: 1
   });
+})

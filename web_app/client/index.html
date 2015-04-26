@@ -16,6 +16,9 @@
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+      <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -28,6 +31,7 @@
       <link rel="stylesheet" href="app/login/login.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/pay/pay.css">
+      <link rel="stylesheet" href="app/report/report.css">
       <link rel="stylesheet" href="app/stamps/stamps.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
@@ -78,7 +82,7 @@
                   </li>
                   <!-- End user options dropdown -->
                   <li ng-show="globals.currentUser.authenticated">
-                      <a href="./cart"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">{{globals.currentUser.products}}</span></a>
+                      <a href="./cart"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">{{nroProdCart}}</span></a>
                   </li>
               </ul>
             </div>
@@ -144,6 +148,14 @@
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-select/dist/select.js"></script>
+      <script src="bower_components/highcharts-release/highcharts.js"></script>
+      <script src="bower_components/highcharts-release/highcharts-more.js"></script>
+      <script src="bower_components/highcharts-release/modules/exporting.js"></script>
+      <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-strap/dist/angular-strap.js"></script>
+      <script src="bower_components/angular-strap/dist/angular-strap.tpl.js"></script>
+      <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -165,6 +177,9 @@
           <script src="app/pay/pay.js"></script>
           <script src="app/payService/payService.service.js"></script>
           <script src="app/registerService/registerService.service.js"></script>
+          <script src="app/report/report.controller.js"></script>
+          <script src="app/report/report.js"></script>
+          <script src="app/reportService/reportService.service.js"></script>
           <script src="app/sessionStorage/sessionStorage.service.js"></script>
           <script src="app/stamps/Stamp/Stamp.service.js"></script>
           <script src="app/stamps/stampDetail/stampDetail.controller.js"></script>

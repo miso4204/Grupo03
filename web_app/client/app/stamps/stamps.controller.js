@@ -1,6 +1,6 @@
 'use strict';
 angular.module('webAppApp')
-  .controller('StampsCtrl', function($scope,$rootScope,$cookieStore,Stamp,sessionStorage){
+  .controller('StampsCtrl', function($scope,$rootScope,$cookieStore,Stamp,sessionStorage,Cart){
 		if (sessionStorage.get("user")) {
       if(!$rootScope.globals){
           $rootScope.globals={};
@@ -39,4 +39,14 @@ angular.module('webAppApp')
  			viewMode:'grid',
  			sortBy:'',
  		}
+
+    var result1 = {};
+    var user =sessionStorage.get("user");
+    result1= Cart.get({id:user.userId},
+        function(response){
+            $rootScope.products=response.products;
+            $rootScope.nroProdCart=$rootScope.products.length;
+            sessionStorage.set('products',$rootScope.products);
+        }
+    );
 	})
