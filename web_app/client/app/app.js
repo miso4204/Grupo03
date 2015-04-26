@@ -14,11 +14,6 @@ angular.module('webAppApp', [
         //templateUrl: 'views/main.html',
         //controller: 'MainCtrl'
       })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-      })
-      
       .when('/stamps/:id',{
         templateUrl:'views/stampDetail.html',
         controller:'stampDetailCtrl',
