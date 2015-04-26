@@ -3,17 +3,21 @@
 	<div class="wrapper1 col-md-7 col-md-offset-1">
 		<center><h2>Resumen Pedido</h2></center>
         <div class="wrapper2">
-            <div ng-show="nroProdsCart">
+            <div ng-show="nroProdsCart
+            ">
               <br>
               <center><h5 >No ha agregado productos a su carrito de compras.</h5></center>
               <br>
             </div>
-          	<div class= "row" ng-repeat="product in products">
-                <div class=" listprod col-md-1">
-                  	<img ng-src="{{product.url}}" WIDTH=79 HEIGHT=85>
+          	<div class= "row" ng-repeat="product in products track by $index">
+                <div  class="listprod col-md-1">
+                  	<img  style="background-color:{{product.colorCode}}" ng-src="{{product.url}}" WIDTH=79 HEIGHT=85>
                 </div>
                 <div class="listprod col-md-8">
-                    <label class="prod">{{product.text}}</label>
+                  <div class="row">
+                     <label class="prod col-md-2">Texto:</label>
+                     <label class="desprod col-md-2">{{product.text.value ? product.text.value: "Sin texto"}}</label>
+                  </div>
                     <div class="row">
                       	<div class="col-md-2">
                         	<label class="prod">Color :</label> <br>
@@ -27,7 +31,7 @@
                         	<label class="prod">Cantidad:</label> <br>
                         	<label class="prod">Valor:</label>  
                       	</div>
-                      	<div class="col-md-3">
+                      	<div class="col-md-2">
                         	<label class="desprod">1</label> <br>
                         	<label class="desprod">$ {{(product.price)}}</label> 
                       	</div> 
@@ -48,7 +52,7 @@
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                   <!-- <label class="prod"><h4>  {{getCantidad()}}</h4></label> <br> -->
-                  <label class="prod"><h4>$ {{getTotal() | number:0}}</h4></label> 
+                  <label class="prod"><h4>$ {{getTotal()}}</h4></label> 
                 </div>
           	</div>
       	</div>

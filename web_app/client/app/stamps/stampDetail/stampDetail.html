@@ -96,11 +96,21 @@
 					</div>
 					<!-- End shirt Price -->
 					<!-- add to cart button -->
-					<div class="add-to-cart-button row">
-						<button class="btn btn-success col-md-12">
-							<i class="fa fa-cart-plus"></i>
-							<span>Agregar al carrito</span>
-						</button>
+					<div class="cart-pay-buttons">
+						<div class="row">
+							<button class="btn btn-success col-md-12" ng-click="addToCart(currentProduct)">
+								<i class="fa fa-cart-plus"></i>
+								<span>Agregar al carrito</span>
+							</button>
+						</div>
+						<div class="row">
+							<a href="/cart">
+								<button class="btn btn-success col-md-12">
+									<i class="fa fa-usd"></i>
+									<span>Ir a pagar</span>
+								</button>
+							</a>
+						</div>
 					</div>
 					<!-- End add to cart button -->
 				</div>

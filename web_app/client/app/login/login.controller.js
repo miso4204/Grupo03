@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('webAppApp')
-  .controller('LoginCtrl',['$scope', '$routeParams','$rootScope', '$location', 'loginService', 'registerService', 'Cart',
-		function($scope,$routeParams,$rootScope,$location,loginService,registerService,Cart){
+  .controller('LoginCtrl',['$scope', '$routeParams','$rootScope', '$location', 'loginService', 'registerService', 'Cart','sessionStorage',
+		function($scope,$routeParams,$rootScope,$location,loginService,registerService,Cart,sessionStorage){
 			$scope.loginForm={};
 			$scope.registerForm={};
             $scope.products = [];
@@ -17,27 +17,28 @@ angular.module('webAppApp')
               loginService.ClearCredentials();
             };
 			$scope.login = function (credentials) {
-				$scope.dataLoading = true;
 				loginService.login(credentials,function(response) {
             		if(response.success) {
-                		console.log("login responsed" + JSON.stringify(response))
-                    	var result = {};
-                        result= Cart.get({id:$rootScope.userId},
-                            function(){
-                                $scope.products=result.products;
-                                $rootScope.nroProdCart=products.length;
-                            }
-                        );
-                        loginService.SetCredentials(credentials,response,result.products);
+                        loginService.SetCredentials(credentials,response);
+                        $scope.loadProducts();
                     	$location.path('/stamps');
+
                 	} else {
-                		console.log("login failed" + JSON.stringify(response))
                 		$scope.error= "Usuario y/o contraseña incorrectas";
-                    	$scope.dataLoading = false;
-                    	console.log("error");
                 	}
             	});
         	};
+            $scope.loadProducts=function(){
+                var result = {};
+                var user =sessionStorage.get("user");
+                result= Cart.get({id:user.userId},
+                    function(response){
+                        $rootScope.products=response.products;
+                        $rootScope.nroProdCart=$scope.products.length;
+                        sessionStorage.set('products',$rootScope.products);
+                    }
+                );
+            };
 			$scope.getFieldCssClass=function(ngModelController){
 				if(ngModelController.$pristine) return "";
 				return ngModelController.$valid ? "valid-field" : "invalid-field";

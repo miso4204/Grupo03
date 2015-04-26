@@ -2,15 +2,12 @@
 
 angular.module('webAppApp')
   .service('loginService',
-    ['Base64', '$http', '$cookieStore', '$rootScope', '$timeout',
-    function (Base64, $http, $cookieStore, $rootScope, $timeout) {
+    ['Base64', '$http','$rootScope','sessionStorage',
+    function (Base64,$http,$rootScope,sessionStorage) {
         return {
             login : function (credentials, callback) {
-                console.log("Solicitando credenciales con los siguientes datos:  " + credentials.username + "*****" + credentials.password)
-                
                 $http.post('https://uniandes-msls.rhcloud.com/stamppyProject-service/rest/user-service/login', { username: credentials.username, password: credentials.password })
                    .success(function (response) {
-                    console.log("Login success!!!" + response)
                        response.success=true;
                        callback(response);
                    });
@@ -18,7 +15,8 @@ angular.module('webAppApp')
             logout : function  () {
                 ClearCredentials();
             },
-            SetCredentials : function (credentials,response, products) {
+
+            SetCredentials : function (credentials,response) {
                 var authdata = Base64.encode(credentials.username + ':' + credentials.password);
                 $rootScope.globals = {
                     currentUser: {
@@ -28,17 +26,16 @@ angular.module('webAppApp')
                         userId:response.id,
                         userEmail:response.email,
                         authenticated:true,
-                        products:products
                     }
                 };
-     
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
-                $cookieStore.put('globals', $rootScope.globals);
+                sessionStorage.set('user',$rootScope.globals.currentUser)
+                console.log("loading products for:" + sessionStorage.get("user"));
             },
      
             ClearCredentials : function () {
                 $rootScope.globals = {};
-                $cookieStore.remove('globals');
+                sessionStorage.clear();
                 $http.defaults.headers.common.Authorization = 'Basic ';
             }
         }

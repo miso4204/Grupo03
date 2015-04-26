@@ -1,8 +1,18 @@
 'use strict';
 
 angular.module('webAppApp')
-  .controller('PayCtrl',['$scope', '$routeParams','$rootScope', '$location', 'Cart', 'payService', 
-        function($scope,$routeParams,$rootScope,$location,Cart,payService){
+  .controller('PayCtrl', 
+        function($scope,$routeParams,$rootScope,$location,Cart,payService,sessionStorage){
+             if (sessionStorage.get("user")) {
+
+                if(!$rootScope.globals){
+                    $rootScope.globals={};
+                }
+                $rootScope.globals.currentUser=sessionStorage.get("user");
+                if(sessionStorage.get("products")){
+                    $rootScope.products=sessionStorage.get("products");
+                }
+            }
             $scope.payForm1={};
             $scope.payForm2={};
             $scope.payForm3={}; 
@@ -53,8 +63,8 @@ angular.module('webAppApp')
 
             $scope.getTotal=function(){
                 var total = 0;
-                for (var i = 0; i < $scope.products.length; i++) {
-                    var product = $scope.products[i];
+                for (var i = 0; i < $rootScope.products.length; i++) {
+                    var product = $rootScope.products[i];
                     total += (product.price);
                 };
                 return total;
@@ -108,7 +118,7 @@ angular.module('webAppApp')
                 });
                 };
 
-    }])
+    })
 
 
 	
