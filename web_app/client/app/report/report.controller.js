@@ -5,11 +5,15 @@ angular.module('webAppApp')
   	'ReportRatingId', 'ReportRatings', 'sessionStorage', 'ListArtist',
   	function ($scope,$filter, $routeParams,$rootScope,$location,ngTableParams,ReportSalesId,ReportSalesPeriod,ReportRatingId,ReportRatings,sessionStorage,ListArtist) {
   		$scope.reportPeriodForm = {};
+  		$scope.idsales = [];
   		$scope.sales = [];
   		$scope.artists = [];
+  		$scope.idstamps = [];
   		$scope.stamps = [];
   		$scope.limiteBajo = '';
   		$scope.limiteAlto = '';
+  		$scope.RatingArtist = null;
+  		$scope.SalesArtist = null;
   		
   		if (sessionStorage.get("user")) {
 	        if(!$rootScope.globals){
@@ -42,15 +46,17 @@ angular.module('webAppApp')
   			$scope.ErrorFechaShow = false;
   	  	}
 
-  	  	$scope.genReportSales = function () {
-  			var result = {};
-		    result= ReportSalesId.get({id:$scope.IdArtist},
+  	  	$scope.$watch('SalesArtist', function () {
+  	  		if ($scope.SalesArtist != null){
+	        var result = {};
+		    result= ReportSalesId.get({id:$scope.SalesArtist},
 		        function(){
-		            $scope.sales=result.sales;
-		            console.log($scope.sales);       
+		            $scope.idsales=result.sales;
+		            console.log($scope.idsales);       
 		        }
 		    );
-  	  	}
+			} 
+    	});
 
   	  	$scope.salesPeriod = function () {
 	  		$scope.SalesIdShow = false;
@@ -69,6 +75,7 @@ angular.module('webAppApp')
 	  		} else {
 	  			$scope.ErrorFechaShow = false;
 	  			$scope.ReportPeriodShow = true;
+	  			$scope.sales=[];
 	  			var result = {};
 		    	result=	ReportSalesPeriod.get({limiteBajo:dataPeriod.limiteIni, limiteAlto:dataPeriod.limiteFin}, function() {
 				    $scope.sales=result.sales;
@@ -84,14 +91,23 @@ angular.module('webAppApp')
   			$scope.RatingsShow = false;
   			$scope.ReportPeriodShow = false;
   			$scope.ErrorFechaShow = false;
-  			var result = {};
-		    result= ReportRatingId.get({artistaId:$rootScope.globals.currentUser.userId},
+  			
+  	  	}
+
+  	  	$scope.$watch('RatingArtist', function () {
+  	  		if ($scope.RatingArtist != null){
+  	  		console.log("aqui")
+	        var result = {};
+	        $scope.stamps=[];
+	        console.log($scope.idstamps);       
+		    result= ReportRatingId.get({artistaId:$scope.RatingArtist},
 		        function(){
-		            $scope.stamps=result.stamps;
-		            console.log($scope.stamps);       
+		            $scope.idstamps=result.stamps;
+		            console.log($scope.idstamps);       
 		        }
 		    );
-  	  	}
+			}
+    	});
 
   	  	$scope.ratings = function () {
 	  		$scope.SalesIdShow = false;
@@ -101,6 +117,7 @@ angular.module('webAppApp')
   			$scope.ReportPeriodShow = false;
   			$scope.ErrorFechaShow = false;
   			var result = {};
+  			$scope.stamps=[];
 		    result= ReportRatings.get(
 		        function(){
 		            $scope.stamps=result.stamps;

@@ -18,33 +18,33 @@
 		<!-- Reporte Ventas por Id Artista -->
 		<div class="panel panel-body panel-primary" ng-show="SalesIdShow">
       		<center><h2>Ventas por Artista</h2></center> <br>
-      		<label>Artista:
+      		<label>Artista:	
 			  <span  class="nullable">
-			    <select ng-model="IdArtist" ng-options="artist.username for artist in artists">
+			    <select class="select" ng-model="SalesArtist" ng-options="artist.id as artist.username for artist in artists">
 			      <option value="">-- Elige Artista --</option>
 			    </select>
 			  </span>
 			</label><br/>
           	<br>
           	<table ng-table="tableParams" class="table">
-		        <tr ng-repeat="sale in sales">
+		        <tr ng-repeat="idsale in idsales">
 		        	<td data-title="'Id'" sortable="'id'">
-		                <center>{{sale.stamp.id}}</center>
+		                <center>{{idsale.stamp.id}}</center>
 		            </td>
 		            <td data-title="'Estampa'">
-		                <center><img ng-src="{{sale.stamp.url}}" WIDTH=30 HEIGHT=36></center>
+		                <center><img ng-src="{{idsale.stamp.url}}" WIDTH=30 HEIGHT=36></center>
 		            </td>
 		            <td data-title="'Name'" sortable="'name'">
-		                <center>{{sale.stamp.name}}</center>
-		            </td>
-		            <td data-title="'Vendidos'" sortable="'vendidos'">
-		                <center>{{sale.numberSales}}</center>
+		                <center>{{idsale.stamp.name}}</center>
 		            </td>
 		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
-		                <center>$ {{sale.stamp.price | number:0}}</center>
+		                <center>$ {{idsale.stamp.price | number:0}}</center>
+		            </td>
+		            <td data-title="'Vendidos'" sortable="'vendidos'">
+		                <center>{{idsale.numberSales}}</center>
 		            </td>
 		            <td data-title="'Total Vendido'" sortable="'totalVendido'">
-		                <center>$ {{(sale.stamp.price)*(sale.numberSales) | number:0}}</center>
+		                <center>$ {{(idsale.stamp.price)*(idsale.numberSales) | number:0}}</center>
 		            </td>
 		        </tr>
 		    </table>
@@ -99,34 +99,33 @@
 		<!-- Reporte Rating por Artista -->
       	<div class="panel panel-body panel-primary" ng-show="RatingIdShow">
       		<center><h2>Rating por Artista</h2></center> <br>
-      		<div class="row">
-      			<div class="col-md-1">
-      				<label>Artista: </label>		
-      			</div>
-      			<div class="col-md-1">
-      				<label>{{globals.currentUser.username}}</label>
-      			</div>
-      		</div>
+      		<label>Artista:	
+			  <span  class="nullable">
+			    <select class="select" ng-model="RatingArtist" ng-options="artist.id as artist.username for artist in artists">
+			      <option value="">-- Elige Artista --</option>
+			    </select>
+			  </span>
+			</label><br/>
           	<br>
           	<table ng-table="tableParams" class="table">
-		        <tr ng-repeat="stamp in stamps">
+		        <tr ng-repeat="idstamp in idstamps">
 		        	<td data-title="'Id'" sortable="'id'">
-		                <center>{{stamp.id}}</center>
+		                <center>{{idstamp.id}}</center>
 		            </td>
 		            <td data-title="'Estampa'">
-		                <center><img ng-src="{{stamp.url}}" WIDTH=30 HEIGHT=36></center>
+		                <center><img ng-src="{{idstamp.url}}" WIDTH=30 HEIGHT=36></center>
 		            </td>
 		            <td data-title="'Name'" sortable="'name'">
-		                <center>{{stamp.name}}</center>
+		                <center>{{idstamp.name}}</center>
 		            </td>
 		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
-		                <center>$ {{stamp.price | number:0}}</center>
+		                <center>$ {{idstamp.price | number:0}}</center>
 		            </td>
 		            <td data-title="'Número de Valoraciones'" sortable="'nroValoraciones'">
-		                <center>{{stamp.rating.ratings | number:0}}</center>
+		                <center>{{idstamp.rating.ratings | number:0}}</center>
 		            </td>
 		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
-		                <center>{{stamp.rating.averageRating | number:0}}</center>
+		                <center>{{idstamp.rating.averageRating | number:0}}</center>
 		            </td>
 		        </tr>
 		    </table>

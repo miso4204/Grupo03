@@ -11,6 +11,7 @@ angular.module('webAppApp', [
   'ngTable', 
   'highcharts-ng',
   'ngFileUpload',
+  'ngSocial'
 ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
