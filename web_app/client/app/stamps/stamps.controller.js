@@ -34,11 +34,6 @@ angular.module('webAppApp')
         }
       )
     }
-
-
-    $scope.createStamp=function(){
-      console.log("SET");
-    }
     $scope.newStamp={
       stampName:null,
       price:null,
@@ -63,34 +58,47 @@ angular.module('webAppApp')
   .controller('CreateStampModalCtrl', function ($scope, $modalInstance,Stamp,$rootScope,newStamp,Upload) {
     $scope.newStamp=newStamp;
     $scope.stamp={}
-    $scope.crear = function () {
-      $modalInstance.close($scope.selected.item);
-    };
-     $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
+    $scope.showAlert=false;
+    $scope.alertError=false;
+    $scope.addButton=true;
+    $scope.imageLoaded=false;
+    $scope.cancel = function () {
+      $modalInstance.close();
     };
     $scope.addStamp=function(){
-      console.log(newStamp)
-        var stamp = new Stamp();
-        $scope.stamp.name=newStamp.stampName;
-        $scope.stamp.price=newStamp.price;
-        $scope.stamp.artistId=$rootScope.globals.currentUser.userId;
-        $scope.stamp.keyWords=newStamp.keywords.toString().split(",");
-        console.log($scope.stamp)
-        Stamp.save($scope.stamp,function(response){
-          console.log(response)
+      var stamp = new Stamp();
+      $scope.stamp.name=$scope.newStamp.stampName;
+      $scope.stamp.price=$scope.newStamp.price;
+      $scope.stamp.artistId=$rootScope.globals.currentUser.userId;
+      if($scope.stamp.keyWords){
+        $scope.stamp.keyWords=$scope.newStamp.keywords.toString().split(",");
+      }else{
+        $scope.stamp.keyWords=[];
+      }
+      if($scope.imageLoaded){
+        //TODO Error handling on save
+       Stamp.save($scope.stamp,function(response){
+            $scope.showAlert=true;
+            $scope.alertError=false;
+            $scope.alertMessage="Se ha agregado tu estampa";
+            $scope.addButton=false;
         })
+      }else{
+        $scope.showAlert=true;
+        $scope.alertError=true;
+        $scope.alertMessage="Agrega la imagen de tu estampa"
+      }
     }
 
    //Image Upload//
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
-        console.log("test")
     });
     $scope.imageLoaded=false;
     $scope.upload = function (files) {
         if (files && files.length) {
             for (var i = 0; i < files.length; i++) {
+                $scope.loadValue=0;
                 var file = files[i];
                 Upload.http({
                     url: 'https://api.imgur.com/3/image',
@@ -100,22 +108,21 @@ angular.module('webAppApp')
                       'Authorization':'Client-ID cc9ca4703814e55'
                     },
                 }).progress(function (evt) {
-                    var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                    console.log(progressPercentage+" :%")
+                    $scope.loadValue = parseInt(100.0 * evt.loaded / evt.total);
                 }).success(function (data, status, headers, config) {
                     $scope.stamp.url=data.data.link;
+                    $scope.showAlert=false;
                     $scope.imageLoaded=true;
                     if(!$scope.$$phase) {
                       $scope.$apply();
                     }
                 }).error(function(response){
-                  console.log(response)
+                  $scope.showAlert=true;
+                  $scope.alertError=true;
+                  $scope.alertMessage="Ha ocurrido un error al subir la imagen"
                 });
             }
         }
     };
+
   })
-
-  .controller('UploadCtrl', ['$scope', 'Upload', function ($scope, Upload) {
-
-}]);
