@@ -49,76 +49,80 @@
     <div class="panel panel-info">
       <div class="panel-body stamp-catalog">
       	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
-          <div div class="grid-item">
+          <!-- New Stamp -->
+          <div ng-if="globals.currentUser.userType=='ARTIST'"div class="grid-item">
             <div class="add-stamp-item" ng-click="open()">
               <div>
                 <i></i>
                 <span>Agregar Estampa</span>
               </div>
             </div>
+            <!-- Modal New Stamps -->
+            <script type="text/ng-template" id="createStampModal.html">
+                <!-- Modal add stamp -->
+                  <div class="modal-header">
+                    <h3 class="modal-title">Crear Estampa</h3>
+                    <button class="btn btn-danger close-button" ng-click="cancel()">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="newStamp" ng-submit="addStamp()">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Nombre</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.stampName" type="text" class="form-control"required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Precio</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.price"  type="number" class="form-control" required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>KeyWords</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.keywords" class="form-control">
+                        </div>
+                      </div>
+                      <fieldset><legend>Estampa</legend>
+                        <div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" ngf-multiple="false"  ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+                          <div class="inner-message" ng-show="!imageLoaded">
+                            <div ng-hide="dropAvailable">Tu navegadro no soporta subir imagenes :(</div>
+                            <div ng-show="dropAvailable">Arrastra tu estampa aca o da clic para seleccionarla .
+                            </div>
+                          </div>
+                          <div class="image-load" ng-show="imageLoaded">
+                            <img src="{{stamp.url}}">
+                          </div>
+                        </div>
+                      </fieldset>
+                      <div class="progress-bar-wrapper">
+                        <progressbar class="progress-striped active" value="loadValue" type="info">
+                          <i>{{loadValue}} % </i>
+                        </progressbar>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="alert-wrapper col-md-8 no-padding">
+                          <label ng-show="showAlert" class="col-md-12" ng-class="alertError ? 'alert alert-danger' :'alert alert-success'">{{alertMessage}}</label>
+                        </div>
+                        <input type="submit" class="btn btn-default" value="Agregar" ng-show="addButton"/>
+                        
+                      </div>
+                    </form>
+                  </div>
+            </script>
+            <!-- End Modal New Stamps -->
           </div>
+          <!-- End New Stamp -->
         	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
         </div>
-
-         <script type="text/ng-template" id="createStampModal.html">
-            <!-- Modal add stamp -->
-            <div class="modal-header">
-              <h3 class="modal-title">Crear Estampa</h3>
-              <button class="btn btn-danger close-button" ng-click="cancel()">&times;</button>
-            </div>
-            <div class="modal-body">
-              <form name="newStamp" ng-submit="addStamp()">
-                <div class="row">
-                  <div class="col-md-4">
-                    <label>Nombre</label>
-                  </div>
-                  <div class="col-md-8">
-                    <input ng-model="newStamp.stampName" type="text" class="form-control"required/>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <label>Precio</label>
-                  </div>
-                  <div class="col-md-8">
-                    <input ng-model="newStamp.price"  type="number" class="form-control" required/>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-4">
-                    <label>KeyWords</label>
-                  </div>
-                  <div class="col-md-8">
-                    <input ng-model="newStamp.keywords" class="form-control">
-                  </div>
-                </div>
-                <fieldset><legend>Estampa</legend>
-                  <div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" ngf-multiple="false"  ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
-                    <div class="inner-message" ng-show="!imageLoaded">
-                      <div ng-hide="dropAvailable">Tu navegadro no soporta subir imagenes :(</div>
-                      <div ng-show="dropAvailable">Arrastra tu estampa aca o da clic para seleccionarla .
-                      </div>
-                    </div>
-                    <div class="image-load" ng-show="imageLoaded">
-                      <img src="{{stamp.url}}">
-                    </div>
-                  </div>
-                </fieldset>
-                <div class="progress-bar-wrapper">
-                  <progressbar class="progress-striped active" value="loadValue" type="info">
-                    <i>{{loadValue}} % </i>
-                  </progressbar>
-                </div>
-                <div class="modal-footer">
-                  <div class="alert-wrapper col-md-8 no-padding">
-                    <label ng-show="showAlert" class="col-md-12" ng-class="alertError ? 'alert alert-danger' :'alert alert-success'">{{alertMessage}}</label>
-                  </div>
-                  <input type="submit" class="btn btn-default" value="Agregar" ng-show="addButton"/>
-                  
-                </div>
-              </form>
-            </div>
-        </script>
+        
       </div>
     </div>
     <!-- End Stamps -->
