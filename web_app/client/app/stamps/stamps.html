@@ -50,7 +50,7 @@
       <div class="panel-body stamp-catalog">
       	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
           <div div class="grid-item">
-            <div class="add-stamp-item" ng-click="createStamp()">
+            <div class="add-stamp-item" ng-click="open()">
               <div>
                 <i></i>
                 <span>Agregar Estampa</span>
@@ -59,45 +59,58 @@
           </div>
         	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
         </div>
-        <!-- Modal add stamp -->
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <div>Crear estampa</div>
-            <div>&times;</div>
-          </div>
-          <div class="panel-body">
-            <form name="newStamp" method="POST" ng-submit="addStamp()">
-              <div class="row">
-                <div class="col-md-4">
-                  <label>Nombre</label>
+
+         <script type="text/ng-template" id="createStampModal.html">
+            <!-- Modal add stamp -->
+            <div class="modal-header">
+              <h3 class="modal-title">Crear Estampa</h3>
+            </div>
+            <div class="modal-body">
+              <form ng-submit="addStamp()">
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>Nombre</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input ng-model="newStamp.stampName" type="text" class="form-control"required/>
+                  </div>
                 </div>
-                <div class="col-md-8">
-                  <input ng-model="data.stampName" name="stampName" type="text" class="form-control"required>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>Precio</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input ng-model="newStamp.price"  type="number" class="form-control" required/>
+                  </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <label>Precio</label>
+                <div class="row">
+                  <div class="col-md-4">
+                    <label>KeyWords</label>
+                  </div>
+                  <div class="col-md-8">
+                    <input ng-model="newStamp.keywords" class="form-control">
+                  </div>
                 </div>
-                <div class="col-md-8">
-                  <input ng-model="data.price" name="precio" type="number" class="form-control" required>
+
+                <fieldset><legend>Estampa</legend>
+                  <div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" ngf-multiple="false"  ngf-accept="'image/png,application/pdf'" ngf-drop-available="dropAvailable">
+                    <div class="inner-message" ng-show="!imageLoaded">
+                      <div ng-hide="dropAvailable">Tu navegadro no soporta subir imagenes :(</div>
+                      <div ng-show="dropAvailable">Arrastra tu estampa aca o da clic para seleccionarla . (sólo .png)
+                      </div>
+                    </div>
+                    <div class="image-load" ng-show="imageLoaded">
+                      <img src="{{stamp.url}}">
+                    </div>
+                  </div>
+                </fieldset>
+                <div class="modal-footer">
+                  <input type="submit" class="btn btn-default" value="Agregar"/>
+                  <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-4">
-                  <label>KeyWords</label>
-                </div>
-                <div class="col-md-8">
-                  <input ng-model="data.keywords" name="keywords" ng-model="keywords" class="form-control">
-                </div>
-              </div>
-              <div class="row">
-                <button class="btn btn-primary" type="submit">Agregar</button>
-              </div>
-              <pre>{{data}}</pre>
-            </form>
-          </div>
-        </div>
+              </form>
+            </div>
+        </script>
       </div>
     </div>
     <!-- End Stamps -->

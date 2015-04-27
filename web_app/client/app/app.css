@@ -661,3 +661,38 @@ ul.social-buttons li a:focus,
 ul.social-buttons li a:active {
     background-color: #0F9FB4;
 }
+
+.drop-box {
+  margin: auto;
+  background: ;
+  border: 2px dashed #DDD;
+  width: 100%;
+  height: 300px;
+  text-align: center;
+  
+  border-radius: 3px;
+}
+
+.drop-box.dragover {
+  border: 2px dashed #1C5B9B;
+  background: rgba(41, 128, 185, 0.4);
+}
+
+.drop-box.dragover-err {
+  border: 5px dashed red;
+}
+
+.drop-box .inner-message{
+  color: #919191;
+  font-size: 1.5em;
+}
+.drop-box .image-load{
+  height: 100%;
+  
+}
+.drop-box .image-load img {
+  max-height:100%;
+  text-align: center;
+  border: 1px dashed;
+  margin: 15px 0px;
+}

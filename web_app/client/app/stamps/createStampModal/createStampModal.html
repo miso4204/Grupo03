@@ -1,0 +1,48 @@
+<!-- Modal add stamp -->
+<div class="modal-header">
+  <h3 class="modal-title"></h3>
+</div>
+<div class="modal-body">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <div>Crear estampa</div>
+      <div>&times;</div>
+    </div>
+    <div class="panel-body">
+      <form name="newStamp" method="POST" ng-submit="addStamp(data)">
+        <div class="row">
+          <div class="col-md-4">
+          <label>Nombre</label>
+          </div>
+          <div class="col-md-8">
+          <input ng-model="data.stampName" name="stampName" type="text" class="form-control"required>
+          </div>
+        </div>s
+        <div class="row">
+          <div class="col-md-4">
+          <label>Precio</label>
+          </div>
+          <div class="col-md-8">
+          <input ng-model="data.price" name="precio" type="number" class="form-control" required>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+          <label>KeyWords</label>
+          </div>
+          <div class="col-md-8">
+          <input ng-model="data.keywords" name="keywords" ng-model="keywords" class="form-control">
+          </div>
+        </div>
+        <div class="row">
+          <button class="btn btn-primary" type="submit">Agregar</button>
+        </div>
+        <pre>{{data}}</pre>
+      </form>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="ok()">OK</button>
+  <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+</div>

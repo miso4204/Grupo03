@@ -6,7 +6,11 @@ angular.module('webAppApp', [
   'ngSanitize',
   'ngRoute',
   'ui.bootstrap',
-  'ngAnimate', 'ngSanitize', 'ngTable', 'highcharts-ng'
+  'ngAnimate', 
+  'ngSanitize', 
+  'ngTable', 
+  'highcharts-ng',
+  'ngFileUpload',
 ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
