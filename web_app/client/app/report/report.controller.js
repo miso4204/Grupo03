@@ -2,20 +2,29 @@
 
 angular.module('webAppApp')
   .controller('ReportCtrl',  ['$scope','$filter', '$routeParams','$rootScope', '$location', 'ngTableParams', 'ReportSalesId', 'ReportSalesPeriod',
-  	'ReportRatingId', 'ReportRatings',
-  	function ($scope,$filter, $routeParams,$rootScope,$location,ngTableParams,ReportSalesId,ReportSalesPeriod,ReportRatingId,ReportRatings) {
+  	'ReportRatingId', 'ReportRatings', 'sessionStorage', 'ListArtist',
+  	function ($scope,$filter, $routeParams,$rootScope,$location,ngTableParams,ReportSalesId,ReportSalesPeriod,ReportRatingId,ReportRatings,sessionStorage,ListArtist) {
   		$scope.reportPeriodForm = {};
   		$scope.sales = [];
+  		$scope.artists = [];
   		$scope.stamps = [];
   		$scope.limiteBajo = '';
   		$scope.limiteAlto = '';
-  		var result = {};
-		    result= ReportSalesId.get({id:1},
-		        function(){
-		            $scope.sales=result.sales;
-		            console.log($scope.sales);       
-		        }
-		    );
+  		
+  		if (sessionStorage.get("user")) {
+	        if(!$rootScope.globals){
+	            $rootScope.globals={};
+	        }
+	        $rootScope.globals.currentUser=sessionStorage.get("user");
+	    }
+
+	    var result = {};
+	    result= ListArtist.query(
+	        function(){
+	            $scope.artists=result;
+	            console.log($scope.artists);       
+	        }
+	    );
 
   		$scope.SalesIdShow = true;
   		$scope.SalesPeriodShow = false;
@@ -31,8 +40,11 @@ angular.module('webAppApp')
   			$scope.RatingsShow = false;
   			$scope.ReportPeriodShow = false;
   			$scope.ErrorFechaShow = false;
+  	  	}
+
+  	  	$scope.genReportSales = function () {
   			var result = {};
-		    result= ReportSalesId.get({id:1},
+		    result= ReportSalesId.get({id:$scope.IdArtist},
 		        function(){
 		            $scope.sales=result.sales;
 		            console.log($scope.sales);       
@@ -50,7 +62,7 @@ angular.module('webAppApp')
   			$scope.ErrorFechaShow = false;
   	  	}
 
-  	  	$scope.genReport = function (dataPeriod) {
+  	  	$scope.genReportPeriod = function (dataPeriod) {
 	  		if ($scope.limiteBajo > $scope.limiteAlto) {
 	  			$scope.ErrorFechaShow = true;		
 	  			$scope.ReportPeriodShow = false;
@@ -73,7 +85,7 @@ angular.module('webAppApp')
   			$scope.ReportPeriodShow = false;
   			$scope.ErrorFechaShow = false;
   			var result = {};
-		    result= ReportRatingId.get({artistaId:1},
+		    result= ReportRatingId.get({artistaId:$rootScope.globals.currentUser.userId},
 		        function(){
 		            $scope.stamps=result.stamps;
 		            console.log($scope.stamps);       

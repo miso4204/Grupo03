@@ -18,6 +18,13 @@
 		<!-- Reporte Ventas por Id Artista -->
 		<div class="panel panel-body panel-primary" ng-show="SalesIdShow">
       		<center><h2>Ventas por Artista</h2></center> <br>
+      		<label>Artista:
+			  <span  class="nullable">
+			    <select ng-model="IdArtist" ng-options="artist.username for artist in artists">
+			      <option value="">-- Elige Artista --</option>
+			    </select>
+			  </span>
+			</label><br/>
           	<br>
           	<table ng-table="tableParams" class="table">
 		        <tr ng-repeat="sale in sales">
@@ -41,7 +48,6 @@
 		            </td>
 		        </tr>
 		    </table>
-		    <br>
 		</div>
 		
 		<!-- Reporte Ventas por Periodo -->
@@ -51,7 +57,7 @@
               <center><h5>Fecha Fin debe ser mayor o igual a Fecha Inicio.</h5></center>
             </div>
 			<div class="row">
-				<form name="reportPeriodForm" ng-submit="genReport(dataPeriod)" method="GET">
+				<form name="reportPeriodForm" ng-submit="genReportPeriod(dataPeriod)" method="GET">
 				<div class="col-md-2">
 					<h4>Fecha Inicio: </h4>		
 				</div>
@@ -93,6 +99,14 @@
 		<!-- Reporte Rating por Artista -->
       	<div class="panel panel-body panel-primary" ng-show="RatingIdShow">
       		<center><h2>Rating por Artista</h2></center> <br>
+      		<div class="row">
+      			<div class="col-md-1">
+      				<label>Artista: </label>		
+      			</div>
+      			<div class="col-md-1">
+      				<label>{{globals.currentUser.username}}</label>
+      			</div>
+      		</div>
           	<br>
           	<table ng-table="tableParams" class="table">
 		        <tr ng-repeat="stamp in stamps">
@@ -124,7 +138,10 @@
           	<br>
           	<table ng-table="tableParams" class="table">
 		        <tr ng-repeat="stamp in stamps">
-		        	<td data-title="'Id'" sortable="'id'">
+		        	<td data-title="'Artista'" sortable="'artist'">
+		                <center>{{stamp.artistName}}</center>
+		            </td>
+		        	<td data-title="'Id Estampa'" sortable="'id'">
 		                <center>{{stamp.id}}</center>
 		            </td>
 		            <td data-title="'Estampa'">
@@ -136,7 +153,7 @@
 		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
 		                <center>$ {{stamp.price | number:0}}</center>
 		            </td>
-		            <td data-title="'Número de Valoraciones'" sortable="'nroValoraciones'">
+		            <td data-title="'Número Valoraciones'" sortable="'nroValoraciones'">
 		                <center>{{stamp.rating.ratings | number:0}}</center>
 		            </td>
 		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">

@@ -24,4 +24,10 @@ angular.module('webAppApp')
       var resource = $resource('http://uniandes-msls.rhcloud.com/ratingReport-service/rest/ratingReport-service/rating');
       return resource;      
     }
+    )
+  .factory('ListArtist', 
+    function ($resource) {
+      var resource = $resource('http://uniandes-msls.rhcloud.com/stamppyProject-service/rest/user-service/artists');
+      return resource;      
+    }
     );
