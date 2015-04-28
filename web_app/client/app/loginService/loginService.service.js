@@ -36,6 +36,7 @@ angular.module('webAppApp')
             ClearCredentials : function () {
                 $rootScope.globals = {};
                 sessionStorage.clear();
+                $rootScope.globals.currentUser.authenticated = false;
                 $http.defaults.headers.common.Authorization = 'Basic ';
             }
         }

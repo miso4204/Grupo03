@@ -54,3 +54,8 @@ angular.module('webAppApp', [
     $locationProvider.html5Mode(true);
   
 })
+.config(
+    ['$animateProvider',
+    function ($animateProvider) {
+        $animateProvider.classNameFilter(/carousel/);
+    }]);

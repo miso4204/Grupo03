@@ -14,6 +14,7 @@ angular.module('webAppApp')
   		$scope.limiteAlto = '';
   		$scope.RatingArtist = null;
   		$scope.SalesArtist = null;
+  		var data = [];
   		
   		if (sessionStorage.get("user")) {
 	        if(!$rootScope.globals){
@@ -69,7 +70,9 @@ angular.module('webAppApp')
   	  	}
 
   	  	$scope.genReportPeriod = function (dataPeriod) {
-	  		if ($scope.limiteBajo > $scope.limiteAlto) {
+  	  		$scope.limiteBajo = $filter('date')(dataPeriod.limiteIni, 'yyyy-MM-dd');
+  	  		$scope.limiteAlto = $filter('date')(dataPeriod.limiteFin, 'yyyy-MM-dd');
+	  		if (dataPeriod.limiteIni > dataPeriod.limiteFin) {
 	  			$scope.ErrorFechaShow = true;		
 	  			$scope.ReportPeriodShow = false;
 	  		} else {
@@ -77,9 +80,22 @@ angular.module('webAppApp')
 	  			$scope.ReportPeriodShow = true;
 	  			$scope.sales=[];
 	  			var result = {};
-		    	result=	ReportSalesPeriod.get({limiteBajo:dataPeriod.limiteIni, limiteAlto:dataPeriod.limiteFin}, function() {
+		    	result=	ReportSalesPeriod.get({limiteBajo:$scope.limiteBajo, limiteAlto:$scope.limiteAlto}, function() {
 				    $scope.sales=result.sales;
-		            console.log($scope.sales);  
+		            console.log($scope.sales);
+		            $scope.data = []; 
+		            for (var i = 0; i < $scope.sales.length; i++) {
+		            	data.push({
+		            		artistName : $scope.sales[i].stamp.artistName,
+	                    	id : $scope.sales[i].stamp.id,
+	                    	url : $scope.sales[i].stamp.url,
+	                    	name : $scope.sales[i].stamp.name,
+	                    	price : $scope.sales[i].stamp.price,
+	                    	numberSales : $scope.sales[i].numberSales,
+	                    	total : (($scope.sales[i].numberSales)*($scope.sales[i].stamp.price)),
+		            	})
+	                }; 
+	                console.log(data)
 				});
 	  		}
   	  	}
@@ -152,12 +168,20 @@ angular.module('webAppApp')
 	    	pickTime: false
 	  	};
 
-	  	$scope.tableParams = new ngTableParams({
+	  	$scope.tableParams1 = new ngTableParams({
 	        page: 1,            // show first page
 	        count: 10,          // count per page
 	        sorting: {
-	            name: 'asc'     // initial sorting
+	            artist: 'asc'     // initial sorting
 	        }
+	    }, {
+		        total: data.length, // length of data
+		        getData: function($defer, params) {
+		            // use build-in angular filter
+		            var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
+
+                	$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+		        }
 	    });
 
 	  	$scope.formats = ['dd-MMMM-yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy', 'shortDate'];

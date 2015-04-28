@@ -1,6 +1,6 @@
 'use strict';
 angular.module('webAppApp')
-  .controller('StampsCtrl', function($scope,$rootScope,$modal,Stamp,sessionStorage,Cart){
+  .controller('StampsCtrl', function($scope,$rootScope,$modal,Stamp,sessionStorage,Cart,StampId){
     $rootScope.globals={};
 
 		if (sessionStorage.get("user")) {
@@ -10,12 +10,23 @@ angular.module('webAppApp')
       }
     }
 
-		var result = {};
-		result=	Stamp.query(
-			function(){
-				$scope.stamps=result.stamps;
-			}
-		);
+    if ($rootScope.globals.currentUser.userType=='CLIENT') {
+      var result = {};
+      result= Stamp.query(
+        function(){
+          $scope.stamps=result.stamps;
+        }
+      );  
+    };
+		
+    if ($rootScope.globals.currentUser.userType=='ARTIST') {
+      var result = {};
+      result= StampId.get({artistId:$rootScope.globals.currentUser.userId},
+        function(){
+          $scope.stamps=result.stamps;
+        }
+      );  
+    };
 
  
     $scope.open = function () {
