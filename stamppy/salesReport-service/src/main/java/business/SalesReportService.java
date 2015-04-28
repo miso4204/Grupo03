@@ -1,7 +1,5 @@
 package business;
 
-import java.util.Date;
-
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.GET;
@@ -26,7 +24,7 @@ public class SalesReportService {
 	@GET
 	@Path("/sales/{lowerBound}/{upperBound}")
 	@Produces("application/json")
-	public Response getSalesByPeriod(@PathParam("lowerBound") Date lowerBound, @PathParam("upperBound") Date upperBound){
+	public Response getSalesByPeriod(@PathParam("lowerBound") String lowerBound, @PathParam("upperBound") String upperBound){
 		try {
 			return Response.ok(salesReportBean.getSalesByPeriod(lowerBound, upperBound)).build();
 		} catch (Exception e) {

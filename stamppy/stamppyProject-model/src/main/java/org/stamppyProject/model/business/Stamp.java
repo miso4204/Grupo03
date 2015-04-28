@@ -27,6 +27,7 @@ import org.stamppyProject.model.security.User;
 @Entity
 @NamedQueries({
 @NamedQuery(name="Stamp.findAll", query="Select s from Stamp s"),
+@NamedQuery(name="Stamp.findByArtist", query="Select s from Stamp s where s.seller.id=:artistId"),
 @NamedQuery(name="Stamp.findByStatus", query="Select s from Stamp s where s.status=:status")
 })
 public class Stamp implements Serializable {

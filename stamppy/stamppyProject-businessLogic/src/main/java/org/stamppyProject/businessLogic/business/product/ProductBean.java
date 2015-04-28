@@ -83,11 +83,28 @@ public class ProductBean implements IProduct {
 		return ProductJsonMapper.convertToProductsByRatingJson(products);
 	}
 	
+	@Override
+	public List<ProductJson> getAllProducts() {
+		List<ProductJson> products = new ArrayList<ProductJson>();
+		for(Product p:productDAO.getAllProducts()){
+			products.add(ProductJsonMapper.convertToProductJson(p));
+		}
+		return products;
+	}
+	
+	@Override
+	public ProductJson insertProductAdmin(ProductJson productJson) {
+		Product product = productDAO.saveProductAdmin(ProductJsonMapper.convertToProduct(productJson));
+		return ProductJsonMapper.convertToProductJson(product);
+	}
+	
 	private void addProductToCart(Product product){
 		Cart cart = cartDAO.getTempCart(product.getUser());
 		cart.getProducts().add(product);
 		cartDAO.updateCart(cart);
 	}
+	
+	
 	
 	
 	

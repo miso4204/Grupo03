@@ -18,4 +18,6 @@ public interface IStampDAO {
 	public List<Stamp> getAvailableStamps();
 	
 	public Stamp getStamp(Long id);
+	
+	public List<Stamp> getStampsByArtist(Long id);
 }

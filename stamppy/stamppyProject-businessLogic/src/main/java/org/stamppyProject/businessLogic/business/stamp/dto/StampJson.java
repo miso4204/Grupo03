@@ -17,6 +17,8 @@ public class StampJson {
 	
 	private Long artistId;
 	
+	private String artistName;
+	
 	private RatingJson rating;
 	
 
@@ -117,5 +119,21 @@ public class StampJson {
 	public void setRating(RatingJson rating) {
 		this.rating = rating;
 	}
+
+	/**
+	 * @return the artistName
+	 */
+	public String getArtistName() {
+		return artistName;
+	}
+
+	/**
+	 * @param artistName the artistName to set
+	 */
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+	}
+	
+	
 	
 }

@@ -9,6 +9,8 @@ public interface IProductDAO {
 	
 	public void saveProduct(Product product);
 	
+	public Product saveProductAdmin(Product product);
+	
 	public void updateProduct(Product product);
 	
 	public Product getProduct(Long id);
@@ -16,5 +18,7 @@ public interface IProductDAO {
 	public List<Product> getSalesByPeriod(Date lowerBound, Date upperBound);
 	
 	public List<Product> getSalesByArtist(Long artistId);
+	
+	public List<Product> getAllProducts();
 
 }

@@ -19,5 +19,7 @@ public interface IStamp {
 	public void setRating(RatingJson ratingJson);
 	
 	public AvailableStampsJson getByRatings(Double lowerBound, Double upperBound); 
+	
+	public AvailableStampsJson getStampsByArtist(Long id);
 
 }

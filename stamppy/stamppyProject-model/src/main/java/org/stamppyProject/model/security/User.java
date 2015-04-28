@@ -22,6 +22,7 @@ import org.stamppyProject.model.enumerations.UserTypeEnum;
 @NamedQueries({
 @NamedQuery(name="user.findAll", query="SELECT u FROM User u"),
 @NamedQuery(name="user.findByUsername", query="SELECT u FROM User u WHERE u.username = :username"),
+@NamedQuery(name="user.findUserByType", query="SELECT u FROM User u WHERE u.userType=:userType"),
 @NamedQuery(name="user.findByUsernamePassword", query="SELECT u FROM User u WHERE u.username = :username and u.password=:password")
 }) 
 public class User implements Serializable{

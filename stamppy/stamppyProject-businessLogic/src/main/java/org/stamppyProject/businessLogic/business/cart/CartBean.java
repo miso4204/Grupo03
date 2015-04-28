@@ -61,6 +61,7 @@ public class CartBean implements ICart {
 		}else{
 			payment.setStatus(PaymentStatusEnum.APPROVED);
 			payment.getCart().setStatus(CartStatusEnum.CHECKOUT);
+			payment.getCart().setCheckoutDate(new Date());
 			cartDAO.updateCart(payment.getCart());
 			//Create a new temp user's cart 
 			Cart cart = new Cart();

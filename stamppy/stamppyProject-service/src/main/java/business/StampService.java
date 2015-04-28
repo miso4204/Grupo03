@@ -78,5 +78,12 @@ public class StampService {
 		}
 		
 	}
+	
+	@GET
+	@Path("/{artistId}/stamp")
+	@Produces("application/json")
+	public Response getStampsByArtist(@PathParam("artistId") Long id){
+		return Response.ok(stampBean.getStampsByArtist(id)).build();
+	}
 
 }

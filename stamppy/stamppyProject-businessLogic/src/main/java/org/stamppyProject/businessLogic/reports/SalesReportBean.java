@@ -1,12 +1,13 @@
 package org.stamppyProject.businessLogic.reports;
 
+import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.stamppyProject.businessLogic.Utils;
 import org.stamppyProject.businessLogic.business.stamp.mapper.StampJsonMapper;
 import org.stamppyProject.businessLogic.reports.dto.SalesJson;
 import org.stamppyProject.businessLogic.reports.dto.SalesJsonList;
@@ -37,9 +38,10 @@ public class SalesReportBean implements ISalesReport{
 	}
 	
 	@Override
-	public SalesJsonList getSalesByPeriod(Date lowerBound, Date upperBound) {
+	public SalesJsonList getSalesByPeriod(String lowerBound, String upperBound) throws ParseException {
 		SalesJsonList slist = new SalesJsonList();
-		List<Product> products = productDAO.getSalesByPeriod(lowerBound, upperBound);
+		List<Product> products = productDAO.getSalesByPeriod(Utils.convertToDate(lowerBound), Utils.convertToDate(upperBound));
+		slist.setNumberStamps(products.size());
 		List<Long> tmp = new ArrayList<Long>();
 		for(Product p:products){
 			if(!tmp.contains(p.getStamp().getId())){

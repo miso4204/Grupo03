@@ -26,6 +26,7 @@ import org.stamppyProject.model.security.User;
  */
 @Entity
 @NamedQueries({
+@NamedQuery(name="Product.findAll", query="Select p from Product p"),
 @NamedQuery(name="Product.findAllSalesByPeriodAndCartStatus", query="Select p from Product p join p.carts c where c.status = :cartStatus and c.checkoutDate >= :lowerBound and c.checkoutDate <= :upperBound"),
 @NamedQuery(name="Product.findAllSalesByArtistAndCartStatus", query="Select p from Product p join p.carts c where c.status = :cartStatus and p.stamp.seller.id = :artistId"),
 })

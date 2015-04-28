@@ -1,5 +1,8 @@
 package org.stamppyProject.businessLogic.security;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
@@ -65,6 +68,15 @@ public class UserBean implements IUser{
 	@Override
 	public UserJson getUser(Long id) {
 		return UserJsonMapper.convertToUserJson(userDAO.getUser(id));
+	}
+	
+	@Override
+	public List<UserJson> getArtists() {
+		List<UserJson> users = new ArrayList<UserJson>();
+		for(User u:userDAO.getArtist()){
+			users.add(UserJsonMapper.convertToUserJson(u));
+		}
+		return users;
 	}
 	
 	private User getUser(String username){

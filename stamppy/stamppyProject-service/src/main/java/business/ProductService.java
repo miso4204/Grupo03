@@ -46,5 +46,20 @@ public class ProductService {
 		}
 		
 	}
+	
+	@GET
+	@Path("/product/")
+	@Produces("application/json")
+	public Response getProduct(){
+		return Response.ok(productBean.getAllProducts()).build();
+	}
+	
+	@POST
+	@Path("/product")
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response registerRating(ProductJson productJson){
+		return Response.ok(productBean.insertProductAdmin(productJson)).build();
+
+	}
 
 }

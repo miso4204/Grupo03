@@ -34,6 +34,11 @@ public class StampBean implements IStamp{
 		Stamp stamp = StampJsonMapper.convertToStamp(stampJson);
 		stamp.setSeller(userDAO.getUser(stampJson.getArtistId()));
 		stamp.setStatus(StampStatusEnum.AVAILABLE);
+		Rating rating = new Rating();
+		rating.setRatings(0);
+		rating.setAverageRating(0.0);
+		stamp.setRating(rating);
+		ratingDAO.saveRating(rating);
 		stampDAO.insertStamp(stamp);
 	}
 	
@@ -90,6 +95,11 @@ public class StampBean implements IStamp{
 			stamps.add(r.getStamp());
 		}
 		return StampJsonMapper.convertToAvailableStampsJson(stamps);
+	}
+	
+	@Override
+	public AvailableStampsJson getStampsByArtist(Long id) {
+		return StampJsonMapper.convertToAvailableStampsJson(stampDAO.getStampsByArtist(id));
 	}
 
 }

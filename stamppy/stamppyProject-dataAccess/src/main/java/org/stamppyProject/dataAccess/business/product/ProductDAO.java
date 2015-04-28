@@ -23,6 +23,12 @@ public class ProductDAO implements IProductDAO {
 	}
 	
 	@Override
+	public Product saveProductAdmin(Product product) {
+		em.persist(product);
+		return product;
+	}
+	
+	@Override
 	public void updateProduct(Product product) {
 		em.merge(product);
 	}
@@ -44,10 +50,19 @@ public class ProductDAO implements IProductDAO {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Product> getSalesByPeriod(Date lowerBound, Date upperBound) {
+		upperBound.setHours(23);
+		upperBound.setMinutes(59);
 		return em.createNamedQuery("Product.findAllSalesByPeriodAndCartStatus")
 				.setParameter("cartStatus", CartStatusEnum.CHECKOUT)
 				.setParameter("lowerBound", lowerBound)
 				.setParameter("upperBound", upperBound)
+				.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Product> getAllProducts() {
+		return em.createNamedQuery("Product.findAll")
 				.getResultList();
 	}
 

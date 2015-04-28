@@ -1,11 +1,14 @@
 package org.stamppyProject.dataAccess.security;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import org.stamppyProject.model.enumerations.UserTypeEnum;
 import org.stamppyProject.model.security.User;
 
 @Stateless
@@ -61,6 +64,14 @@ public class UserDAO implements IUserDAO{
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<User> getArtist() {
+		return em.createNamedQuery("user.findUserByType")
+				.setParameter("userType", UserTypeEnum.ARTIST)
+				.getResultList();
 	}
 	
 }

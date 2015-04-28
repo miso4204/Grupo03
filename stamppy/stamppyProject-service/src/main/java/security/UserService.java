@@ -67,6 +67,12 @@ public class UserService {
  		return userBean.getUser(id);
  	}
  	
+ 	@GET
+ 	@Path("/artists/")
+ 	@Produces("application/json")
+ 	public Response getArtists(){
+ 		return Response.ok(userBean.getArtists()).build();
+ 	}
  	
      
 }

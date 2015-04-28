@@ -45,6 +45,12 @@ public class StampDAO implements IStampDAO {
 		return em.find(Stamp.class, id);
 	}
 	
-	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Stamp> getStampsByArtist(Long id) {
+		return em.createNamedQuery("Stamp.findByArtist")
+				.setParameter("artistId", id)
+				.getResultList();
+	}
 
 }
