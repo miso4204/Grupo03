@@ -18,13 +18,11 @@
 		<!-- Reporte Ventas por Id Artista -->
 		<div class="panel panel-body panel-primary" ng-show="SalesIdShow">
       		<center><h2>Ventas por Artista</h2></center> <br>
-      		<label>Artista:	
-			  <span  class="nullable">
-			    <select class="select" ng-model="SalesArtist" ng-options="artist.id as artist.username for artist in artists">
+			  <span  class="nullable col-md-2">
+			    <select class="form-control" ng-model="SalesArtist" ng-options="artist.id as artist.username for artist in artists">
 			      <option value="">-- Elige Artista --</option>
 			    </select>
-			  </span>
-			</label><br/>
+			  </span> <br>
           	<br>
           	<table ng-table="tableParams" class="table">
 		        <tr ng-repeat="idsale in idsales">
@@ -94,6 +92,31 @@
 				</form>
 			</div>
           	<br>
+          	<table ng-table="tableParams1" class="table">
+		        <tr ng-repeat="sale in $data">
+		        	<td data-title="'Artista'" sortable="'artist'">
+		                <center>{{sale.artistName}}</center>
+		            </td>
+		        	<td data-title="'Id Estampa'" sortable="'id'">
+		                <center>{{sale.id}}</center>
+		            </td>
+		            <td data-title="'Estampa'">
+		                <center><img ng-src="{{sale.url}}" WIDTH=30 HEIGHT=36></center>
+		            </td>
+		            <td data-title="'Name'" sortable="'name'">
+		                <center>{{sale.name}}</center>
+		            </td>
+		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
+		                <center>$ {{sale.price | number:0}}</center>
+		            </td>
+		            <td data-title="'Vendidos'" sortable="'vendidos'">
+		                <center>{{sale.numberSales}}</center>
+		            </td>
+		            <td data-title="'Total Vendido'" sortable="'totalVendido'">
+		                <center>$ {{sale.total | number:0}}</center>
+		            </td>
+		        </tr>
+		    </table>
 		</div>
 
 		<!-- Reporte Rating por Artista -->
@@ -101,7 +124,7 @@
       		<center><h2>Rating por Artista</h2></center> <br>
       		<label>Artista:	
 			  <span  class="nullable">
-			    <select class="select" ng-model="RatingArtist" ng-options="artist.id as artist.username for artist in artists">
+			    <select class="form-control" ng-model="RatingArtist" ng-options="artist.id as artist.username for artist in artists">
 			      <option value="">-- Elige Artista --</option>
 			    </select>
 			  </span>
