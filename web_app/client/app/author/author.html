@@ -17,11 +17,13 @@
             <div class="panel-body"  >
                <h3>
                   <B> 
-                    <font size="5" color="#4682B4">Ana Milena Barragan Charry</font>
+                    <font size="5" color="#4682B4">{{user.name}}  {{user.lastName}}</font>
                   </B>
-               </h3>
+				  <br />
+				  <font size="4" color="#4682B4">@{{user.username}}</font> 
+               </h3>			  
                <h3>  			   	   
-                  <font size="3" color="GREY">Calificacion: </font>  				   
+                  <!--<font size="3" color="GREY">Calificacion: </font>-->   				   
                </h3>
    			
 			<h3 align="center"> 			 			   	   
@@ -36,8 +38,8 @@
                         <slide ng-repeat="slide in slides">
                           <img ng-src="{{slide.url}}" style="margin:auto;">						  
                           <div class="carousel-caption">
-                            <h4>Slide {{$index}}</h4>
-                            <p>{{slide.text}}</p>
+                            <!--<h4>{{$index}}</h4>-->
+                            <p>{{slide.name}}</p>
                           </div>
                         </slide>
                       </carousel>

@@ -1,13 +1,19 @@
 'use strict';
 
 angular.module('webAppApp')
-  .controller('AuthorCtrl', function ($scope) {
+  .controller('AuthorCtrl', function ($scope,StampId,$routeParams,User) {
    	$scope.myInterval=10000;
-   	$scope.slides=[
-   		{url:"http://i.imgur.com/0w2Jx7Cm.png",text:"hola"},
-   		{url:"http://i.imgur.com/uKwBXQnm.jpg",text:"hola1"},
-   		{url:"http://i.imgur.com/0w2Jx7Cm.png",text:"hola2"},
-   		{url:"http://i.imgur.com/uKwBXQnm.jpg",text:"hola3"},
-   		{url:"http://i.imgur.com/0w2Jx7Cm.png",text:"hola4"},
-   	]
+	$scope.result = {};	
+	$scope.user = User.get({id:$routeParams.id},function(){
+        console.log(JSON.stringify($scope.user))
+      });
+	
+	
+	
+	var authorId = $routeParams.id;
+	var result = StampId.get({artistId:authorId},
+				  				function(){
+          						     $scope.slides=result.stamps;
+       							 });  	   		
+   	
   });
