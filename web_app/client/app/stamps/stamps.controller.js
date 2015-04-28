@@ -56,13 +56,15 @@ angular.module('webAppApp')
     if (sessionStorage.get("user")) {
       var result1 = {};
       var user =sessionStorage.get("user");
-      result1= Cart.get({id:user.userId},
-          function(response){
-              $rootScope.products=response.products;
-              $rootScope.nroProdCart=$rootScope.products.length;
-              sessionStorage.set('products',$rootScope.products);
-          }
-      );
+      if ($rootScope.globals.currentUser.userType=='CLIENT'){
+        result1= Cart.get({id:user.userId},
+            function(response){
+                $rootScope.products=response.products;
+                $rootScope.nroProdCart=$rootScope.products.length;
+                sessionStorage.set('products',$rootScope.products);
+            }
+        );
+      }
     }
     
 	})
