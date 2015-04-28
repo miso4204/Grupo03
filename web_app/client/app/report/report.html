@@ -18,11 +18,13 @@
 		<!-- Reporte Ventas por Id Artista -->
 		<div class="panel panel-body panel-primary" ng-show="SalesIdShow">
       		<center><h2>Ventas por Artista</h2></center> <br>
-			  <span  class="nullable col-md-2">
+      		<label>
+			  <span  class="nullable">
 			    <select class="form-control" ng-model="SalesArtist" ng-options="artist.id as artist.username for artist in artists">
 			      <option value="">-- Elige Artista --</option>
 			    </select>
 			  </span> <br>
+			</label>  
           	<br>
           	<table ng-table="tableParams" class="table">
 		        <tr ng-repeat="idsale in idsales">
@@ -122,7 +124,7 @@
 		<!-- Reporte Rating por Artista -->
       	<div class="panel panel-body panel-primary" ng-show="RatingIdShow">
       		<center><h2>Rating por Artista</h2></center> <br>
-      		<label>Artista:	
+      		<label>
 			  <span  class="nullable">
 			    <select class="form-control" ng-model="RatingArtist" ng-options="artist.id as artist.username for artist in artists">
 			      <option value="">-- Elige Artista --</option>

@@ -28,6 +28,7 @@ angular.module('webAppApp')
                         authenticated:true,
                     }
                 };
+                $rootScope.dirAuthor = "./author/" + $rootScope.globals.currentUser.userId ;
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata; // jshint ignore:line
                 sessionStorage.set('user',$rootScope.globals.currentUser)
                 console.log("loading products for:" + sessionStorage.get("user"));
