@@ -4,18 +4,7 @@
 	</div>
 	<div class="col-md-6">
 		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;<a href="#/stamps/{{stamp.id}}">{{stamp.name}}</a></span></p>
-		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="#/authors/{{stamp.author.id}}">{{stamp.author.name}}</a></span></p>
-		<p>
-			<strong>Calificación:&nbsp;</strong>
-			<span class="rating">
-				<i ng-show="stamp.rating>=1" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=2" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=3" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=4" class="fa fa-star"></i>
-				<i ng-show="stamp.rating>=5" class="fa fa-star"></i>
-			</span>
-			<span>({{stamp.ratings}})</span>
-		</p>
+		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="#/authors/{{stamp.author.id}}">{{stamp.artistName?stamp.artistName:"Anonimo"}}</a></span></p>
 	</div>
 	<div class="col-md-3 no-padding no-margin">
 		<p>

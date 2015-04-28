@@ -85,10 +85,13 @@ body {
   /*TODO*/
 }
 .main-panel{
-  margin-top:100px;
+  margin-top:50px;
   height: 100%;
 }
 
+.main-panel .login-view{
+  margin: 90px
+}
 
 
 /*Suport for catalog left filter*/
