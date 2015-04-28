@@ -6,17 +6,23 @@
     <div id="view-options" class="panel panel-default no-margin">
       <div class="panel-body no-padding">
         <!-- view mode -->
-        <div class="col-md-3 btn-group no-padding">
-          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
+        <div class="col-md-4 btn-group no-padding">
+          <span  class="nullable col-md-6">
+          <select class="form-control" ng-model="viewStamps" ng-init="viewStamps='Todas'">
+            <option value="Todas">Todas</option>
+            <option value="Artist" ng-if="globals.currentUser.userType=='ARTIST'">Estampas {{globals.currentUser.username}}</option>
+          </select>
+        </span>
+          <label class="btn btn-default col-md-3" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
             <span class="glyphicon glyphicon-th"></span>
           </label>
-          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'list'" tooltip="Ver en modo lista">
+          <label class="btn btn-default col-md-3" ng-model="viewOptions.viewMode" btn-radio="'list'" tooltip="Ver en modo lista">
             <span class="glyphicon glyphicon-th-list"></span>
           </label>
         </div>
         <!-- End view mode -->
         <!-- search box -->
-        <div class="col-md-6 no-padding" id="searchbox">
+        <div class="col-md-5 no-padding" id="searchbox">
           <div class="input-group no-padding">
             <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="filters.searchBox"></input>
             <span class="input-group-btn">

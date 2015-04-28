@@ -10,25 +10,28 @@ angular.module('webAppApp')
       }
     }
 
-    if ($rootScope.globals.currentUser.userType=='CLIENT') {
-      var result = {};
-      result= Stamp.query(
-        function(){
-          $scope.stamps=result.stamps;
-        }
-      );  
-    };
-		
-    if ($rootScope.globals.currentUser.userType=='ARTIST') {
-      var result = {};
-      result= StampId.get({artistId:$rootScope.globals.currentUser.userId},
-        function(){
-          $scope.stamps=result.stamps;
-        }
-      );  
-    };
+    $scope.$watch('viewStamps', function () {
+     
+      if ($scope.viewStamps =='Todas') {
+        var result = {};
+        result= Stamp.query(
+          function(){
+            $scope.stamps=result.stamps;
+          }
+        );  
+      };
+      
+      if ($scope.viewStamps=='Artist') {
+        var result = {};
+        result= StampId.get({artistId:$rootScope.globals.currentUser.userId},
+          function(){
+            $scope.stamps=result.stamps;
+          }
+        );  
+      };
 
- 
+    });
+
     $scope.open = function () {
       $modal.open(
         {
