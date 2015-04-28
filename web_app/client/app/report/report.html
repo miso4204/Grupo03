@@ -92,28 +92,28 @@
 				</form>
 			</div>
           	<br>
-          	<table ng-table="tableParams1" class="table">
-		        <tr ng-repeat="sale in $data">
+          	<table ng-table="tableParams" class="table">
+		        <tr ng-repeat="sale in sales">
 		        	<td data-title="'Artista'" sortable="'artist'">
-		                <center>{{sale.artistName}}</center>
+		                <center>{{sale.stamp.artistName}}</center>
 		            </td>
 		        	<td data-title="'Id Estampa'" sortable="'id'">
-		                <center>{{sale.id}}</center>
+		                <center>{{sale.stamp.id}}</center>
 		            </td>
 		            <td data-title="'Estampa'">
-		                <center><img ng-src="{{sale.url}}" WIDTH=30 HEIGHT=36></center>
+		                <center><img ng-src="{{sale.stamp.url}}" WIDTH=30 HEIGHT=36></center>
 		            </td>
 		            <td data-title="'Name'" sortable="'name'">
-		                <center>{{sale.name}}</center>
+		                <center>{{sale.stamp.name}}</center>
 		            </td>
 		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
-		                <center>$ {{sale.price | number:0}}</center>
+		                <center>$ {{sale.stamp.price | number:0}}</center>
 		            </td>
 		            <td data-title="'Vendidos'" sortable="'vendidos'">
 		                <center>{{sale.numberSales}}</center>
 		            </td>
 		            <td data-title="'Total Vendido'" sortable="'totalVendido'">
-		                <center>$ {{sale.total | number:0}}</center>
+		                <center>$ {{(sale.stamp.price)*(sale.numberSales) | number:0}}</center>
 		            </td>
 		        </tr>
 		    </table>
@@ -148,7 +148,8 @@
 		                <center>{{idstamp.rating.ratings | number:0}}</center>
 		            </td>
 		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
-		                <center>{{idstamp.rating.averageRating | number:0}}</center>
+		                <center ng-if="idstamp.rating.ratings != 0">{{idstamp.rating.averageRating | number:0}}</center>
+		                <center ng-if="idstamp.rating.ratings == 0">-</center>
 		            </td>
 		        </tr>
 		    </table>
@@ -179,7 +180,8 @@
 		                <center>{{stamp.rating.ratings | number:0}}</center>
 		            </td>
 		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
-		                <center>{{stamp.rating.averageRating | number:0}}</center>
+		                <center ng-if="stamp.rating.ratings != 0">{{stamp.rating.averageRating | number:0}}</center>
+		                <center ng-if="stamp.rating.ratings == 0">-</center>
 		            </td>
 		        </tr>
 		    </table>

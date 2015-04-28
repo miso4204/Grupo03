@@ -14,7 +14,6 @@ angular.module('webAppApp')
   		$scope.limiteAlto = '';
   		$scope.RatingArtist = null;
   		$scope.SalesArtist = null;
-  		var data = [];
   		
   		if (sessionStorage.get("user")) {
 	        if(!$rootScope.globals){
@@ -83,19 +82,6 @@ angular.module('webAppApp')
 		    	result=	ReportSalesPeriod.get({limiteBajo:$scope.limiteBajo, limiteAlto:$scope.limiteAlto}, function() {
 				    $scope.sales=result.sales;
 		            console.log($scope.sales);
-		            $scope.data = []; 
-		            for (var i = 0; i < $scope.sales.length; i++) {
-		            	data.push({
-		            		artistName : $scope.sales[i].stamp.artistName,
-	                    	id : $scope.sales[i].stamp.id,
-	                    	url : $scope.sales[i].stamp.url,
-	                    	name : $scope.sales[i].stamp.name,
-	                    	price : $scope.sales[i].stamp.price,
-	                    	numberSales : $scope.sales[i].numberSales,
-	                    	total : (($scope.sales[i].numberSales)*($scope.sales[i].stamp.price)),
-		            	})
-	                }; 
-	                console.log(data)
 				});
 	  		}
   	  	}
@@ -168,20 +154,12 @@ angular.module('webAppApp')
 	    	pickTime: false
 	  	};
 
-	  	$scope.tableParams1 = new ngTableParams({
+	  	$scope.tableParams = new ngTableParams({
 	        page: 1,            // show first page
 	        count: 10,          // count per page
 	        sorting: {
 	            artist: 'asc'     // initial sorting
 	        }
-	    }, {
-		        total: data.length, // length of data
-		        getData: function($defer, params) {
-		            // use build-in angular filter
-		            var orderedData = params.sorting() ? $filter('orderBy')(data, params.orderBy()) : data;
-
-                	$defer.resolve(orderedData.slice((params.page() - 1) * params.count(), params.page() * params.count()));
-		        }
 	    });
 
 	  	$scope.formats = ['dd-MMMM-yyyy', 'yyyy-MM-dd', 'dd.MM.yyyy', 'shortDate'];

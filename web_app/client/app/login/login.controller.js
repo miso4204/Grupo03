@@ -28,9 +28,6 @@ angular.module('webAppApp')
             $scope.test=function(){
                 console.log("hola");
             };
-            $scope.logout=function() {
-              loginService.ClearCredentials();
-            };
 			$scope.login = function (credentials) {
 				loginService.login(credentials,function(response) {
             		if(response.success) {
@@ -46,13 +43,16 @@ angular.module('webAppApp')
             $scope.loadProducts=function(){
                 var result = {};
                 var user =sessionStorage.get("user");
-                result= Cart.get({id:user.userId},
-                    function(response){
-                        $rootScope.products=response.products;
-                        $rootScope.nroProdCart=$rootScope.products.length;
-                        sessionStorage.set('products',$rootScope.products);
+                if ($rootScope.globals.currentUser.userType=='CLIENT'){
+                    result= Cart.get({id:user.userId},
+                        function(response){
+                            $rootScope.products=response.products;
+                            $rootScope.nroProdCart=$rootScope.products.length;
+                            sessionStorage.set('products',$rootScope.products);
                     }
-                );
+                );    
+                }
+                
             };
 			$scope.getFieldCssClass=function(ngModelController){
 				if(ngModelController.$pristine) return "";
