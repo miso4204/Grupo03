@@ -30,7 +30,7 @@
       <link rel="stylesheet" href="app/author/author.css">
       <link rel="stylesheet" href="app/cart/cart.css">
       <link rel="stylesheet" href="app/catalogItem/catalogItem.css">
-      <link rel="stylesheet" href="app/change-password/change-password.css">
+      <link rel="stylesheet" href="app/change-user-data/change-user-data.css">
       <link rel="stylesheet" href="app/login/login.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/pay/pay.css">
@@ -79,7 +79,7 @@
                       <ul class="dropdown-menu" role="menu">
                           <li><a href="#"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>                            
                           <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
-                          <li><a href="./change-password"><i class="fa fa-pencil fa-fw"></i> Cambiar Contraseña</a></li>
+                          <li><a href="./change-user-data"><i class="fa fa-pencil fa-fw"></i> Cambiar Contraseña</a></li>
                           <li ng-if="globals.currentUser.userType=='ARTIST'"><a href="{{dirAuthor}}"><i class="fa fa-picture-o"></i> Perfil Artista</a></li>
                           <li ng-if="globals.currentUser.userType=='ADMIN'"><a href="./report"><i class="fa fa-table"></i> Reportes</a></li>
                       </ul> 
@@ -177,8 +177,8 @@
           <script src="app/cart/cart.js"></script>
           <script src="app/cartService/cartService.service.js"></script>
           <script src="app/catalogItem/catalogItem.directive.js"></script>
-          <script src="app/change-password/change-password.controller.js"></script>
-          <script src="app/change-password/change-password.js"></script>
+          <script src="app/change-user-data/change-user-data.controller.js"></script>
+          <script src="app/change-user-data/change-user-data.js"></script>
           <script src="app/login/login.controller.js"></script>
           <script src="app/login/login.js"></script>
           <script src="app/loginService/loginService.service.js"></script>
