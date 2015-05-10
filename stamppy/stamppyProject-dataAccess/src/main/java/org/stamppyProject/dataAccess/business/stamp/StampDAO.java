@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.PersistenceContextType;
 
+import org.stamppyProject.model.business.Offer;
 import org.stamppyProject.model.business.Stamp;
 import org.stamppyProject.model.enumerations.StampStatusEnum;
 
@@ -51,6 +52,18 @@ public class StampDAO implements IStampDAO {
 		return em.createNamedQuery("Stamp.findByArtist")
 				.setParameter("artistId", id)
 				.getResultList();
+	}
+	
+	@Override
+	public Offer saveOffer(Offer offer) {
+		em.persist(offer);
+		return offer;
+	}
+	
+	@Override
+	public Offer updateOffer(Offer offer) {
+		em.merge(offer);
+		return offer;
 	}
 
 }

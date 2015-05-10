@@ -56,6 +56,9 @@ public class Stamp implements Serializable {
 	@Enumerated(EnumType.STRING)
 	private StampStatusEnum status;
 	
+	@OneToOne(fetch=FetchType.EAGER)
+	private Offer offer;
+	
 	private static final long serialVersionUID = 1L;
 
 	public Stamp() {
@@ -139,6 +142,18 @@ public class Stamp implements Serializable {
 	 */
 	public void setStatus(StampStatusEnum status) {
 		this.status = status;
+	}
+	/**
+	 * @return the offer
+	 */
+	public Offer getOffer() {
+		return offer;
+	}
+	/**
+	 * @param offer the offer to set
+	 */
+	public void setOffer(Offer offer) {
+		this.offer = offer;
 	}	
 	
 	

@@ -10,4 +10,6 @@ public interface ICart {
 	public void removeItem(Long cartId, Long productId);
 	
 	public PaymentJson purchaseProducts(PaymentJson payment);
+	
+	public Boolean validatePaymentRestrictions(PaymentJson paymentJson);
 }

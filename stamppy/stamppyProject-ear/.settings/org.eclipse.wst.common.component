@@ -11,5 +11,8 @@
         <dependent-module archiveName="salesReport-service-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/salesReport-service/salesReport-service">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="offers-service-0.0.1-SNAPSHOT.war" deploy-path="/" handle="module:/resource/offers-service/offers-service">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
     </wb-module>
 </project-modules>

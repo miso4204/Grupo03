@@ -4,5 +4,6 @@ public enum CartStatusEnum {
 	
 	TEMP,
 	CHECKOUT,
+	WAITING_CAHS_ON_DELIVERY;
 
 }

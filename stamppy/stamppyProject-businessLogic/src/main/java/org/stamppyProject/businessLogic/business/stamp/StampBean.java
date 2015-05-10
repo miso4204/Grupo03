@@ -1,5 +1,6 @@
 package org.stamppyProject.businessLogic.business.stamp;
 
+import java.awt.image.SampleModel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,12 +8,14 @@ import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
 import org.stamppyProject.businessLogic.business.stamp.dto.AvailableStampsJson;
+import org.stamppyProject.businessLogic.business.stamp.dto.OfferJson;
 import org.stamppyProject.businessLogic.business.stamp.dto.RatingJson;
 import org.stamppyProject.businessLogic.business.stamp.dto.StampJson;
 import org.stamppyProject.businessLogic.business.stamp.mapper.StampJsonMapper;
 import org.stamppyProject.dataAccess.business.rating.IRatingDAO;
 import org.stamppyProject.dataAccess.business.stamp.IStampDAO;
 import org.stamppyProject.dataAccess.security.IUserDAO;
+import org.stamppyProject.model.business.Offer;
 import org.stamppyProject.model.business.Rating;
 import org.stamppyProject.model.business.Stamp;
 import org.stamppyProject.model.enumerations.StampStatusEnum;
@@ -101,5 +104,23 @@ public class StampBean implements IStamp{
 	public AvailableStampsJson getStampsByArtist(Long id) {
 		return StampJsonMapper.convertToAvailableStampsJson(stampDAO.getStampsByArtist(id));
 	}
+	
+	@Override
+	public Offer saveOffer(OfferJson offerJson) {
+		Offer offer = stampDAO.saveOffer(StampJsonMapper.convertToOffer(offerJson));
+		Stamp stamp = stampDAO.getStamp(offerJson.getStampId());
+		stamp.setOffer(offer);
+		stampDAO.updateStamp(stamp);
+		return offer;
+	}
+	
+	@Override
+	public Offer updateOffer(OfferJson offerJson) {
+		Stamp stamp = stampDAO.getStamp(offerJson.getStampId());
+		offerJson.setId(stamp.getOffer().getId());
+		Offer offer = stampDAO.updateOffer(StampJsonMapper.convertToOffer(offerJson));
+		return offer;
+	}
+	
 
 }

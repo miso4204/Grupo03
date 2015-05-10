@@ -46,6 +46,8 @@ public class User implements Serializable{
 	
 	private String lastName;
 	
+	private String image;
+	
 	@Enumerated(EnumType.STRING)
 	private UserTypeEnum userType;
 
@@ -155,8 +157,19 @@ public class User implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
-	
-	
+
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
+	}
 
 }

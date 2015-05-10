@@ -4,6 +4,6 @@ public enum PaymentTypeEnum {
 	
 	CREDIT_CARD,
 	PSE,
-	PAYPAL;
+	CASH_ON_DELIVERY;
 
 }

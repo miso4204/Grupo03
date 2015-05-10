@@ -10,11 +10,11 @@ import org.stamppyProject.model.business.Product;
 @Aspect
 public class AddProductColor {
 	
-	@Pointcut("call(* *.convertToProduct(..))")
+	@Pointcut("call(* Product.*(..))")
     public void entryPoint1() {
     }
 	
-	@Pointcut("call(* *.convertToProductJson(..))")
+	@Pointcut("call(* ProductJson.*(..))")
     public void entryPoint2() {
     }
 

@@ -41,13 +41,13 @@ public class SalesReportBean implements ISalesReport{
 	public SalesJsonList getSalesByPeriod(String lowerBound, String upperBound) throws ParseException {
 		SalesJsonList slist = new SalesJsonList();
 		List<Product> products = productDAO.getSalesByPeriod(Utils.convertToDate(lowerBound), Utils.convertToDate(upperBound));
-		slist.setNumberStamps(products.size());
+//		slist.setNumberStamps(products.size());
 		List<Long> tmp = new ArrayList<Long>();
 		for(Product p:products){
 			if(!tmp.contains(p.getStamp().getId())){
 				tmp.add(p.getStamp().getId());
 				SalesJson sj = new SalesJson();
-				sj.setNumberSales(getNumberSales(p.getId(), products));
+				sj.setNumberSales(getNumberSales(p.getStamp().getId(), products));
 				sj.setStamp(StampJsonMapper.convertToStampJson(p.getStamp()));
 				slist.getSales().add(sj);
 			}

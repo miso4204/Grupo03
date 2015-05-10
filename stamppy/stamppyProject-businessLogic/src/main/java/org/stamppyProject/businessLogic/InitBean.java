@@ -30,6 +30,18 @@ public class InitBean {
 	private Boolean reportRatingDesignArtist;
 	
 	private Boolean reportSalesArtist;
+	
+	/**payment variability**/
+	private static final Boolean CASH_ON_DELIVERY = Boolean.TRUE;
+	private Boolean cashOnDelivery;
+	
+	
+	/**socialnetwork variability**/
+	
+	private static final Boolean TWITTER = Boolean.TRUE;
+	private static final Boolean FACEBOOK = Boolean.TRUE;
+	private Boolean facebook;
+	private Boolean twitter;
 
 	
 	
@@ -41,6 +53,9 @@ public class InitBean {
 		userBuilder = USER_BUILDER_STRATEGY;
 		reportRatingDesignArtist = REPORT_DESIGN_ARTIST;
 		reportSalesArtist = REPORT_SALES_ARTIST;
+		cashOnDelivery= CASH_ON_DELIVERY;
+		facebook=FACEBOOK;
+		twitter=TWITTER;
 	}
 	
 	
@@ -84,6 +99,34 @@ public class InitBean {
 		return reportSalesArtist;
 	}
 
+
+
+	/**
+	 * @return the cashOnDelivery
+	 */
+	public Boolean getCashOnDelivery() {
+		return cashOnDelivery;
+	}
+
+
+
+	/**
+	 * @return the facebook
+	 */
+	public Boolean getFacebook() {
+		return facebook;
+	}
+
+
+
+	/**
+	 * @return the twitter
+	 */
+	public Boolean getTwitter() {
+		return twitter;
+	}
+
+	
 	
 
 }

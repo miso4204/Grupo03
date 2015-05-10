@@ -21,6 +21,8 @@ public class StampJson {
 	
 	private RatingJson rating;
 	
+	private Double offerPrice;
+	
 
 	/**
 	 * @return the id
@@ -132,6 +134,20 @@ public class StampJson {
 	 */
 	public void setArtistName(String artistName) {
 		this.artistName = artistName;
+	}
+
+	/**
+	 * @return the offerPrice
+	 */
+	public Double getOfferPrice() {
+		return offerPrice;
+	}
+
+	/**
+	 * @param offerPrice the offerPrice to set
+	 */
+	public void setOfferPrice(Double offerPrice) {
+		this.offerPrice = offerPrice;
 	}
 	
 	

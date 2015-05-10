@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.stamppyProject.businessLogic.business.stamp.dto.AvailableStampsJson;
+import org.stamppyProject.businessLogic.business.stamp.dto.OfferJson;
 import org.stamppyProject.businessLogic.business.stamp.dto.StampJson;
+import org.stamppyProject.model.business.Offer;
 import org.stamppyProject.model.business.Stamp;
 
 public class StampJsonMapper {
@@ -30,6 +32,8 @@ public class StampJsonMapper {
 		stampJson.setArtistName(stamp.getSeller().getUsername());
 		if(stamp.getRating()!=null)
 			stampJson.setRating(RatingJsonMapper.convertToRatingJson(stamp.getRating()));
+		if(stamp.getOffer()!=null && stamp.getOffer().getDiscount()>0)
+			stampJson.setOfferPrice(stamp.getPrice()-(stamp.getPrice()*stamp.getOffer().getDiscount()/100));
 		return stampJson;
 	}
 	
@@ -42,6 +46,13 @@ public class StampJsonMapper {
 		}
 		available.setStamps(stampJsons);
 		return available;
+	}
+	
+	public static Offer convertToOffer(OfferJson offerJson){
+		Offer offer = new Offer();
+		offer.setId(offerJson.getId());
+		offer.setDiscount(offerJson.getDiscount());
+		return offer;
 	}
 
 }

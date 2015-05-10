@@ -15,6 +15,7 @@ public class UserJsonMapper {
 		user.setPassword(userJson.getPassword());
 		user.setUsername(userJson.getUsername());	
 		user.setUserType(userJson.getUserType());
+		user.setImage(userJson.getImage());
 		
 		return user;
 	}
@@ -29,7 +30,7 @@ public class UserJsonMapper {
 		userJson.setPassword(user.getPassword());
 		userJson.setUsername(user.getUsername());	
 		userJson.setUserType(user.getUserType());
-		
+		userJson.setImage(user.getImage());
 		return userJson;
 	}
 }

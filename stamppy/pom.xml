@@ -13,6 +13,7 @@
     <!--  variability-->
     <module>ratingReport-service</module>
     <module>salesReport-service</module>
+    <module>offers-service</module>
      <!--  variability-->
     <module>stamppyProject-ear</module>
   </modules>

@@ -28,6 +28,7 @@ public class CartService {
 	@EJB
 	private IProduct productBean;
 	
+	
 	@POST
 	@Path("/cart")
 	@Consumes(MediaType.APPLICATION_JSON)
@@ -56,7 +57,10 @@ public class CartService {
 	@Produces("application/json")
 	public Response purchase(PaymentJson paymentJson){
 		try {
-			return Response.ok(cartBean.purchaseProducts(paymentJson)).build();
+			if(cartBean.validatePaymentRestrictions(paymentJson))
+				return Response.ok(cartBean.purchaseProducts(paymentJson)).build();
+			else
+				return Response.status(404).build();
 		} catch (Exception e) {
 			return Response.status(500).build();
 		}

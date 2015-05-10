@@ -20,6 +20,8 @@ public class UserJson {
 	private String lastName;
 
 	private UserTypeEnum userType;
+	
+	private String image;
 
 	/**
 	 * @return the id
@@ -117,6 +119,20 @@ public class UserJson {
 	 */
 	public void setUserType(UserTypeEnum userType) {
 		this.userType = userType;
+	}
+
+	/**
+	 * @return the image
+	 */
+	public String getImage() {
+		return image;
+	}
+
+	/**
+	 * @param image the image to set
+	 */
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	
