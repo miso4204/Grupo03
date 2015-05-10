@@ -2,7 +2,7 @@
 
 angular.module('webAppApp')
   .directive('productItem', function () {
-    var controller=['$rootScope','Cart', '$scope','sessionStorage', function($rootScope,Cart,$scope,sessionStorage){
+    var controller=['$rootScope','CartP', '$scope','sessionStorage', function($rootScope,CartP,$scope,sessionStorage){
       
       $scope.addToCart=function(product){
         console.log(product)
@@ -11,7 +11,9 @@ angular.module('webAppApp')
         }
         $rootScope.products.push(product);
         sessionStorage.set('products',$rootScope.products);
-        Cart.save(product,function(response){
+        var prod={};
+        prod.sta
+        CartP.save(product,function(response){
           console.log(response);
           $location.path('/products');
         })

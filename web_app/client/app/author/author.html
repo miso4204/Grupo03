@@ -1,6 +1,6 @@
 <div class="row">
    <!--Author photo-->
-   <div class="col-xs-6 col-md-2">
+    <div class="col-xs-6 col-md-2">
       <div class="thumbnail">
          <img src="http://i.imgur.com/w6VslJA.jpg" class="media-object" alt="Sample Image">  	    
          <div class="caption" align="center">
@@ -9,46 +9,31 @@
             
          </div>
       </div>
-   </div>
-   <!--Author Deatails-->
-   <div class="col-xs-6 col-md-10">
-      <div class="media-body"  >
-         <div class="panel panel-default"  >
-            <div class="panel-body"  >
-               <h3>
-                  <B> 
-                    <font size="5" color="#4682B4">{{user.name}}  {{user.lastName}}</font>
-                  </B>
-				  <br />
-				  <font size="4" color="#4682B4">@{{user.username}}</font> 
-               </h3>			  
-               <h3>  			   	   
-                  <!--<font size="3" color="GREY">Calificacion: </font>-->   				   
-               </h3>
-   			
-			<h3 align="center"> 			 			   	   
-              <B> <font size="4"  color="GREY">Estampas</font></B>  				   
-            </h3>               
-               <!--CARROUSEL-->
-               <div>
-                    <div style="height: 305px">
-
-                      <carousel interval="myInterval">
-
-                        <slide ng-repeat="slide in slides">
-                          <img ng-src="{{slide.url}}" style="margin:auto;">						  
-                          <div class="carousel-caption">
-                            <!--<h4>{{$index}}</h4>-->
-                            <p>{{slide.name}}</p>
-                          </div>
-                        </slide>
-                      </carousel>
-
-                    </div>
-                   
-               </div>
-            </div>
-
-         </div>
+    </div>
+    <!--Author Deatails-->
+    <div class="col-xs-6 col-md-10">
+      <div class="media-body">
+        <div class="panel panel-default"  >
+          <div class="panel-body"  >
+           <h3>
+              <B> 
+                <font size="5" color="#4682B4">{{user.name}}  {{user.lastName}}</font>
+              </B>
+			        <br/>
+			        <font size="4" color="#4682B4">@{{user.username}}</font> 
+            </h3>			  
+          </div>
+        </div>
       </div>
-</div>
+
+      <div class="panel panel-default">
+        <div class="panel-heading">Estampas</div>
+        <div class="panel-body stamp-catalog">
+        <div class="masonry">
+          <div ng-repeat="hola in stamps" catalog-item stamp="hola" view-mode=grid>
+          </div>
+        </div>
+      </div>
+  </div>
+
+  

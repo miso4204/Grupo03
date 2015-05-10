@@ -7,12 +7,12 @@
       <div class="panel-body no-padding">
         <!-- view mode -->
         <div class="col-md-4 btn-group no-padding">
-          <span  class="nullable col-md-6">
-          <select class="form-control" ng-model="viewStamps" ng-init="viewStamps='Todas'">
-            <option value="Todas">Todas</option>
-            <option value="Artist" ng-if="globals.currentUser.userType=='ARTIST'">Estampas {{globals.currentUser.username}}</option>
-          </select>
-        </span>
+          <span  class="nullable col-md-6 no-padding">
+            <select class="form-control" ng-model="viewStamps" ng-init="viewStamps='Todas'">
+              <option value="Todas">Todas</option>
+              <option value="Artist" ng-if="globals.currentUser.userType=='ARTIST'">Estampas {{globals.currentUser.username}}</option>
+            </select>
+          </span>
           <label class="btn btn-default col-md-3" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
             <span class="glyphicon glyphicon-th"></span>
           </label>
@@ -32,9 +32,9 @@
         </div>
         <!-- End search box -->
         <!-- sort mode -->
-        <div class="col-md-3 no-padding">
+        <div class="col-md-3 no-padding dropdown-wrapper" >
           <div class="btn-group no-padding" dropdown>
-            <button class="btn btn-default" type="button" >Odernar por:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-default" type="button" >Odernar por:</button>
             <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
               <span class="caret"></span>
               <span class="sr-only"> Split!</span>
@@ -128,7 +128,6 @@
           <!-- End New Stamp -->
         	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
         </div>
-        
       </div>
     </div>
     <!-- End Stamps -->
