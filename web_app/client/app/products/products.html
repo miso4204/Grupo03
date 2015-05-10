@@ -1,3 +1,131 @@
-<div class="col-md-12">
-This is the products view.
+<div layout="row">
+  <!-- ******************* -->
+  <!-- catalog panel -->
+  <div class="col-md-12 panel panel-info no-padding ">
+    <!-- view options -->
+    <div id="view-options" class="panel panel-default no-margin">
+      <div class="panel-body no-padding">
+        <!-- view mode -->
+        <div class="col-md-2 btn-group no-padding">
+          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
+            <span class="glyphicon glyphicon-th"></span>
+          </label>
+          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'list'" tooltip="Ver en modo lista">
+            <span class="glyphicon glyphicon-th-list"></span>
+          </label>
+        </div>
+        <!-- End view mode -->
+        <!-- search box -->
+        <div class="col-md-7 no-padding" id="searchbox">
+          <div class="input-group no-padding">
+            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="filters.searchBox"></input>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" aria-hidden="true" ng-click="filter=filterFuction">Buscar</button>
+            </span>
+          </div>
+        </div>
+        <!-- End search box -->
+        <!-- sort mode -->
+        <div class="col-md-3 no-padding dropdown-wrapper">
+          <div class="btn-group no-padding" dropdown>
+            <button class="btn btn-default" type="button" >Odernar por:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
+              <span class="caret"></span>
+              <span class="sr-only"> Split!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="">Precio mayor - menor</a></li>
+              <li><a href="">Precio menor - mayor</a></li>
+              <li><a href="">Calificacion</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- End sort mode -->
+      </div>
+    </div>
+    <!-- End view options -->
+
+    <!-- Stamps -->
+    <div class="panel panel-info">
+      <div class="panel-body stamp-catalog">
+      	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
+          <!-- New Stamp -->
+          <div ng-if="globals.currentUser.userType=='ARTIST'"div class="grid-item">
+            <div class="add-stamp-item" ng-click="open()">
+              <div>
+                <i></i>
+                <span>Agregar Estampa</span>
+              </div>
+            </div>
+            <!-- Modal New Stamps -->
+            <script type="text/ng-template" id="createStampModal.html">
+                <!-- Modal add stamp -->
+                  <div class="modal-header">
+                    <h3 class="modal-title">Crear Estampa</h3>
+                    <button class="btn btn-danger close-button" ng-click="cancel()">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="newStamp" ng-submit="addStamp()">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Nombre</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.stampName" type="text" class="form-control"required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Precio</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.price"  type="number" class="form-control" required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>KeyWords</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.keywords" class="form-control">
+                        </div>
+                      </div>
+                      <fieldset><legend>Estampa</legend>
+                        <div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" ngf-multiple="false"  ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+                          <div class="inner-message" ng-show="!imageLoaded">
+                            <div ng-hide="dropAvailable">Tu navegadro no soporta subir imagenes :(</div>
+                            <div ng-show="dropAvailable">Arrastra tu estampa aca o da clic para seleccionarla .
+                            </div>
+                          </div>
+                          <div class="image-load" ng-show="imageLoaded">
+                            <img src="{{stamp.url}}">
+                          </div>
+                        </div>
+                      </fieldset>
+                      <div class="progress-bar-wrapper">
+                        <progressbar class="progress-striped active" value="loadValue" type="info">
+                          <i>{{loadValue}} % </i>
+                        </progressbar>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="alert-wrapper col-md-8 no-padding">
+                          <label ng-show="showAlert" class="col-md-12" ng-class="alertError ? 'alert alert-danger' :'alert alert-success'">{{alertMessage}}</label>
+                        </div>
+                        <input type="submit" class="btn btn-default" value="Agregar" ng-show="addButton"/>
+                        
+                      </div>
+                    </form>
+                  </div>
+            </script>
+            <!-- End Modal New Stamps -->
+          </div>
+          <!-- End New Stamp -->
+        	<div ng-repeat="product in products" product-item product="product" view-mode="viewOptions['viewMode']"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End Stamps -->
+  </div>
+  <!-- End catalog panel -->
 </div>
+ 

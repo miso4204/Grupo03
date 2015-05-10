@@ -1,0 +1,31 @@
+'use strict';
+
+angular.module('webAppApp')
+  .directive('productItem', function () {
+    var controller=['$rootScope','Cart', '$scope','sessionStorage', function($rootScope,Cart,$scope,sessionStorage){
+      
+      $scope.addToCart=function(product){
+        console.log(product)
+        if(!$rootScope.products){
+          $rootScope.products= []
+        }
+        $rootScope.products.push(product);
+        sessionStorage.set('products',$rootScope.products);
+        Cart.save(product,function(response){
+          console.log(response);
+          $location.path('/products');
+        })
+      }
+    }];
+    return {
+      templateUrl: 'app/products/productItem/productItem.html',
+      restrict: 'EA',
+      scope:{
+      	product:"=product"
+      },
+      controller:controller,
+      link: function (scope, element, attrs) {
+      }
+    };
+  });
+

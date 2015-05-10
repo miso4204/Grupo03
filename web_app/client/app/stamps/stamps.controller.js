@@ -107,7 +107,6 @@ angular.module('webAppApp')
         $scope.alertMessage="Agrega la imagen de tu estampa"
       }
     }
-
    //Image Upload//
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
@@ -142,5 +141,4 @@ angular.module('webAppApp')
             }
         }
     };
-
   })

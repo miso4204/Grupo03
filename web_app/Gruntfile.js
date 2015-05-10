@@ -592,17 +592,17 @@ module.exports = function (grunt) {
     'concurrent:dist',
     'injector',
     'wiredep',
-    'useminPrepare',
+    //'useminPrepare',
     'autoprefixer',
     'ngtemplates',
     'concat',
     'ngAnnotate',
     'copy:dist',
     'cdnify',
-    'cssmin',
-    'uglify',
+    //'cssmin',
+    //'uglify',
     'rev',
-    'usemin'
+    //'usemin'
   ]);
 
   grunt.registerTask('default', [

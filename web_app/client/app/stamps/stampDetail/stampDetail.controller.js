@@ -101,7 +101,6 @@ angular.module('webAppApp')
         if(!$rootScope.products){
           $rootScope.products= []
         }
-
         $scope.currentProduct.price=$scope.calcPrice();
         $scope.currentProduct.url=$scope.stamp.url;
         $scope.currentProduct.colorCode=$scope.shirtOptions.color[$scope.currentProduct.color].code;
@@ -122,6 +121,5 @@ angular.module('webAppApp')
           console.log(response);
           $location.path('/stamps');
         })
-        
       };
   });

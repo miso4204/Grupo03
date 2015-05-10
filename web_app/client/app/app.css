@@ -524,6 +524,19 @@ div.input{
   margin-bottom: 5px;
 }
 
+
+.dropdown-wrapper div button:first-child{
+  width: 90%;
+  text-align: left;
+}
+.dropdown-wrapper div{
+  width: 100%;
+}
+.dropdown-wrapper div button.dropdown-toggle{
+  width: 10%;
+}
+
+
 /*Responsive Stamps Gallery*/
 
 @media screen  and (max-width: 650px){
@@ -721,4 +734,27 @@ ul.social-buttons li a:active {
   font-size: 22px;
   vertical-align:top;
   font-weight: bold;
+}
+
+
+
+.shirt-base{
+  width: 100%;
+  min-height: 100%;
+}
+.shirt-shadow{
+  position: absolute;
+  top: 0;
+}
+
+.grid-item.product .stamp-wrapper img:first-child{
+  position: absolute;
+  top:55px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  max-height: 30%;
+  max-width: 40%;
+  border-radius: 0px !important;
 }
