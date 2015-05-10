@@ -29,3 +29,40 @@ angular.module('webAppApp')
 		},
 	}
  	})
+
+  .controller('catalogItem', function ($scope,rateService) {
+    $scope.isRate = true; 
+
+    $scope.rateFunction = function (rate1) {
+        $scope.rate.stampId = $scope.stamp.id;
+        rateService.Rate(rate1,function(response, status) {
+                    console.log(status);
+                    $scope.payVisibility = false;
+                    if(status == 200) {
+                        $scope.responsePay = response;
+                        if (response.status == "APPROVED"){
+                            $scope.APPROVEDShow = true;
+                            result= Cart.get({id:$rootScope.userId},
+                                function(){
+                                    $scope.products=result.products;
+                                    console.log($scope.products);
+                                    $rootScope.nroProdCart = $scope.getCantidad();
+                                    console.log($scope.dataPay)
+                                    if ($rootScope.nroProdCart == 0){
+                                        $scope.nroProdsCart = true;
+                                    } else {
+                                        $scope.nroProdsCart = false;
+                                    }
+                                }
+                            );
+                        } else {
+                            $scope.REJECTEDShow = true;
+                        }
+                    } else {
+                        $scope.REJECTEDShow = true;
+                    }
+                });
+          
+        }     
+    
+  });

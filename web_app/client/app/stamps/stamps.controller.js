@@ -1,13 +1,22 @@
 'use strict';
 angular.module('webAppApp')
-  .controller('StampsCtrl', function($scope,$rootScope,$modal,Stamp,sessionStorage,Cart,StampId){
+  .controller('StampsCtrl', function($scope,$rootScope,$modal,Stamp,sessionStorage,Cart,StampId,ListArtist){
     $rootScope.globals={};
+    $scope.artists = [];    
 
 		if (sessionStorage.get("user")) {
       $rootScope.globals.currentUser=sessionStorage.get("user");
       if(sessionStorage.get("products")){
           $rootScope.products=sessionStorage.get("products");
       }
+    }
+
+    if ($rootScope.globals.currentUser.userType=='ARTIST' ){
+      $scope.showStamps = true ;  
+      $scope.showStampsAdmin = false ;  
+    }else{
+      $scope.showStamps = false ;  
+      $scope.showStampsAdmin = true ;
     }
 
     $scope.$watch('viewStamps', function () {
@@ -24,6 +33,35 @@ angular.module('webAppApp')
       if ($scope.viewStamps=='Artist') {
         var result = {};
         result= StampId.get({artistId:$rootScope.globals.currentUser.userId},
+          function(){
+            $scope.stamps=result.stamps;
+          }
+        );  
+      };
+
+    });
+
+    $scope.$watch('viewStampsAdmin', function () {
+     
+      var result1 = {};
+      result1= ListArtist.query(
+          function(){
+              $scope.artists=result1;
+              console.log("artists");       
+          }
+      );
+      
+      if ($scope.viewStampsAdmin =='Todas') {
+        var result = {};
+        console.log("Admin")
+        result= Stamp.query(
+          function(){
+            $scope.stamps=result.stamps;
+          }
+        );  
+      }else {
+        var result = {};
+        result= StampId.get({artistId:$scope.viewStampsAdmin},
           function(){
             $scope.stamps=result.stamps;
           }

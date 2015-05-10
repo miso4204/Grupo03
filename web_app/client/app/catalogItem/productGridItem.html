@@ -1,3 +1,4 @@
+<div ng-controller="catalogItem">
 <div div class="grid-item">
 	<div class="stamp-wrapper">
 		<div class="stamp-image-section">
@@ -23,14 +24,17 @@
 				<div class="stamp-footer">
 					<div class="stamp-price">$ {{stamp.price/1000}} mil</div>
 					<div class="stamp-expand"><i class="fa fa-arrows-alt"></i></div>
-				</div>
+				</div>	
 			</div>
 		</div>
 		<div class="stamp-caption-section">
 			<div class="info-section">
 				<!-- href="#/stamps/{{stamp.id}}" -->
 				<h5 class="no-padding no-margin">{{stamp.name}}</h5>
-				<span class="stamp-rating">{{stamp.rating ? stamp.rating.averageRating:0}} <i class="fa fa-star"></i></span>
+				<span class="stamp-rating"><rating ng-model="rate=stamp.rating ? stamp.rating.averageRating:0" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:0}}</i></span>	
+				<div ng-model="rate1.stampId=stamp.id"></div>		
+				<rating ng-model="rate1.calification" max=5 on-rating-selected="rateFunction(rate1)" on-leave="overStar = null"></rating>
+				
 			</div>
 		</div>
 		<div class="stamp-author-info-section">
@@ -45,4 +49,5 @@
 			</a>
 		</div>	
 	</div>
+</div>
 </div>

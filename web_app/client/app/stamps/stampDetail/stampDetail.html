@@ -96,7 +96,7 @@
 					</div>
 					<!-- End shirt Price -->
 					<!-- add to cart button -->
-					<div class="cart-pay-buttons">
+					<div class="cart-pay-buttons" ng-if="globals.currentUser.userType=='CLIENT'">
 						<div class="row">
 							<button class="btn btn-success col-md-12" ng-click="addToCart(currentProduct)">
 								<i class="fa fa-cart-plus"></i>

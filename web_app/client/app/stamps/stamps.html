@@ -7,11 +7,16 @@
       <div class="panel-body no-padding">
         <!-- view mode -->
         <div class="col-md-4 btn-group no-padding">
-          <span  class="nullable col-md-6 no-padding">
-            <select class="form-control" ng-model="viewStamps" ng-init="viewStamps='Todas'">
-              <option value="Todas">Todas</option>
-              <option value="Artist" ng-if="globals.currentUser.userType=='ARTIST'">Estampas {{globals.currentUser.username}}</option>
-            </select>
+          <span  class="nullable col-md-6" ng-show="showStamps">
+          <select class="form-control" ng-model="viewStamps" ng-init="viewStamps='Todas'">
+            <option value="Todas">Todas</option>
+            <option value="Artist" ng-if="globals.currentUser.userType=='ARTIST'">Estampas {{globals.currentUser.username}}</option>
+          </select>
+          </span>
+          <span  class="nullable col-md-6" ng-show="showStampsAdmin">
+          <select class="form-control" ng-model="viewStampsAdmin" ng-init="viewStampsAdmin='Todas'" ng-options="artist.id as artist.username for artist in artists">
+            <option value="Todas">-- Todas --</option>
+          </select>
           </span>
           <label class="btn btn-default col-md-3" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
             <span class="glyphicon glyphicon-th"></span>

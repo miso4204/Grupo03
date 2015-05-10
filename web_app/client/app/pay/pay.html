@@ -128,8 +128,20 @@
             <button class ="btn botonpay1 btn-primary" ng-click="ShowForm3()"> 
               	Pago Contra Entrega <i class="fa fa-truck"></i> </button>
             <br>
-            <br>
-            <form ng-show="formVisibility3" class="form-pay" name="payForm3" > 
+            
+            <form ng-show="formVisibility3" class="form-pay" name="payForm3" ng-submit="pay(dataPay)" method="POST"> 
+            <label for="inputDir" class="label-pay">Dirección Entrega *</label>
+            <input type="direccion" id="inputDir" class="form-control" required autofocus>
+            <label for="inputCiu" class="label-pay">Ciudad Entrega *</label>
+                <select type="ciudad" id="inputCiu" class="form-control"  ng-model="dataPay.type" ng-init="datapay.type='CASH_ON_DELIVERY'" required> 
+                      <option value="CASH_ON_DELIVERY">Barranquilla</option>
+                      <option value="CASH_ON_DELIVERY">Bogotá</option>
+                      <option value="CASH_ON_DELIVERY">Manizales</option>
+                      <option value="CASH_ON_DELIVERY">Medellin</option>
+                      <option value="CASH_ON_DELIVERY">Pereira</option>
+                </select>
+
+            <br>  
         		<center><button class="botonpay btn btn-lg btn-success btn-block" type="submit">Continuar</button></center>
       		</form> 
 
