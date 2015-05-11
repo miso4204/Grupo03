@@ -58,7 +58,7 @@ public class ProductBean implements IProduct {
 		Rating rating = ratingDAO.getRatingByProduct(ratingJson.getProductId());
 		if(rating!=null){
 			rating.setRatings(rating.getRatings()+1);
-			rating.setAverageRating((rating.getAverageRating()+ratingJson.getCalification())/rating.getRatings());
+			rating.setAverageRating(((rating.getAverageRating()*rating.getRatings()-1)+ratingJson.getCalification())/rating.getRatings());
 			ratingDAO.updateRating(rating);
 		}else{
 			rating = new Rating();
@@ -95,6 +95,8 @@ public class ProductBean implements IProduct {
 	@Override
 	public ProductJson insertProductAdmin(ProductJson productJson) {
 		Product product = productDAO.saveProductAdmin(ProductJsonMapper.convertToProduct(productJson));
+		product.setStamp(stampDAO.getStamp(productJson.getStampId()));
+		product.setUser(userDAO.getUser(productJson.getUserId()));
 		return ProductJsonMapper.convertToProductJson(product);
 	}
 	

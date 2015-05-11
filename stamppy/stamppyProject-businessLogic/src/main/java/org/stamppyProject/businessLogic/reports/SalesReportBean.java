@@ -29,7 +29,7 @@ public class SalesReportBean implements ISalesReport{
 			if(!tmp.contains(p.getStamp().getId())){
 				tmp.add(p.getStamp().getId());
 				SalesJson sj = new SalesJson();
-				sj.setNumberSales(getNumberSales(p.getId(), products));
+				sj.setNumberSales(getNumberSales(p.getStamp().getId(), products));
 				sj.setStamp(StampJsonMapper.convertToStampJson(p.getStamp()));
 				slist.getSales().add(sj);
 			}

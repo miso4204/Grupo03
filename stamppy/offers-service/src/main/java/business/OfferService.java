@@ -26,7 +26,7 @@ public class OfferService {
 	@Produces("application/json")
 	public Response setOffer(OfferJson offerJson){
 		try {
-			Offer offer = stampBean.saveOffer(offerJson);
+			Offer offer = stampBean.delegator(offerJson, true);
 			if(offer!=null){
 				return Response.ok(offer).build();
 			}else{
@@ -44,7 +44,7 @@ public class OfferService {
 	@Produces("application/json")
 	public Response updateOffer(OfferJson offerJson){
 		try {
-			Offer offer = stampBean.updateOffer(offerJson);
+			Offer offer = stampBean.delegator(offerJson, false);
 			if(offer!=null){
 				return Response.ok(offer).build();
 			}else{

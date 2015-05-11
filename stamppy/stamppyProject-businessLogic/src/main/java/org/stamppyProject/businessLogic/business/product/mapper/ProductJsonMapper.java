@@ -29,6 +29,7 @@ public class ProductJsonMapper {
 		productJson.setSize(product.getSize());
 //		productJson.setColor(product.getColor());
 		productJson.setUrl(product.getUrl());
+		productJson.setStampId(product.getStamp().getId());
 //		productJson.setText(product.getText());
 		if(product.getRating()!=null)
 			productJson.setRating(RatingJsonMapper.convertToRatingJson(product.getRating()));
@@ -42,9 +43,11 @@ public class ProductJsonMapper {
 			productsByRatingJson.setProductsNumber(products.size());
 			List<ProductJson> psj = new ArrayList<ProductJson>();
 			for(Product p : products){
-				ProductJson pj = new ProductJson();
-				pj = convertToProductJson(p);
-				psj.add(pj);
+				if(p!=null){
+					ProductJson pj = new ProductJson();
+					pj = convertToProductJson(p);
+					psj.add(pj);
+				}
 			}
 			productsByRatingJson.setProducts(psj);
 		}

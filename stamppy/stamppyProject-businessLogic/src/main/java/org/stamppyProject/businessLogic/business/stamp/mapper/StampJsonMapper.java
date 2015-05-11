@@ -42,7 +42,9 @@ public class StampJsonMapper {
 		available.setNumberStamps(stamps.size());
 		List<StampJson> stampJsons = new ArrayList<StampJson>();
 		for(Stamp stamp : stamps){
-			stampJsons.add(convertToStampJson(stamp));
+			if(stamp!=null){
+				stampJsons.add(convertToStampJson(stamp));
+			}	
 		}
 		available.setStamps(stampJsons);
 		return available;

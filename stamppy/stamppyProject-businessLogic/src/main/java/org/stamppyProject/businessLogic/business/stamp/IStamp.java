@@ -24,6 +24,8 @@ public interface IStamp {
 	
 	public AvailableStampsJson getStampsByArtist(Long id);
 	
+	public Offer delegator(OfferJson offerJson, boolean createPromo) throws NoSuchMethodException, SecurityException;
+	
 	public Offer saveOffer(OfferJson offerJson);
 	
 	public Offer updateOffer(OfferJson offerJson);

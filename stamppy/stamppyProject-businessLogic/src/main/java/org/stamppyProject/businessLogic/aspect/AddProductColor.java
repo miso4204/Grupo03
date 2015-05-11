@@ -10,21 +10,22 @@ import org.stamppyProject.model.business.Product;
 @Aspect
 public class AddProductColor {
 	
-	@Pointcut("call(* Product.*(..))")
+	
+	@Pointcut("call(org.stamppyProject.model.business.Product *.*(org.stamppyProject.businessLogic.business.product.dto.ProductJson))")
     public void entryPoint1() {
     }
 	
-	@Pointcut("call(* ProductJson.*(..))")
+	@Pointcut("call(org.stamppyProject.businessLogic.business.product.dto.ProductJson *.*(org.stamppyProject.model.business.Product))")
     public void entryPoint2() {
     }
 
 
 	@AfterReturning(pointcut="entryPoint1()", returning="result")
-    public void afterPoint1(JoinPoint joinPoint, Object result) {
-        Product product = (Product)result;
+	public void afterPoint1(JoinPoint joinPoint, Object result) {
+		Product product = (Product)result;
         ProductJson productJson = (ProductJson)joinPoint.getArgs()[0];
         product.setColor(productJson.getColor());
-        System.out.println("SIRVIOOOOO, producto: "+product.getText()+", "+product.getColor());
+        System.out.println("Add color - entry1, producto: "+product.getColor());
     }
 	
 	@AfterReturning(pointcut="entryPoint2()", returning="result")
@@ -32,7 +33,7 @@ public class AddProductColor {
         ProductJson productJson = (ProductJson)result;
         Product product = (Product)joinPoint.getArgs()[0];
         productJson.setColor(product.getColor());
-        System.out.println("SIRVIOOOOO, productJson: "+productJson.getText()+", "+productJson.getColor());
+        System.out.println("Add color - entry2, productJson: "+productJson.getColor());
     }
 
 }

@@ -10,11 +10,11 @@ import org.stamppyProject.model.business.Product;
 @Aspect
 public class AddProductText {
 	
-	@Pointcut("call(* Product.*(..))")
+	@Pointcut("call(org.stamppyProject.model.business.Product *.*(org.stamppyProject.businessLogic.business.product.dto.ProductJson))")
     public void entryPoint1() {
     }
 	
-	@Pointcut("call(* ProductJson.*(..))")
+	@Pointcut("call(org.stamppyProject.businessLogic.business.product.dto.ProductJson *.*(org.stamppyProject.model.business.Product))")
     public void entryPoint2() {
     }
 
@@ -24,6 +24,7 @@ public class AddProductText {
         Product product = (Product)result;
         ProductJson productJson = (ProductJson)joinPoint.getArgs()[0];
         product.setText(productJson.getText());
+        System.out.println("Add text - entry1, producto: "+product.getText());
     }
 	
 	@AfterReturning(pointcut="entryPoint2()", returning="result")
@@ -31,5 +32,6 @@ public class AddProductText {
         ProductJson productJson = (ProductJson)result;
         Product product = (Product)joinPoint.getArgs()[0];
         productJson.setText(product.getText());
+        System.out.println("Add text - entry2, producto: "+product.getText());
     }
 }

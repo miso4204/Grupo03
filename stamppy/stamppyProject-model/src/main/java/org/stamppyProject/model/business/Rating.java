@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 @Entity
 @NamedQueries({
 @NamedQuery(name="Rating.findByStamp", query="Select r from Rating r where r.stamp.id=:stampId"),
-@NamedQuery(name="Rating.findAllStamps", query="Select r from Rating r where r.stamp is not null order by r.averageRating desc"),
+@NamedQuery(name="Rating.findAllStamps", query="Select r from Rating r where r.stamp <> NULL order by r.averageRating desc"),
 @NamedQuery(name="Rating.findAllStampsByArtist", query="Select r from Rating r where r.stamp is not null and r.stamp.seller.id=:artistId order by r.averageRating desc"),
 @NamedQuery(name="Rating.findByProduct", query="Select r from Rating r where r.product.id=:productId"),
 @NamedQuery(name="Rating.findProductsByBoundaries", query="Select r from Rating r where r.product is not null and r.averageRating>=:lowerBound and r.averageRating<=:upperBound"),

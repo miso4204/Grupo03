@@ -1,12 +1,12 @@
 package org.stamppyProject.businessLogic.business.stamp;
 
-import java.awt.image.SampleModel;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 
+import org.stamppyProject.businessLogic.annotations.OffersVariability;
 import org.stamppyProject.businessLogic.business.stamp.dto.AvailableStampsJson;
 import org.stamppyProject.businessLogic.business.stamp.dto.OfferJson;
 import org.stamppyProject.businessLogic.business.stamp.dto.RatingJson;
@@ -75,7 +75,7 @@ public class StampBean implements IStamp{
 		Rating rating = ratingDAO.getRatingByStamp(ratingJson.getStampId());
 		if(rating!=null){
 			rating.setRatings(rating.getRatings()+1);
-			rating.setAverageRating((rating.getAverageRating()+ratingJson.getCalification())/rating.getRatings());
+			rating.setAverageRating(((rating.getAverageRating()*rating.getRatings()-1)+ratingJson.getCalification())/rating.getRatings());
 			ratingDAO.updateRating(rating);
 		}else{
 			rating = new Rating();
@@ -105,7 +105,28 @@ public class StampBean implements IStamp{
 		return StampJsonMapper.convertToAvailableStampsJson(stampDAO.getStampsByArtist(id));
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
+	public Offer delegator(OfferJson offerJson, boolean createPromo) throws NoSuchMethodException, SecurityException {
+		@SuppressWarnings("rawtypes")
+		Class c = StampBean.class;
+		if(createPromo){
+			if(c.getMethod("saveOffer", OfferJson.class).getAnnotation(OffersVariability.class)!=null){
+				return saveOffer(offerJson);
+			}else{
+				return null;
+			}
+		}else{
+			if(c.getMethod("updateOffer", OfferJson.class).getAnnotation(OffersVariability.class)!=null){
+				return updateOffer(offerJson);
+			}else{
+				return null;
+			}
+		}
+	}
+	
+	@Override
+	@OffersVariability
 	public Offer saveOffer(OfferJson offerJson) {
 		Offer offer = stampDAO.saveOffer(StampJsonMapper.convertToOffer(offerJson));
 		Stamp stamp = stampDAO.getStamp(offerJson.getStampId());
@@ -115,6 +136,7 @@ public class StampBean implements IStamp{
 	}
 	
 	@Override
+	@OffersVariability
 	public Offer updateOffer(OfferJson offerJson) {
 		Stamp stamp = stampDAO.getStamp(offerJson.getStampId());
 		offerJson.setId(stamp.getOffer().getId());
