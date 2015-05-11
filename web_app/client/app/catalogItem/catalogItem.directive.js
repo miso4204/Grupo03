@@ -13,8 +13,6 @@ angular.module('webAppApp')
 		link:function($scope){
 			
 			$scope.getTemplateUrl=function(){
-				console.log("llego****"+ $scope.viewMode)
-				console.log("llego****"+ $scope.stamp.price)
 				if($scope.viewMode=="grid"){
 					console.log("grid")
 					return 'app/catalogItem/productGridItem.html';
@@ -30,37 +28,23 @@ angular.module('webAppApp')
 	}
  	})
 
-  .controller('catalogItem', function ($scope,rateService) {
+  .controller('catalogItem', function ($scope,$rootScope,rateService,sessionStorage,$filter) {
     $scope.isRate = true; 
+    $scope.rate1 = {};
 
-    $scope.rateFunction = function (rate1) {
-        $scope.rate.stampId = $scope.stamp.id;
-        rateService.Rate(rate1,function(response, status) {
-                    console.log(status);
-                    $scope.payVisibility = false;
-                    if(status == 200) {
-                        $scope.responsePay = response;
-                        if (response.status == "APPROVED"){
-                            $scope.APPROVEDShow = true;
-                            result= Cart.get({id:$rootScope.userId},
-                                function(){
-                                    $scope.products=result.products;
-                                    console.log($scope.products);
-                                    $rootScope.nroProdCart = $scope.getCantidad();
-                                    console.log($scope.dataPay)
-                                    if ($rootScope.nroProdCart == 0){
-                                        $scope.nroProdsCart = true;
-                                    } else {
-                                        $scope.nroProdsCart = false;
-                                    }
-                                }
-                            );
-                        } else {
-                            $scope.REJECTEDShow = true;
-                        }
-                    } else {
-                        $scope.REJECTEDShow = true;
-                    }
+    if (sessionStorage.get("user")) {
+        if(!$rootScope.globals){
+            $rootScope.globals={};
+        }
+        $rootScope.globals.currentUser=sessionStorage.get("user");
+    }
+    console.log($rootScope.globals.currentUser.userType);
+
+    $scope.rateFunction = function (calificat) {
+        $scope.rate1.stampId = $scope.stamp.id;
+        console.log($scope.rate1.calification)
+        rateService.Rate($scope.rate1,function(response) {
+                    console.log("rating");                    
                 });
           
         }     

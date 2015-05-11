@@ -15,15 +15,11 @@
 							</button>
 						</a>
 					</div>
-					<div class="like-box">
-						<button type="button" class="btn btn-default">
-							<i class="fa fa-smile-o"></i>
-						</button>
-					</div>
 				</div>
 				<div class="stamp-footer">
-					<div class="stamp-price">$ {{stamp.price/1000}} mil</div>
-					<div class="stamp-expand"><i class="fa fa-arrows-alt"></i></div>
+					<div class="stamp-price" ng-if="stamp.offerPrice == 0 || stamp.offerPrice == null">$ {{stamp.price/1000}} mil</div>
+					<div class="stamp-price" ng-if="stamp.offerPrice > 0">$ {{stamp.offerPrice/1000}} mil</div><br>
+					<div class="stamp-price" ng-if="stamp.offerPrice > 0"><STRIKE>$ {{stamp.price/1000}} mil</STRIKE></div>
 				</div>	
 			</div>
 		</div>
@@ -31,16 +27,16 @@
 			<div class="info-section">
 				<!-- href="#/stamps/{{stamp.id}}" -->
 				<h5 class="no-padding no-margin">{{stamp.name}}</h5>
-				<span class="stamp-rating"><rating ng-model="rate=stamp.rating ? stamp.rating.averageRating:0" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:0}}</i></span>	
-				<div ng-model="rate1.stampId=stamp.id"></div>		
-				<rating ng-model="rate1.calification" max=5 on-rating-selected="rateFunction(rate1)" on-leave="overStar = null"></rating>
+				<span class="stamp-rating"><rating ng-model="stamp.rating.averageRating" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:'-' | number:2}}</i></span>	
+				<br>		
+				<rating ng-model="rate1.calification" max=5 ng-click="rateFunction(rate1)" on-leave="overStar = null"></rating>
 				
 			</div>
 		</div>
 		<div class="stamp-author-info-section">
 			<a href="/author/{{stamp.artistId}}">
 				<div class="author-image">
-					<img src="https://cdn4.iconfinder.com/data/icons/superheroes/512/batman-512.png">
+					<img src="http://cdns2.freepik.com/foto-gratis/vector-de-usuario-avatar-icono_279-10313.jpg">
 				</div>
 				<div class="author">
 					<h6 class="no-padding no-margin author-name">{{stamp.artistName?stamp.artistName:"Anonimo"}}</h6>

@@ -1,3 +1,4 @@
+<div ng-controller="productItem">
 <div div class="grid-item product">
 	<div class="stamp-wrapper">
 		<div class="stamp-image-section">
@@ -19,7 +20,6 @@
 				</div>
 				<div class="stamp-footer">
 					<div class="stamp-price">$ {{product.price/1000}} mil</div>
-					<div class="stamp-expand"><i class="fa fa-arrows-alt"></i></div>
 				</div>
 			</div>
 		</div>
@@ -27,8 +27,11 @@
 			<div class="info-section">
 				<!-- href="#/stamps/{{product.id}}" -->
 				<h5 class="no-padding no-margin">{{product.name}}</h5>
-				<span class="stamp-rating">{{product.rating ? product.rating.averageRating:3}} <i class="fa fa-star"></i></span>
+				<span class="stamp-rating"><rating ng-model="product.rating.averageRating" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{product.rating ? product.rating.averageRating:'-' | number:2}}</i></span>	
+				<br>		
+				<rating ng-model="rate1.calification" max=5 ng-click="rateFunction(rate1)" on-leave="overStar = null"></rating>
 			</div>
 		</div>
 	</div>
+</div>
 </div>

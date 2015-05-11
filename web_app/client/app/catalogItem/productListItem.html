@@ -1,17 +1,22 @@
-<div class="panel col-md-12">
+<div class="panel col-md-12" ng-controller="catalogItem">
 	<div class="col-md-3">
 		<img class="img-thumbnail" src="{{stamp.url}}"</img>
 	</div>
 	<div class="col-md-6">
-		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;<a href="#/stamps/{{stamp.id}}">{{stamp.name}}</a></span></p>
-		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="#/authors/{{stamp.author.id}}">{{stamp.artistName?stamp.artistName:"Anonimo"}}</a></span></p>
+		<br>
+		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;{{stamp.name}}</span></p>
+		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="/author/{{stamp.artistId}}">{{stamp.artistName?stamp.artistName:"Anonimo"}}</a></span></p>
+		<p><strong>Calificación:&nbsp;</strong><span class="stamp-rating"><rating ng-model="stamp.rating.averageRating" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:'-' | number:2}}</i></span></p>
+		<p><strong>Calificar:&nbsp;</strong><rating ng-model="rate1.calification" max=5 ng-click="rateFunction(rate1)" on-leave="overStar = null"></rating></p>
 	</div>
 	<div class="col-md-3 no-padding no-margin">
 		<p>
-			<h3 class= "text-right no-margin">${{stamp.price}}</h3>
+			<h3 class= "text-right no-margin">${{stamp.price | number:0}}</h3>
 		</p>
 		<p class="text-right ">
+			<a href="/stamps/{{stamp.id}}">
 			<button class="btn btn-danger"><i class="fa fa-paint-brush"></i>&nbsp; Agregalo a una camiseta </button>
+			</a>
 		</p>
 	</div>
 </div>
