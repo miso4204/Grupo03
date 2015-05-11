@@ -1,0 +1,41 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'install',
+1 verbose cli   'grunt' ]
+2 info using npm@2.7.4
+3 info using node@v0.12.2
+4 verbose node symlink C:\Program Files\nodejs\\node.exe
+5 verbose install grunt is installed as 0.4.5
+6 silly cache add args [ 'grunt', null ]
+7 verbose cache add spec grunt
+8 silly cache add parsed spec { raw: 'grunt',
+8 silly cache add   scope: null,
+8 silly cache add   name: null,
+8 silly cache add   rawSpec: 'grunt',
+8 silly cache add   spec: 'D:\\Grupo03\\web_app\\grunt',
+8 silly cache add   type: 'local' }
+9 silly addLocalTarball shasum (computed) da39a3ee5e6b4b0d3255bfef95601890afd80709
+10 verbose addTmpTarball D:\Grupo03\web_app\grunt not in flight; adding
+11 verbose addTmpTarball validating metadata from D:\Grupo03\web_app\grunt
+12 verbose tar unpack D:\Grupo03\web_app\grunt
+13 verbose tar unpacking to C:\Users\Ana\AppData\Local\Temp\npm-5480-866de622\unpack-7183cb434583
+14 silly gentlyRm C:\Users\Ana\AppData\Local\Temp\npm-5480-866de622\unpack-7183cb434583 is being purged
+15 verbose gentlyRm don't care about contents; nuking C:\Users\Ana\AppData\Local\Temp\npm-5480-866de622\unpack-7183cb434583
+16 silly gunzTarPerm modes [ '777', '666' ]
+17 error tar.unpack error reading D:\Grupo03\web_app\grunt
+18 error addLocal Could not install D:\Grupo03\web_app\grunt
+19 verbose stack Error: 0-byte tarball
+19 verbose stack Please run `npm cache clean`
+19 verbose stack     at C:\Program Files\nodejs\node_modules\npm\lib\utils\tar.js:126:14
+19 verbose stack     at FSReqWrap.oncomplete (evalmachine.<anonymous>:95:15)
+20 verbose cwd D:\Grupo03\web_app
+21 error Windows_NT 6.1.7601
+22 error argv "C:\\Program Files\\nodejs\\\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "install" "grunt"
+23 error node v0.12.2
+24 error npm  v2.7.4
+25 error 0-byte tarball
+25 error Please run `npm cache clean`
+26 error If you need help, you may report this error at:
+26 error     <https://github.com/npm/npm/issues>
+27 verbose exit [ 1, true ]
