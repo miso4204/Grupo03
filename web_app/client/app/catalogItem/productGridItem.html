@@ -15,6 +15,43 @@
 							</button>
 						</a>
 					</div>
+                    <br />
+                    <br />
+                    <br />
+                    <div class="stamp-promotion" ng-controller="promotionItem" ng-show="showPromotion">
+                        <div ng-hide="hasPromotion">
+                            <form name="addPromoForm" ng-submit="addPromotion()">
+                                <div class="input">
+                                    <input size="3"  style="width:50px !important;" type="number" min="0" max="99" name="addPromotion" class="form-control" ng-model="promotion" placeholder="Promoción *" required autofocus />
+                                    <!-- div role="alert">
+                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.required" style="color:white">
+                                            Obligatorio!</span>
+                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.number" style="color:white">
+                                            No es un número!</span>
+                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.min" style="color:white">
+                                            Debe ser mayor o igual a 0!</span>
+                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.max" style="color:white">
+                                            Debe ser menor o igual a 99!</span>
+                                    </div -->
+                                    <button class="btn btn-primary " type="submit">
+                                        <span> Crear!</span>
+                                        <i class="fa fa-floppy-o"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                        <div ng-show="hasPromotion">
+                            <form name="updatePromoForm" ng-submit="updatePromotion()">
+                                <div class="input">
+                                    <input  size="3" style="width:50px !important;" type="number" min="0" max="99" name="updatePromotion" class="form-control" ng-model="promotion" placeholder="Promoción *" required autofocus />
+                                    <button class="btn btn-primary " type="submit">
+                                        <span> Actualizar!</span>
+                                        <i class="fa fa-floppy-o"></i>
+                                    </button>
+                                </div>
+                            </form>
+                        </div> 
+                    </div>
 				</div>
 				<div class="stamp-footer">
 					<div class="stamp-price" ng-if="stamp.offerPrice == 0 || stamp.offerPrice == null">$ {{stamp.price/1000}} mil</div>

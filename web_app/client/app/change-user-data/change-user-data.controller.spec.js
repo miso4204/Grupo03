@@ -1,6 +1,6 @@
 'use strict';
 
-describe('Controller: ChangePasswordCtrl', function () {
+describe('Controller: ChangeUserDataCtrl', function () {
 
   // load the controller's module
   beforeEach(module('webAppApp'));
@@ -10,7 +10,7 @@ describe('Controller: ChangePasswordCtrl', function () {
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope) {
     scope = $rootScope.$new();
-    ChangePasswordCtrl = $controller('ChangePasswordCtrl', {
+    ChangeUserDataCtrl = $controller('ChangeUserDataCtrl', {
       $scope: scope
     });
   }));

@@ -49,4 +49,52 @@ angular.module('webAppApp')
           
         }     
     
+  })
+  .controller('promotionItem', function ($scope,$rootScope,rateService,sessionStorage,$filter, Promotion) {
+    $scope.showPromotion = false;
+    $scope.hasPromotion = ($scope.stamp.offerPrice > 0);
+    $scope.promotion = 0;
+    
+    if (sessionStorage.get("user")) {
+        if(!$rootScope.globals){
+            $rootScope.globals={};
+        }
+        $rootScope.globals.currentUser=sessionStorage.get("user");
+        //console.log(JSON.stringify($rootScope.globals.currentUser));
+        $scope.showPromotion = ($rootScope.globals.currentUser.userId == $scope.stamp.artistId);
+    }
+    
+    $scope.addPromotion = function () {
+            //console.log("Agregando promoción a la estampa...");
+
+            var promo = {};
+
+            promo.stampId = $scope.stamp.id;
+            promo.discount = $scope.promotion;
+
+            //console.log("promotion: "+JSON.stringify(promo));
+
+            status = Promotion.save(promo);
+
+            $scope.hasPromotion=true;
+
+            //console.log("Status: "+JSON.stringify(status));
+        }
+    
+    $scope.updatePromotion = function() {
+            //console.log("Agregando promoción a la estampa...");
+
+            var promo = {};
+
+            promo.stampId = $scope.stamp.id;
+            promo.discount = $scope.promotion;
+
+            //console.log("promotion: "+JSON.stringify(promo));
+
+            status = Promotion.update(promo);
+
+            $scope.hasPromotion=true;
+
+            //console.log("Status: "+JSON.stringify(status));
+        }
   });

@@ -8,7 +8,7 @@ angular.module('webAppApp')
       }
       
       $rootScope.globals.currentUser=sessionStorage.get("user");
-      console.log(JSON.stringify($rootScope.globals.currentUser))
+      console.log(JSON.stringify($rootScope.globals.currentUser));
     }
     
     $scope.oldPassword = "";
