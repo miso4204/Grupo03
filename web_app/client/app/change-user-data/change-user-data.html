@@ -1,58 +1,62 @@
-<div class="col-md-12">
-  <div class="panel panel-body panel-primary col-md-10">
+<br>
+
+  <div class="panel panel-body panel-primary col-md-8 col-md-offset-2">
     <h2 class="form-change-usr-heading">{{dataUser.name}} {{dataUser.lastName}}</h2>
-    <h5 class="form-change-usr-heading">{{dataUser.username}}</h5>
-    <h5 class="form-change-usr-heading">{{dataUser.email}}</h5>
+    <h5 class="form-change-usr-heading"><label for="">Usuario:</label> {{dataUser.username}}</h5>
+    <h5 class="form-change-usr-heading"><label for="">Correo:</label> {{dataUser.email}}</h5>
   </div>
-  <div class="panel panel-body panel-primary col-md-10" style="width:500px;">
-    <label ng-show="regErrorUsrShow" class="alert alert-danger">{{regError}}</label>
-	<label ng-show="regSuccessUsrShow" class="alert alert-success">{{regSuccess}}</label>
-	<form class="form-change-usr" name="changeUsrForm" ng-submit="updateUser()" method="POST">
-	  <h3 class="form-change-usr-heading">Actualización de Datos</h3>
-	  <h5 class="form-change-usr-heading">(* Campos Obligatorios)</h5>
-	  <div class="col-md-12 no-padding">
-	    <div>
-	      <div class="input">
-		    <input type="nombre" id="inputName" class="form-control" ng-model="name" placeholder="Nombre *" required autofocus>
-          </div>
-          <div class="input">
-		    <input type="apellido" id="inputLastName" class="form-control" ng-model="lastName" placeholder="Apellido *" required autofocus>
-          </div>
-          <div class="input">
-		    <input type="email" id="inputMail" class="form-control" ng-model="email" placeholder="Correo *" required autofocus>
-          </div>
-		  <div class="text-right">
-		    <button class="btn btn-primary " type="submit">Actualizar Datos</button>
-		  </div>
-	    </div>  
-	  </div>    
-    </form>
-  </div>
-  <div class="panel panel-body panel-primary col-md-12" style="width:500px;">
-    <label ng-show="regErrorPwdShow" class="alert alert-danger">{{regError}}</label>
-	<label ng-show="regSuccessPwdShow" class="alert alert-success">{{regSuccess}}</label>
-	<form class="form-change-pwd" name="changePwdForm" ng-submit="updatePassword()" method="POST">
-      <h3 class="form-change-usr-heading">Cambio Contraseña</h3>
-	  <h5 class="form-change-pwd-heading">(* Campos Obligatorios)</h5>
-	  <div class="col-md-12 no-padding">
-	    <div>
-	      <div class="input">
-		    <input type="hidden" id="inputUser" class="form-control" ng-model="dataUser.username" placeholder="Usuario *" required autofocus>
-          </div>
-          <div class="input">
-  		    <input type="password" id="inputOldPassword" class="form-control" ng-model="oldPassword" placeholder="Antigüa Contraseña *" required>
-  		  </div>
-          <div class="input">
-		    <input type="password" id="inputNewPassword" class="form-control" ng-model="newPassword" placeholder="Nueva Contraseña *" required>
-		  </div>
-		  <div class="input">
-		    <input type="password" id="inputConfPassword" class="form-control" ng-model="newPasswordConfirm" placeholder="Confirmar Contraseña *" required>
-		  </div>
-		  <div class="text-right">
-		    <button class="btn btn-primary " type="submit">Actualizar contraseña</button>
-		  </div>
-	    </div>  
-	  </div>    
-    </form>
-  </div>
-</div>
+  <div class="row col-md-8 col-md-offset-2">
+  	<div class="panel panel-body panel-primary col-md-5">
+	    <label ng-show="regErrorUsrShow" class="alert alert-danger">{{regError}}</label>
+		<label ng-show="regSuccessUsrShow" class="alert alert-success">{{regSuccess}}</label>
+		<form class="form-change-usr" name="changeUsrForm" ng-submit="updateUser()" method="POST">
+		  <h3 class="form-change-usr-heading">Actualización de Datos</h3>
+		  <h5 class="form-change-usr-heading">(* Campos Obligatorios)</h5>
+		  <div class="col-md-12 no-padding">
+		    <div>
+		      <div class="input">
+			    <input type="nombre" id="inputName" class="form-control" ng-model="name" placeholder="Nombre *" required autofocus>
+	          </div>
+	          <div class="input">
+			    <input type="apellido" id="inputLastName" class="form-control" ng-model="lastName" placeholder="Apellido *" required autofocus>
+	          </div>
+	          <div class="input">
+			    <input type="email" id="inputMail" class="form-control" ng-model="email" placeholder="Correo *" required autofocus>
+	          </div>
+			  <div class="text-right">
+			    <button class="btn btn-primary " type="submit">Actualizar Datos</button>
+			  </div>
+		    </div>  
+		  </div>    
+	    </form>
+	  </div>
+	  <div class="panel panel-body panel-primary col-md-5 col-md-offset-2">
+	    <label ng-show="regErrorPwdShow" class="alert alert-danger">{{regError}}</label>
+		<label ng-show="regSuccessPwdShow" class="alert alert-success">{{regSuccess}}</label>
+		<form class="form-change-pwd" name="changePwdForm" ng-submit="updatePassword()" method="POST">
+	      <h3 class="form-change-usr-heading">Cambio Contraseña</h3>
+		  <h5 class="form-change-pwd-heading">(* Campos Obligatorios)</h5>
+		  <div class="col-md-12 no-padding">
+		    <div>
+		      <div class="input">
+			    <input type="hidden" id="inputUser" class="form-control" ng-model="dataUser.username" placeholder="Usuario *" required autofocus>
+	          </div>
+	          <div class="input">
+	  		    <input type="password" id="inputOldPassword" class="form-control" ng-model="oldPassword" placeholder="Antigüa Contraseña *" required>
+	  		  </div>
+	          <div class="input">
+			    <input type="password" id="inputNewPassword" class="form-control" ng-model="newPassword" placeholder="Nueva Contraseña *" required>
+			  </div>
+			  <div class="input">
+			    <input type="password" id="inputConfPassword" class="form-control" ng-model="newPasswordConfirm" placeholder="Confirmar Contraseña *" required>
+			  </div>
+			  <div class="text-right">
+			    <button class="btn btn-primary " type="submit">Actualizar contraseña</button>
+			  </div>
+		    </div>  
+		  </div>    
+	    </form>
+	 </div>
+	
+  </div>	
+  

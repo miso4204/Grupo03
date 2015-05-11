@@ -70,6 +70,12 @@
                   <li ng-show="!globals.currentUser.authenticated">
                       <a href="/login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó Registrarse </a>
                   </li>
+                  <li ng-show="globals.currentUser.authenticated">
+                      <a href="./products"> Productos</a>
+                  </li>
+                  <li ng-show="globals.currentUser.authenticated">
+                      <a href="./stamps"> Estampas</a>
+                  </li>
                   <!-- user options dropdown -->
                  
                   <li ng-show="globals.currentUser.authenticated" class="dropdown">
@@ -78,7 +84,7 @@
                         <i class="fa fa-user fa-fw"></i>{{globals.currentUser.username}}<span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" role="menu">
-                          <li><a href="./change-password"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>
+                          <li><a href="./change-user-data"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>
                           <li ng-if="globals.currentUser.userType=='ARTIST'"><a href="{{dirAuthor}}"><i class="fa fa-picture-o"></i> Perfil Artista</a></li>
                           <li ng-if="globals.currentUser.userType=='ADMIN'"><a href="./report"><i class="fa fa-table"></i> Reportes</a></li>
                       </ul> 
@@ -105,14 +111,14 @@
                 <div class="col-md-3 col-md-offset-1">
                     <center><span class="copyright">Copyright &copy; Hexagram , Universidad de los Andes 2015</span></center>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" ng-controller="SocialCtrl">
                     <ul ng-social-buttons class="col-span-6 col-push-3" style="margin-top:150px"
                          data-url="'https://stamppy.herokuapp.com/'"
                          data-title="'Stamppy, la mejor opción para personalizar tus camisetas.'"
                          data-description="'Personaliza tus camisetas con las Mejores Estampas.'"
                          data-image="''">
-                        <li class="ng-social-facebook">Facebook</li>
-                        <li class="ng-social-twitter">Twitter</li>
+                        <li ng-show="showFacebook" class="ng-social-facebook">Facebook</li>
+                        <li ng-show="showTwitter" class="ng-social-twitter">Twitter</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -197,6 +203,8 @@
           <script src="app/report/report.js"></script>
           <script src="app/reportService/reportService.service.js"></script>
           <script src="app/sessionStorage/sessionStorage.service.js"></script>
+          <script src="app/social/social.controller.js"></script>
+          <script src="app/socialService/socialService.service.js"></script>
           <script src="app/stamps/Stamp/Stamp.service.js"></script>
           <script src="app/stamps/createStampModal/createStampModal.controller.js"></script>
           <script src="app/stamps/stampDetail/stampDetail.controller.js"></script>

@@ -22,6 +22,7 @@ angular.module('webAppApp')
             $scope.payVisibility = true;
             $scope.APPROVEDShow = false;
             $scope.REJECTEDShow = false;
+            $scope.DELIVERYShow = false;
             var result = {};
             result= Cart.get({id:$rootScope.globals.currentUser.userId},
                 function(){
@@ -110,7 +111,11 @@ angular.module('webAppApp')
                                 }
                             );
                         } else {
-                            $scope.REJECTEDShow = true;
+                            if (response.status == "WAITING_FOR_PAYMENT"){
+                                $scope.DELIVERYShow = true;
+                            } else {
+                                $scope.REJECTEDShow = true;
+                            }
                         }
                     } else {
                         $scope.REJECTEDShow = true;
