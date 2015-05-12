@@ -145,6 +145,23 @@ angular.module('webAppApp')
         $scope.alertMessage="Agrega la imagen de tu estampa"
       }
     }
+    $scope.searchFilter="";
+
+    $scope.filterFunction = function(element) {
+
+      if($scope.searchFilter==""){
+        return true;
+      }
+      var re = new RegExp("/^"+$scope.searchFilter+"/");
+
+      for (var i=0; i<element.keyWords.length; i++) {
+          console.log(element.keyWords[i].match(re) + element.keyWords[i])
+          if(element.keyWords[i].match(re)){
+            return true
+          }
+      } 
+      return false;
+    };
    //Image Upload//
     $scope.$watch('files', function () {
         $scope.upload($scope.files);

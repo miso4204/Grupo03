@@ -2,7 +2,7 @@
 
 angular.module('webAppApp')
   .directive('productItem', function () {
-    var controller=['$rootScope','CartP', '$scope','sessionStorage', 'Cart', function($rootScope,CartP,$scope,sessionStorage,Cart){
+    var controller=['$rootScope','CartP', '$scope','sessionStorage', 'Cart','$location', function($rootScope,CartP,$scope,sessionStorage,Cart,$location){
       
       $scope.addToCart=function(product){
         console.log(product)

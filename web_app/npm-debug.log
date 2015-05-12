@@ -19,9 +19,9 @@
 10 verbose addTmpTarball D:\Grupo03\web_app\grunt not in flight; adding
 11 verbose addTmpTarball validating metadata from D:\Grupo03\web_app\grunt
 12 verbose tar unpack D:\Grupo03\web_app\grunt
-13 verbose tar unpacking to C:\Users\Ana\AppData\Local\Temp\npm-7336-5ba482c2\unpack-f6de9a03517d
-14 silly gentlyRm C:\Users\Ana\AppData\Local\Temp\npm-7336-5ba482c2\unpack-f6de9a03517d is being purged
-15 verbose gentlyRm don't care about contents; nuking C:\Users\Ana\AppData\Local\Temp\npm-7336-5ba482c2\unpack-f6de9a03517d
+13 verbose tar unpacking to C:\Users\Ana\AppData\Local\Temp\npm-3896-325e9d5c\unpack-a171fa663f36
+14 silly gentlyRm C:\Users\Ana\AppData\Local\Temp\npm-3896-325e9d5c\unpack-a171fa663f36 is being purged
+15 verbose gentlyRm don't care about contents; nuking C:\Users\Ana\AppData\Local\Temp\npm-3896-325e9d5c\unpack-a171fa663f36
 16 silly gunzTarPerm modes [ '777', '666' ]
 17 error tar.unpack error reading D:\Grupo03\web_app\grunt
 18 error addLocal Could not install D:\Grupo03\web_app\grunt
