@@ -97,6 +97,7 @@ public class ProductBean implements IProduct {
 		Product product = productDAO.saveProductAdmin(ProductJsonMapper.convertToProduct(productJson));
 		product.setStamp(stampDAO.getStamp(productJson.getStampId()));
 		product.setUser(userDAO.getUser(productJson.getUserId()));
+		productDAO.saveProduct(product);
 		return ProductJsonMapper.convertToProductJson(product);
 	}
 	
