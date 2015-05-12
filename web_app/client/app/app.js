@@ -11,7 +11,8 @@ angular.module('webAppApp', [
   'ngTable', 
   'highcharts-ng',
   'ngFileUpload',
-  'ngSocial'
+  'ngSocial',
+  'pw.canvas-painter',
 ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider

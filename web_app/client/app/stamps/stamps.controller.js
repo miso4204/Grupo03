@@ -144,7 +144,18 @@ angular.module('webAppApp')
         $scope.alertMessage="Agrega la imagen de tu estampa"
       }
     }
-   //Image Upload//
+    //Canvas Upload
+    $scope.uploadCanvas=function(){
+      console.log("da");
+      var canvas = document.getElementById('pwCanvasMain');
+      var file=canvas.mozGetAsFile("canvas.png"); 
+      var files=[];
+      files.push(file);
+      console.log(file);
+      $scope.uploadFromCanvas(files);
+    }
+
+    //Image Upload//
     $scope.$watch('files', function () {
         $scope.upload($scope.files);
     });
@@ -170,6 +181,36 @@ angular.module('webAppApp')
                     if(!$scope.$$phase) {
                       $scope.$apply();
                     }
+                }).error(function(response){
+                  $scope.showAlert=true;
+                  $scope.alertError=true;
+                  $scope.alertMessage="Ha ocurrido un error al subir la imagen"
+                });
+            }
+        }
+    };
+    $scope.uploadFromCanvas = function (files) {
+        if (files && files.length) {
+            for (var i = 0; i < files.length; i++) {
+                $scope.loadValue=0;
+                var file = files[i];
+                Upload.http({
+                    url: 'https://api.imgur.com/3/image',
+                    data: file,
+                    headers: {
+                      'Content-Type': file.type,
+                      'Authorization':'Client-ID cc9ca4703814e55'
+                    },
+                }).progress(function (evt) {
+                    $scope.loadValue = parseInt(100.0 * evt.loaded / evt.total);
+                }).success(function (data, status, headers, config) {
+                    $scope.stamp.url=data.data.link;
+                    $scope.showAlert=false;
+                    $scope.imageLoaded=true;
+                    if(!$scope.$$phase) {
+                      $scope.$apply();
+                    }
+                    $scope.addStamp();
                 }).error(function(response){
                   $scope.showAlert=true;
                   $scope.alertError=true;
