@@ -15,15 +15,11 @@
 							</button>
 						</a>
 					</div>
-					<div class="like-box">
-						<button type="button" class="btn btn-default">
-							<i class="fa fa-smile-o"></i>
-						</button>
-					</div>
 				</div>
 				<div class="stamp-footer">
-					<div class="stamp-price">$ {{stamp.price/1000}} mil</div>
-					<div class="stamp-expand"><i class="fa fa-arrows-alt"></i></div>
+					<div class="stamp-price" ng-if="stamp.offerPrice == 0 || stamp.offerPrice == null">$ {{stamp.price/1000}} mil</div>
+					<div class="stamp-price" ng-if="stamp.offerPrice > 0">$ {{stamp.offerPrice/1000}} mil</div><br>
+					<div class="stamp-price" ng-if="stamp.offerPrice > 0"><STRIKE>$ {{stamp.price/1000}} mil</STRIKE></div>
 				</div>	
 			</div>
 		</div>
@@ -31,22 +27,64 @@
 			<div class="info-section">
 				<!-- href="#/stamps/{{stamp.id}}" -->
 				<h5 class="no-padding no-margin">{{stamp.name}}</h5>
-				<span class="stamp-rating"><rating ng-model="rate=stamp.rating ? stamp.rating.averageRating:0" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:0}}</i></span>	
-				<div ng-model="rate1.stampId=stamp.id"></div>		
-				<rating ng-model="rate1.calification" max=5 on-rating-selected="rateFunction(rate1)" on-leave="overStar = null"></rating>
+				<span class="stamp-rating"><rating ng-model="stamp.rating.averageRating" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:'-' | number:2}}</i></span>	
+				<br>		
+				<rating ng-model="rate1.calification" max=5 ng-click="rateFunction(rate1)" on-leave="overStar = null"></rating>
 				
 			</div>
 		</div>
 		<div class="stamp-author-info-section">
 			<a href="/author/{{stamp.artistId}}">
 				<div class="author-image">
-					<img src="https://cdn4.iconfinder.com/data/icons/superheroes/512/batman-512.png">
+					<img src="http://cdns2.freepik.com/foto-gratis/vector-de-usuario-avatar-icono_279-10313.jpg">
 				</div>
 				<div class="author">
 					<h6 class="no-padding no-margin author-name">{{stamp.artistName?stamp.artistName:"Anonimo"}}</h6>
 					<span>5 <i class="fa fa-trophy"></i> </span>
 				</div>
 			</a>
+		</div>
+		<div class="stamp-author-info-section" ng-controller="promotionItem" ng-show="showPromotion">
+			<div class="stamp-promotion" >
+
+				<div><h5 class="author">Oferta Especial (%):</h5></div>
+                        <div ng-hide="hasPromotion">
+                            <form class="author"  name="addPromoForm" ng-submit="addPromotion()">
+                            		<div class="input">
+                            			<div class="col-md-6">
+                            				<input size="3"  style="!important;" type="number" min="0" max="99" name="addPromotion" class="form-control" ng-model="promotion" placeholder="Promo" required autofocus />	
+                            			</div>
+	                                    
+	                                    <!-- div role="alert">
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.required" style="color:white">
+	                                            Obligatorio!</span>
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.number" style="color:white">
+	                                            No es un número!</span>
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.min" style="color:white">
+	                                            Debe ser mayor o igual a 0!</span>
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.max" style="color:white">
+	                                            Debe ser menor o igual a 99!</span>
+	                                    </div -->
+	                                    <button class="btn btn-primary " type="submit">
+	                                        <span> Crear!</span>
+	                                        <i class="fa fa-floppy-o"></i>
+	                                    </button>
+	                                </div> 
+                            </form> 
+                        </div>
+                        <div class="author" ng-show="hasPromotion">
+                            <form name="updatePromoForm" ng-submit="updatePromotion()">
+                                <div class="input">
+                                	<div class="col-md-6">
+                                    <input  size="3" style="!important;" type="number" min="0" max="99" name="updatePromotion" class="form-control" ng-model="promotion" placeholder="Promo" required autofocus />
+                                    </div>
+                                    <button class="btn btn-primary " type="submit">
+                                        <span>Actualizar!</span>
+                                    </button>
+                                </div> 
+                            </form> 
+                        </div> 
+                    </div>
 		</div>	
 	</div>
 </div>

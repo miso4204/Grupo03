@@ -89,9 +89,17 @@
 							<span class="item-desc col-md-6 no-padding">Camiseta</span>
 							<span class="item-price col-md-6 no-padding">$ {{shirtOptions.gender[currentProduct.gender].price}}</span>
 						</div>
-						<div clas="row">
+						<div clas="row" ng-show="offerShow">
+							<span class="item-desc col-md-6 no-padding">Descuento</span>
+							<span class="item-price col-md-6 no-padding"><font color="red">$ {{stamp.price - stamp.offerPrice}}</font></span>
+						</div>
+						<div clas="row" ng-show="totalShow">
 							<span class="item-desc col-md-6 no-padding">Total:</span>
 							<span class="item-price col-md-6 no-padding">$ {{stamp.price + shirtOptions.gender[currentProduct.gender].price}}</span>
+						</div>
+						<div clas="row" ng-show="offerShow">
+							<span class="item-desc col-md-6 no-padding">Total:</span>
+							<span class="item-price col-md-6 no-padding">$ {{stamp.price + shirtOptions.gender[currentProduct.gender].price - (stamp.price - stamp.offerPrice)}}</span>
 						</div>
 					</div>
 					<!-- End shirt Price -->

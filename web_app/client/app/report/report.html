@@ -151,7 +151,7 @@
 		                <center>{{idstamp.rating.ratings | number:0}}</center>
 		            </td>
 		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
-		                <center ng-if="idstamp.rating.ratings != 0">{{idstamp.rating.averageRating | number:0}}</center>
+		                <center ng-if="idstamp.rating.ratings != 0">{{idstamp.rating.averageRating | number:2}}</center>
 		                <center ng-if="idstamp.rating.ratings == 0">-</center>
 		            </td>
 		        </tr>
@@ -183,7 +183,7 @@
 		                <center>{{stamp.rating.ratings | number:0}}</center>
 		            </td>
 		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
-		                <center ng-if="stamp.rating.ratings != 0">{{stamp.rating.averageRating | number:0}}</center>
+		                <center ng-if="stamp.rating.ratings != 0">{{stamp.rating.averageRating | number:2}}</center>
 		                <center ng-if="stamp.rating.ratings == 0">-</center>
 		            </td>
 		        </tr>

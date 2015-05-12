@@ -40,7 +40,7 @@ angular.module('webAppApp')
       };
 
     });
-
+    $scope.searchValue="";
     $scope.$watch('viewStampsAdmin', function () {
      
       var result1 = {};
@@ -110,7 +110,6 @@ angular.module('webAppApp')
     
 	})
 
-
   .controller('CreateStampModalCtrl', function ($scope, $modalInstance,Stamp,$rootScope,newStamp,Upload) {
     $scope.newStamp=newStamp;
     $scope.stamp={}
@@ -179,4 +178,23 @@ angular.module('webAppApp')
             }
         }
     };
+  })
+
+  .filter('keyWordsFilter',function(){
+    return function(items, searchValue){
+      if(items){
+        var filtered=[];
+        var len=items.length
+        for (var i = 0 ;i<len;i++) {
+          var item=items[i];
+          var keywords = item.keyWords.toString();
+          var name=item.name?item.name:""
+          if(keywords.indexOf(searchValue)>-1 || name.indexOf(searchValue)>-1)
+          filtered.push(item);        
+        };
+      }else{
+        return;
+      }
+      return filtered;
+    }
   })

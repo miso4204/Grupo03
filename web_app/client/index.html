@@ -85,7 +85,7 @@
                       </a>
                       <ul class="dropdown-menu" role="menu">
                           <li><a href="./change-user-data"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>
-                          <li ng-if="globals.currentUser.userType=='ARTIST'"><a href="{{dirAuthor}}"><i class="fa fa-picture-o"></i> Perfil Artista</a></li>
+                          <li ng-if="globals.currentUser.userType=='ARTIST'"><a href="/author/{{globals.currentUser.userId}}"><i class="fa fa-picture-o"></i> Perfil Artista</a></li>
                           <li ng-if="globals.currentUser.userType=='ADMIN'"><a href="./report"><i class="fa fa-table"></i> Reportes</a></li>
                       </ul> 
                   </li>
@@ -197,6 +197,7 @@
           <script src="app/products/productItem/productItem.directive.js"></script>
           <script src="app/products/products.controller.js"></script>
           <script src="app/products/products.js"></script>
+          <script src="app/promoService/promoService.service.js"></script>
           <script src="app/rateService/rateService.service.js"></script>
           <script src="app/registerService/registerService.service.js"></script>
           <script src="app/report/report.controller.js"></script>

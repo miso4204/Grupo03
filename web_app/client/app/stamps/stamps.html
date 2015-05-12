@@ -29,7 +29,7 @@
         <!-- search box -->
         <div class="col-md-5 no-padding" id="searchbox">
           <div class="input-group no-padding">
-            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="filters.searchBox"></input>
+            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="searchValue"></input>
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" aria-hidden="true" ng-click="filter=filterFuction">Buscar</button>
             </span>
@@ -131,7 +131,7 @@
             <!-- End Modal New Stamps -->
           </div>
           <!-- End New Stamp -->
-        	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
+        	<div ng-repeat="stamp in stamps | keyWordsFilter:searchValue " catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
         </div>
       </div>
     </div>

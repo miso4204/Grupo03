@@ -41,5 +41,28 @@ angular.module('webAppApp')
       link: function (scope, element, attrs) {
       }
     };
+  })
+
+.controller('productItem', function ($scope,$rootScope,rateServiceProd,sessionStorage,$filter) {
+    $scope.isRate = true; 
+    $scope.rate1 = {};
+
+    if (sessionStorage.get("user")) {
+        if(!$rootScope.globals){
+            $rootScope.globals={};
+        }
+        $rootScope.globals.currentUser=sessionStorage.get("user");
+    }
+    console.log($rootScope.globals.currentUser.userType);
+
+    $scope.rateFunction = function (calificat) {
+        $scope.rate1.productId = $scope.product.id;
+        console.log($scope.rate1.calification)
+        rateServiceProd.RateProd($scope.rate1,function(response) {
+                    console.log("rating");                    
+                });
+          
+        }     
+    
   });
 

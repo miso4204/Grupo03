@@ -1,18 +1,70 @@
-<div class="panel col-md-12">
+<div class="panel col-md-12" ng-controller="catalogItem">
 	<div class="col-md-3">
 		<img class="img-thumbnail" src="{{stamp.url}}"</img>
 	</div>
 	<div class="col-md-6">
-		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;<a href="#/stamps/{{stamp.id}}">{{stamp.name}}</a></span></p>
-		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="#/authors/{{stamp.author.id}}">{{stamp.artistName?stamp.artistName:"Anonimo"}}</a></span></p>
+		<br>
+		<p><strong>Nombre:&nbsp;</strong><span>&nbsp;{{stamp.name}}</span></p>
+		<p><strong>Autor:&nbsp;</strong><span>&nbsp;<a href="/author/{{stamp.artistId}}">{{stamp.artistName?stamp.artistName:"Anonimo"}}</a></span></p>
+		<p><strong>Calificación:&nbsp;</strong><span class="stamp-rating"><rating ng-model="stamp.rating.averageRating" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{stamp.rating ? stamp.rating.averageRating:'-' | number:2}}</i></span></p>
+		<p><strong>Calificar:&nbsp;</strong><rating ng-model="rate1.calification" max=5 ng-click="rateFunction(rate1)" on-leave="overStar = null"></rating></p>
+		<br>
+		<div class="stamp-author-info-section text-right" ng-controller="promotionItem" ng-show="showPromotion">
+			<div class="stamp-promotion" >
+
+				<div><h5 class="author">Oferta Especial (%):</h5></div>
+                        <div ng-hide="hasPromotion">
+                            <form class="author"  name="addPromoForm" ng-submit="addPromotion()">
+                            		<div class="input">
+                            			<div class="col-md-6">
+                            				<input size="3"  style="!important;" type="number" min="0" max="99" name="addPromotion" class="form-control" ng-model="promotion" placeholder="Promo" required autofocus />	
+                            			</div>
+	                                    
+	                                    <!-- div role="alert">
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.required" style="color:white">
+	                                            Obligatorio!</span>
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.number" style="color:white">
+	                                            No es un número!</span>
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.min" style="color:white">
+	                                            Debe ser mayor o igual a 0!</span>
+	                                        <span class="error" ng-show="addPromoForm.addPromotion.$error.max" style="color:white">
+	                                            Debe ser menor o igual a 99!</span>
+	                                    </div -->
+	                                    <button class="btn btn-primary " type="submit">
+	                                        <span> Crear!</span>
+	                                        <i class="fa fa-floppy-o"></i>
+	                                    </button>
+	                                </div> 
+                            </form> 
+                        </div>
+                        <div class="author" ng-show="hasPromotion">
+                            <form name="updatePromoForm" ng-submit="updatePromotion()">
+                                <div class="input">
+                                	<div class="col-md-6">
+                                    <input  size="3" style="!important;" type="number" min="0" max="99" name="updatePromotion" class="form-control" ng-model="promotion" placeholder="Promo" required autofocus />
+                                    </div>
+                                    <button class="btn btn-primary " type="submit">
+                                        <span>Actualizar!</span>
+                                    </button>
+                                </div> 
+                            </form> 
+                        </div> 
+                    </div>
+		</div>
 	</div>
+
 	<div class="col-md-3 no-padding no-margin">
 		<p>
-			<h3 class= "text-right no-margin">${{stamp.price}}</h3>
+			<h3 class= "text-right no-margin" ng-if="stamp.offerPrice == 0 || stamp.offerPrice == null">${{stamp.price | number:0}}</h3>
+			<h3 class= "text-right no-margin" ng-if="stamp.offerPrice > 0">${{stamp.offerPrice | number:0}}</h3>
+			<h3 class= "text-right no-margin" ng-if="stamp.offerPrice > 0"><STRIKE>${{stamp.price | number:0}}</STRIKE></h3>
 		</p>
 		<p class="text-right ">
+			<a href="/stamps/{{stamp.id}}">
 			<button class="btn btn-danger"><i class="fa fa-paint-brush"></i>&nbsp; Agregalo a una camiseta </button>
+			</a>
 		</p>
 	</div>
+
 </div>
 
