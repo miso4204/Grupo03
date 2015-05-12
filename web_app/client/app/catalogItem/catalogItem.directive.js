@@ -50,7 +50,7 @@ angular.module('webAppApp')
         }     
     
   })
-  .controller('promotionItem', function ($scope,$rootScope,rateService,sessionStorage,$filter, Promotion) {
+  .controller('promotionItem', function ($scope,$rootScope,rateService,sessionStorage,$filter, Promotion,Stamp,$location) {
     $scope.showPromotion = false;
     $scope.hasPromotion = ($scope.stamp.offerPrice > 0);
     $scope.promotion = 0;

@@ -13,7 +13,17 @@ angular.module('webAppApp')
         }
       }
 
-  		$scope.stamp = Stamp.get({id:$routeParams.id});
+  		$scope.stamp = Stamp.get({id:$routeParams.id},
+         function(){
+            if ($scope.stamp.offerPrice > 0){
+              $scope.offerShow = true ;
+              $scope.totalShow = false ;
+            } else {
+              $scope.offerShow = false ;
+              $scope.totalShow = true ;
+            }      
+            }
+        );
   		$scope.shirtOptions={
   			gender:{
   				female:{
@@ -97,11 +107,18 @@ angular.module('webAppApp')
       $scope.calcPrice=function(){
         return $scope.stamp.price + $scope.shirtOptions.gender[$scope.currentProduct.gender].price;
       };
+      $scope.calcPrice1=function(){
+        return $scope.stamp.price + $scope.shirtOptions.gender[$scope.currentProduct.gender].price - ($scope.stamp.price - $scope.stamp.offerPrice);
+      };   
       $scope.addToCart=function(product){
         if(!$rootScope.products){
           $rootScope.products= []
         }
-        $scope.currentProduct.price=$scope.calcPrice();
+        if ($scope.stamp.offerPrice > 0){
+          $scope.currentProduct.price=$scope.calcPrice1(); 
+        } else {
+          $scope.currentProduct.price=$scope.calcPrice();
+        }
         $scope.currentProduct.url=$scope.stamp.url;
         $scope.currentProduct.colorCode=$scope.shirtOptions.color[$scope.currentProduct.color].code;
         $rootScope.products.push(product);
