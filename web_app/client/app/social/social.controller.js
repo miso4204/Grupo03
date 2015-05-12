@@ -7,15 +7,27 @@ angular.module('webAppApp')
     	$scope.showTwitter = false;
     	$scope.showFacebook = false;
 
-    	var result= twitterService.get(
-            function(){
-                $scope.showTwitter = result;
+    	twitterService.getTwitter(
+            function(response,status){
+                console.log(status);
+                if(status == 200){
+                    $scope.showTwitter = true;
+                }else{
+                    $scope.showTwitter = false;
+                }
+                
             }
         );
 
-        var result1= facebookService.get(
-            function(){
-                $scope.showFacebook = result1;
+        facebookService.getFacebook(
+            function(response,status){
+                console.log(status);
+                if(status == 200){
+                    $scope.showFacebook = true;
+                }else{
+                    $scope.showFacebook = false;
+                }
+                
             }
         );
 

@@ -2,7 +2,7 @@
 
 angular.module('webAppApp')
   .controller('StampDetailCtrl',
-  	function ($scope,$routeParams,$rootScope,Stamp,sessionStorage,Cart,$location) {
+  	function ($scope,$routeParams,$rootScope,Stamp,sessionStorage,Cart,$location,productService) {
       if (sessionStorage.get("user")) {
         if(!$rootScope.globals){
             $rootScope.globals={};
@@ -110,6 +110,34 @@ angular.module('webAppApp')
       $scope.calcPrice1=function(){
         return $scope.stamp.price + $scope.shirtOptions.gender[$scope.currentProduct.gender].price - ($scope.stamp.price - $scope.stamp.offerPrice);
       };   
+      $scope.addProduct = function (product) {
+          if(!$rootScope.products){
+            $rootScope.products= []
+          }
+          if ($scope.stamp.offerPrice > 0){
+            $scope.currentProduct.price=$scope.calcPrice1(); 
+          } else {
+            $scope.currentProduct.price=$scope.calcPrice();
+          }
+          $scope.currentProduct.url=$scope.stamp.url;
+          $scope.currentProduct.colorCode=$scope.shirtOptions.color[$scope.currentProduct.color].code;
+          $rootScope.products.push(product);
+          sessionStorage.set('products',$rootScope.products);
+          var prod = {};
+          prod.stampId=$scope.currentProduct.stampId;
+          prod.price=$scope.currentProduct.price;
+          prod.shippingPrice=5000;
+          prod.size=$scope.currentProduct.size;
+          prod.color=$scope.currentProduct.color.toUpperCase();
+          prod.url=$scope.stamp.url;
+          prod.text=$scope.currentProduct.text.value;
+          console.log($rootScope.globals.currentUser.userId)
+          prod.userId=$rootScope.globals.currentUser.userId
+          productService.postProd(prod,function(response) {
+          $location.path('/stamps');                 
+        });
+          
+      };
       $scope.addToCart=function(product){
         if(!$rootScope.products){
           $rootScope.products= []
