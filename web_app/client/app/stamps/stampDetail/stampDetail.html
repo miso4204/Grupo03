@@ -120,6 +120,13 @@
 							</a>
 						</div>
 					</div>
+					<div class="cart-pay-buttons" ng-if="globals.currentUser.userType=='ADMIN'">
+						<div class="row">
+							<button class="btn btn-success col-md-12" ng-click="addProduct(currentProduct)">
+								<span>Crear Producto</span>
+							</button>
+						</div>
+					</div>
 					<!-- End add to cart button -->
 				</div>
 			</div>

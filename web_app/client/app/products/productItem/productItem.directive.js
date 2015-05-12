@@ -2,8 +2,15 @@
 
 angular.module('webAppApp')
   .directive('productItem', function () {
-    var controller=['$rootScope','CartP', '$scope','sessionStorage', 'Cart', function($rootScope,CartP,$scope,sessionStorage,Cart){
+    var controller=['$rootScope','CartP', '$scope','sessionStorage', 'Cart', '$location', function($rootScope,CartP,$scope,sessionStorage,Cart,$location){
       
+      if (sessionStorage.get("user")) {
+        if(!$rootScope.globals){
+            $rootScope.globals={};
+        }
+        $rootScope.globals.currentUser=sessionStorage.get("user");
+    }
+
       $scope.addToCart=function(product){
         console.log(product)
         if(!$rootScope.products){
@@ -11,8 +18,7 @@ angular.module('webAppApp')
         }
         $rootScope.products.push(product);
         sessionStorage.set('products',$rootScope.products);
-        var prod={};
-        prod.sta
+        product.userId = $rootScope.globals.currentUser.userId;
         CartP.save(product,function(response){
           console.log(response);
           var result = {};
