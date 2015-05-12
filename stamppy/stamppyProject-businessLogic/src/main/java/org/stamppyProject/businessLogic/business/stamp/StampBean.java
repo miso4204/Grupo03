@@ -75,7 +75,7 @@ public class StampBean implements IStamp{
 		Rating rating = ratingDAO.getRatingByStamp(ratingJson.getStampId());
 		if(rating!=null){
 			rating.setRatings(rating.getRatings()+1);
-			rating.setAverageRating(((rating.getAverageRating()*rating.getRatings()-1)+ratingJson.getCalification())/rating.getRatings());
+			rating.setAverageRating(((rating.getAverageRating()*(rating.getRatings()-1))+ratingJson.getCalification())/rating.getRatings());
 			ratingDAO.updateRating(rating);
 		}else{
 			rating = new Rating();

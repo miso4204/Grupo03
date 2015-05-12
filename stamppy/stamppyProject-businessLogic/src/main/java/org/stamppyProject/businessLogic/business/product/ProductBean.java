@@ -58,7 +58,7 @@ public class ProductBean implements IProduct {
 		Rating rating = ratingDAO.getRatingByProduct(ratingJson.getProductId());
 		if(rating!=null){
 			rating.setRatings(rating.getRatings()+1);
-			rating.setAverageRating(((rating.getAverageRating()*rating.getRatings()-1)+ratingJson.getCalification())/rating.getRatings());
+			rating.setAverageRating(((rating.getAverageRating()*(rating.getRatings()-1))+ratingJson.getCalification())/rating.getRatings());
 			ratingDAO.updateRating(rating);
 		}else{
 			rating = new Rating();
