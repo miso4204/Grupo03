@@ -18,7 +18,6 @@ angular.module('webAppApp')
                 console.log($rootScope.products);
                 $scope.idCart = result.id;
                 $rootScope.nroProdCart = $scope.getCantidad();
-                console.log($scope.dataPay)
 
                 if ($rootScope.nroProdCart == 0){
                     $scope.nroProdsCart = true;
@@ -33,13 +32,15 @@ angular.module('webAppApp')
 	      	DelCart.delete({cartId:$scope.idCart, productId:product.id}, function() {
 	      		console.log("eliminado correctamente")
 	      		var result = {};
-			    result= Cart.get({id:$rootScope.userId},
+			    result= Cart.get({id:$rootScope.globals.currentUser.userId},
 			        function(){
+                        sessionStorage.remove("products");
 			            $rootScope.products=result.products;
 			            console.log($rootScope.products);
+                        sessionStorage.set("products",$rootScope.products);
 			            $scope.idCart = result.id;
 			            $rootScope.nroProdCart = $scope.getCantidad();
-			            console.log($scope.dataPay)
+
                         if ($rootScope.nroProdCart == 0){
                             $scope.nroProdsCart = true;
                         } else {

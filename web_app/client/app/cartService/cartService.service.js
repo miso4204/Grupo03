@@ -12,5 +12,11 @@ angular.module('webAppApp')
       var resource = $resource('http://uniandes-msls.rhcloud.com/stamppyProject-service/rest/cart-service/cart/:cartId/:productId', {cartId:'@cartId', productId:'@productId'});
       return resource;      
     }
-  	);;
+  )
+  .factory('CartP', 
+    function ($resource) {
+      var resource = $resource('http://uniandes-msls.rhcloud.com/stamppyProject-service/rest/cart-service/cart/');
+      return resource;      
+    }
+    )
 

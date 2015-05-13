@@ -1,0 +1,36 @@
+<div ng-controller="productItem">
+<div div class="grid-item product">
+	<div class="stamp-wrapper">
+		<div class="stamp-image-section">
+			<div class="stamp-wrapper">
+				<img class="" src="{{product.url}}">
+				<img class="shirt-base" src="http://i.imgur.com/UTpxQpN.png"  style="background-color:{{product.color}}">
+				<img class="shirt-shadow" src="http://i.imgur.com/UTpxQpN.png">
+			</div>
+			<div class="stamp-hover-options">
+				<div class="stamp-buttons">
+					<div class="stamp-it-button">
+						<a>
+							<button type="button" ng-click="addToCart(product)"class="btn btn-danger">
+									<span>Agregar al carrito </span>
+									<i class="fa fa-cart-plus"></i>
+							</button>
+						</a>
+					</div>
+				</div>
+				<div class="stamp-footer">
+					<div class="stamp-price">$ {{product.price/1000}} mil</div>
+				</div>
+			</div>
+		</div>
+		<!-- <div class="stamp-caption-section">
+			<div class="info-section">
+				<h5 class="no-padding no-margin">{{product.name}}</h5>
+				<span class="stamp-rating"><rating ng-model="product.rating.averageRating" max=5  readonly="isRate" on-leave="overStar = null"></rating>{{product.rating ? product.rating.averageRating:'-' | number:2}}</i></span>	
+				<br>		
+				<rating ng-model="rate1.calification" max=5 ng-click="rateFunction(rate1)" on-leave="overStar = null"></rating>
+			</div>
+		</div> -->
+	</div>
+</div>
+</div>

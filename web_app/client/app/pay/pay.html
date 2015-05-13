@@ -1,3 +1,4 @@
+<br>
 <div class="row" ng-show="payVisibility">
     <div class="col-md-6" >
     	<div class="panel panel-body panel-primary col-md-10">
@@ -125,20 +126,32 @@
           	<br>
 	             
 	              	<!-- Pago Contra Entrega -->
-            <button class ="btn botonpay1 btn-primary" ng-click="ShowForm3()"> 
+            <!-- <button class ="btn botonpay1 btn-primary" ng-click="ShowForm3()"> 
               	Pago Contra Entrega <i class="fa fa-truck"></i> </button>
             <br>
-            <br>
-            <form ng-show="formVisibility3" class="form-pay" name="payForm3" > 
+            
+            <form ng-show="formVisibility3" class="form-pay" name="payForm3" ng-submit="pay(dataPay)" method="POST"> 
+            <label for="inputDir" class="label-pay">Dirección Entrega *</label>
+            <input type="direccion" id="inputDir" class="form-control" required autofocus>
+            <label for="inputCiu" class="label-pay">Ciudad Entrega *</label>
+                <select type="ciudad" id="inputCiu" class="form-control"  ng-model="dataPay.type" ng-init="datapay.type='CASH_ON_DELIVERY'" required> 
+                      <option value="CASH_ON_DELIVERY">Barranquilla</option>
+                      <option value="CASH_ON_DELIVERY">Bogotá</option>
+                      <option value="CASH_ON_DELIVERY">Manizales</option>
+                      <option value="CASH_ON_DELIVERY">Medellin</option>
+                      <option value="CASH_ON_DELIVERY">Pereira</option>
+                </select>
+
+            <br>  
         		<center><button class="botonpay btn btn-lg btn-success btn-block" type="submit">Continuar</button></center>
-      		</form> 
+      		</form> --> 
 
     	</div>  
     </div>  
 
     <!-- Detalle Carrito de Compras -->
     <div class="col-md-6">
-      	<div class="wrapper1 col-md-10">
+      	<div class="wrapper1 col-md-11">
             <center><h2>Resumen Pedido</h2></center>
             <div class="wrapper2">
                 <div ng-show="nroProdsCart">
@@ -168,7 +181,7 @@
 	                      	</div>
 	                      	<div class="col-md-3">
 		                        <label class="desprod">1</label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		                        <label class="desprod">$ {{(product.price)}}</label> 
+		                        <label class="desprod">$ {{(product.price) | number:0}}</label> 
 	                      	</div> 
 	                    </div>
 	                </div>
@@ -236,3 +249,33 @@
     </div>  
 </div>
 
+<div class="row" ng-show="DELIVERYShow">
+    <div class="col-md-6 col-md-offset-3" >
+      <div class="panel panel-body panel-primary">
+        <!-- Formulario Pago -->
+          <center><h2>Datos Pago Contra Entrega</h2></center>   
+              <!-- Pago Tarjeta Crédito -->
+          <h4>Su pedido fue registrado exitosamente, en breve nos comunicaremos con usted.</h4>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <label class="prod">Estado Transacción:</label>
+              <br>
+              <label class="prod">Número de Pedido:</label>
+              <br>
+              <label class="prod">Valor:</label>
+              <br>
+            </div> 
+            <div class="col-md-6">
+              <label class="desprod">{{responsePay.status}}</label>
+              <br>
+              <label class="desprod">{{dataPay.cartId}}</label>
+              <br>
+              <label class="desprod">$ {{responsePay.price | number:0}}</label>
+              <br>
+            </div>
+          </div>
+          <center><button class="botonpay btn btn-lg btn-success btn-block" ng-click="terminar()">Terminar</button></center> 
+      </div>  
+    </div>  
+</div>

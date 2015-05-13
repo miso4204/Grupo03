@@ -10,4 +10,13 @@ angular.module('webAppApp')
               });
       return resource;      
     }
+  )
+  .factory('StampId', 
+    function ($resource) {
+      var resource = $resource('http://uniandes-msls.rhcloud.com/stamppyProject-service/rest/stamp-service/:artistId/stamp',
+              {artistId:'@artistId'},{
+                'query': {method: 'GET', isArray: false }
+              });
+      return resource;      
+    }
   );

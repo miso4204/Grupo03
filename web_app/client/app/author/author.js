@@ -6,5 +6,10 @@ angular.module('webAppApp')
       .when('/author', {
         templateUrl: 'app/author/author.html',
         controller: 'AuthorCtrl'
-      });
+      })
+	  .when('/author/:id',{
+       templateUrl: 'app/author/author.html',
+        controller: 'AuthorCtrl'
+      })
+	  ;
   });

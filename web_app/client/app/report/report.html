@@ -1,0 +1,197 @@
+<br>
+<div class="row" >
+    <div class="col-md-2" >
+    	<div class="panel panel-body panel-primary">
+    		<center><h2>Tipo de Reporte</h2></center>
+    		<br>
+    		<center><label>-> Rerpotes de Ventas</label></center>
+        	<center><button class ="btn btn-primary" ng-click="salesId()"> Ventas por Artista </button></center> <br>
+        	<center><button class ="btn btn-primary" ng-click="salesPeriod()"> Ventas por Periodo </button></center> <br>
+        	<center><label>-> Rerpotes de Rating</label></center>
+        	<center><button class ="btn btn-primary" ng-click="ratingId()"> Rating por Artista </button></center> <br>
+        	<center><button class ="btn btn-primary" ng-click="ratings()"> Rating Estampas </button></center>
+
+    	</div>  
+    </div>  
+
+    <!-- Reportes -->
+    <div class="col-md-10">
+		<!-- Reporte Ventas por Id Artista -->
+		<div class="panel panel-body panel-primary" ng-show="SalesIdShow">
+      		<center><h2>Ventas por Artista</h2></center> <br>
+      		<label>
+			  <span  class="nullable">
+			    <select class="form-control" ng-model="SalesArtist" ng-options="artist.id as artist.username for artist in artists">
+			      <option value="">-- Elige Artista --</option>
+			    </select>
+			  </span> <br>
+			</label>  
+          	<br>
+          	<table ng-table="tableParams" class="table">
+		        <tr ng-repeat="idsale in idsales">
+		        	<td data-title="'Id'" sortable="'id'">
+		                <center>{{idsale.stamp.id}}</center>
+		            </td>
+		            <td data-title="'Estampa'">
+		                <center><img ng-src="{{idsale.stamp.url}}" WIDTH=30 HEIGHT=36></center>
+		            </td>
+		            <td data-title="'Name'" sortable="'name'">
+		                <center>{{idsale.stamp.name}}</center>
+		            </td>
+		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
+		                <center>$ {{idsale.stamp.price | number:0}}</center>
+		            </td>
+		            <td data-title="'Vendidos'" sortable="'vendidos'">
+		                <center>{{idsale.numberSales}}</center>
+		            </td>
+		            <td data-title="'Total Vendido'" sortable="'totalVendido'">
+		                <center>$ {{(idsale.stamp.price)*(idsale.numberSales) | number:0}}</center>
+		            </td>
+		        </tr>
+		    </table>
+		</div>
+		
+		<!-- Reporte Ventas por Periodo -->
+      	<div class="panel panel-body panel-primary" ng-show="SalesPeriodShow">
+      		<center><h2>Ventas por Periodo</h2></center> <br>
+      		<div ng-show="ErrorFechaShow" class="alert alert-danger">
+              <center><h5>Fecha Fin debe ser mayor o igual a Fecha Inicio.</h5></center>
+            </div>
+			<div class="row">
+				<form name="reportPeriodForm" ng-submit="genReportPeriod(dataPeriod)" method="GET">
+				<div class="col-md-2">
+					<h4>Fecha Inicio: </h4>		
+				</div>
+				<div class="col-md-3">
+					<div class="row">
+				        <div class="col-md-12">
+				            <p class="input-group">
+				              <input type="text" class="form-control" datepicker-popup="{{format | limitTo:10}}" ng-model="dataPeriod.limiteIni " is-open="opened1" min-date="minDate" max-date="'2039-12-31'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+				              <span class="input-group-btn">
+				                <button type="button" class="btn btn-default" ng-click="open1($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+				              </span>
+				            </p>
+				        </div>
+				    </div>		
+				</div>
+				<div class="col-md-2 ">
+					<h4>Fecha Fin: </h4>		
+				</div>
+				<div class="col-md-3">
+					<div class="row">
+				        <div class="col-md-12">
+				            <p class="input-group">
+				              <input type="input" class="form-control" datepicker-popup="{{format}}" ng-model="dataPeriod.limiteFin" is-open="opened2" min-date="minDate" max-date="'2039-12-31'" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+				              <span class="input-group-btn">
+				                <button type="button" class="btn btn-default" ng-click="open2($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+				              </span>
+				            </p>
+				        </div>
+				    </div>
+				</div>
+				<div class="col-md-2">
+					<center><button class ="btn btn-primary" type="submit"> Generar Reporte </button></center> <br>
+				</div>
+				</form>
+			</div>
+          	<br>
+          	<table ng-table="tableParams" class="table">
+		        <tr ng-repeat="sale in sales">
+		        	<td data-title="'Artista'" sortable="'artist'">
+		                <center>{{sale.stamp.artistName}}</center>
+		            </td>
+		        	<td data-title="'Id Estampa'" sortable="'id'">
+		                <center>{{sale.stamp.id}}</center>
+		            </td>
+		            <td data-title="'Estampa'">
+		                <center><img ng-src="{{sale.stamp.url}}" WIDTH=30 HEIGHT=36></center>
+		            </td>
+		            <td data-title="'Name'" sortable="'name'">
+		                <center>{{sale.stamp.name}}</center>
+		            </td>
+		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
+		                <center>$ {{sale.stamp.price | number:0}}</center>
+		            </td>
+		            <td data-title="'Vendidos'" sortable="'vendidos'">
+		                <center>{{sale.numberSales}}</center>
+		            </td>
+		            <td data-title="'Total Vendido'" sortable="'totalVendido'">
+		                <center>$ {{(sale.stamp.price)*(sale.numberSales) | number:0}}</center>
+		            </td>
+		        </tr>
+		    </table>
+		</div>
+
+		<!-- Reporte Rating por Artista -->
+      	<div class="panel panel-body panel-primary" ng-show="RatingIdShow">
+      		<center><h2>Rating por Artista</h2></center> <br>
+      		<label>
+			  <span  class="nullable">
+			    <select class="form-control" ng-model="RatingArtist" ng-options="artist.id as artist.username for artist in artists">
+			      <option value="">-- Elige Artista --</option>
+			    </select>
+			  </span>
+			</label><br/>
+          	<br>
+          	<table ng-table="tableParams" class="table">
+		        <tr ng-repeat="idstamp in idstamps">
+		        	<td data-title="'Id'" sortable="'id'">
+		                <center>{{idstamp.id}}</center>
+		            </td>
+		            <td data-title="'Estampa'">
+		                <center><img ng-src="{{idstamp.url}}" WIDTH=30 HEIGHT=36></center>
+		            </td>
+		            <td data-title="'Name'" sortable="'name'">
+		                <center>{{idstamp.name}}</center>
+		            </td>
+		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
+		                <center>$ {{idstamp.price | number:0}}</center>
+		            </td>
+		            <td data-title="'Número de Valoraciones'" sortable="'nroValoraciones'">
+		                <center>{{idstamp.rating.ratings | number:0}}</center>
+		            </td>
+		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
+		                <center ng-if="idstamp.rating.ratings != 0">{{idstamp.rating.averageRating | number:2}}</center>
+		                <center ng-if="idstamp.rating.ratings == 0">-</center>
+		            </td>
+		        </tr>
+		    </table>
+		</div>
+		
+		<!-- Reporte Rating Estampas -->
+      	<div class="panel panel-body panel-primary" ng-show="RatingsShow">
+      		<center><h2>Rating Estampas</h2></center> <br>
+          	<br>
+          	<table ng-table="tableParams" class="table">
+		        <tr ng-repeat="stamp in stamps">
+		        	<td data-title="'Artista'" sortable="'artist'">
+		                <center>{{stamp.artistName}}</center>
+		            </td>
+		        	<td data-title="'Id Estampa'" sortable="'id'">
+		                <center>{{stamp.id}}</center>
+		            </td>
+		            <td data-title="'Estampa'">
+		                <center><img ng-src="{{stamp.url}}" WIDTH=30 HEIGHT=36></center>
+		            </td>
+		            <td data-title="'Name'" sortable="'name'">
+		                <center>{{stamp.name}}</center>
+		            </td>
+		            <td data-title="'Precio Unitario'" sortable="'precioUnitario'">
+		                <center>$ {{stamp.price | number:0}}</center>
+		            </td>
+		            <td data-title="'Número Valoraciones'" sortable="'nroValoraciones'">
+		                <center>{{stamp.rating.ratings | number:0}}</center>
+		            </td>
+		            <td data-title="'Calificación Promedio'" sortable="'calificacionPromedio'">
+		                <center ng-if="stamp.rating.ratings != 0">{{stamp.rating.averageRating | number:2}}</center>
+		                <center ng-if="stamp.rating.ratings == 0">-</center>
+		            </td>
+		        </tr>
+		    </table>
+		</div>
+
+
+
+    </div>
+</div>
+

@@ -16,6 +16,11 @@
       <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
       <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
       <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker3.css" />
+      <link rel="stylesheet" href="bower_components/ng-table/dist/ng-table.min.css" />
+      <link rel="stylesheet" href="bower_components/angular-social/angular-social.css" />
+      <link rel="stylesheet" href="bower_components/bootstrap-select/dist/css/bootstrap-select.css" />
       <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,client}) app/app.css -->
@@ -25,9 +30,13 @@
       <link rel="stylesheet" href="app/author/author.css">
       <link rel="stylesheet" href="app/cart/cart.css">
       <link rel="stylesheet" href="app/catalogItem/catalogItem.css">
+      <link rel="stylesheet" href="app/change-user-data/change-user-data.css">
       <link rel="stylesheet" href="app/login/login.css">
       <link rel="stylesheet" href="app/main/main.css">
       <link rel="stylesheet" href="app/pay/pay.css">
+      <link rel="stylesheet" href="app/products/productItem/productItem.css">
+      <link rel="stylesheet" href="app/products/products.css">
+      <link rel="stylesheet" href="app/report/report.css">
       <link rel="stylesheet" href="app/stamps/stamps.css">
       <link rel="stylesheet" href="components/modal/modal.css">
       <!-- endinjector -->
@@ -41,7 +50,7 @@
     <!-- Add your site or application content here -->
      <div class="col-md-12">
       <!-- header -->
-      <div class="header">
+      <div class="header" ng-controller='NavBarCtrl'>
         <nav class="navbar navbar-default navbar-fixed-top navbar-inverse">
           <div class="container">
             <div class="navbar-header page-scroll">
@@ -59,7 +68,13 @@
                       <a href=""></a>
                   </li>
                   <li ng-show="!globals.currentUser.authenticated">
-                      <a href="/login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó  Registrarse </a>
+                      <a href="/login"><i class="fa fa-sign-in">&nbsp; &nbsp;</i>Iniciar Sesión ó Registrarse </a>
+                  </li>
+                  <li ng-show="globals.currentUser.authenticated">
+                      <a href="./products"> Productos</a>
+                  </li>
+                  <li ng-show="globals.currentUser.authenticated">
+                      <a href="./stamps"> Estampas</a>
                   </li>
                   <!-- user options dropdown -->
                  
@@ -69,16 +84,17 @@
                         <i class="fa fa-user fa-fw"></i>{{globals.currentUser.username}}<span class="caret"></span>
                       </a>
                       <ul class="dropdown-menu" role="menu">
-                          <li><a href="#"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>                                
-                          <li><a href="#"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
-                          <li><a href="#"><i class="fa fa-truck fa-fw"></i> Pedidos</a></li>
-                          <li class="divider"></li>
-                          <li ><a ng-click='logout()'><i class="fa fa-sign-out fa-fw"></i> Cerrar Sesión</a></li>
+                          <li><a href="./change-user-data"><i class="fa fa-user fa-fw"></i> Mi Usuario</a></li>
+                          <li ng-if="globals.currentUser.userType=='ARTIST'"><a href="/author/{{globals.currentUser.userId}}"><i class="fa fa-picture-o"></i> Perfil Artista</a></li>
+                          <!-- <li ng-if="globals.currentUser.userType=='ADMIN'"><a href="./report"><i class="fa fa-table"></i> Reportes</a></li> -->
                       </ul> 
                   </li>
                   <!-- End user options dropdown -->
+                  <li ng-show="globals.currentUser.authenticated" ng-if="globals.currentUser.userType=='CLIENT'">
+                      <a href="./cart"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">{{nroProdCart}}</span></a>
+                  </li>
                   <li ng-show="globals.currentUser.authenticated">
-                      <a href="./cart"><i class="fa fa-shopping-cart fa-fw"></i><span class="badge">{{globals.currentUser.products}}</span></a>
+                      <a href="/login" ng-click="logout()"><i class="fa fa-sign-out"></i>Cerrar Sesión </a>
                   </li>
               </ul>
             </div>
@@ -91,19 +107,18 @@
     </div>
                      
     <footer>
-        <div class="container">
             <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Hexagram , Universidad de los Andes 2015</span>
+                <div class="col-md-3 col-md-offset-1">
+                    <center><span class="copyright">Copyright &copy; Hexagram , Universidad de los Andes 2015</span></center>
                 </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
+                <div class="col-md-4" ng-controller="SocialCtrl">
+                    <ul ng-social-buttons class="col-span-6 col-push-3" style="margin-top:150px"
+                         data-url="'https://stamppy.herokuapp.com/'"
+                         data-title="'Stamppy, la mejor opción para personalizar tus camisetas.'"
+                         data-description="'Personaliza tus camisetas con las Mejores Estampas.'"
+                         data-image="''">
+                        <li ng-show="showFacebook" class="ng-social-facebook">Facebook</li>
+                        <li ng-show="showTwitter" class="ng-social-twitter">Twitter</li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -115,7 +130,7 @@
                     </ul>
                 </div>
             </div>
-        </div>
+        
     </footer>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
@@ -144,6 +159,18 @@
       <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
       <script src="bower_components/lodash/dist/lodash.compat.js"></script>
       <script src="bower_components/angular-ui-select/dist/select.js"></script>
+      <script src="bower_components/highcharts-release/highcharts.js"></script>
+      <script src="bower_components/highcharts-release/highcharts-more.js"></script>
+      <script src="bower_components/highcharts-release/modules/exporting.js"></script>
+      <script src="bower_components/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+      <script src="bower_components/ng-table/dist/ng-table.min.js"></script>
+      <script src="bower_components/highcharts-ng/dist/highcharts-ng.js"></script>
+      <script src="bower_components/ng-file-upload/ng-file-upload.js"></script>
+      <script src="bower_components/ng-file-upload-shim/ng-file-upload-shim.js"></script>
+      <script src="bower_components/angular-social/angular-social.js"></script>
+      <script src="bower_components/bootstrap-select/dist/js/bootstrap-select.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-canvas-painter/dist/angular-canvas-painter.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -156,20 +183,36 @@
           <script src="app/cart/cart.js"></script>
           <script src="app/cartService/cartService.service.js"></script>
           <script src="app/catalogItem/catalogItem.directive.js"></script>
+          <script src="app/change-user-data/change-user-data.controller.js"></script>
+          <script src="app/change-user-data/change-user-data.js"></script>
           <script src="app/login/login.controller.js"></script>
           <script src="app/login/login.js"></script>
           <script src="app/loginService/loginService.service.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/navBar/navBar.controller.js"></script>
           <script src="app/pay/pay.controller.js"></script>
           <script src="app/pay/pay.js"></script>
           <script src="app/payService/payService.service.js"></script>
+          <script src="app/products/Product/Product.service.js"></script>
+          <script src="app/products/productItem/productItem.directive.js"></script>
+          <script src="app/products/products.controller.js"></script>
+          <script src="app/products/products.js"></script>
+          <script src="app/promoService/promoService.service.js"></script>
+          <script src="app/rateService/rateService.service.js"></script>
           <script src="app/registerService/registerService.service.js"></script>
+          <script src="app/report/report.controller.js"></script>
+          <script src="app/report/report.js"></script>
+          <script src="app/reportService/reportService.service.js"></script>
           <script src="app/sessionStorage/sessionStorage.service.js"></script>
+          <script src="app/social/social.controller.js"></script>
+          <script src="app/socialService/socialService.service.js"></script>
           <script src="app/stamps/Stamp/Stamp.service.js"></script>
+          <script src="app/stamps/createStampModal/createStampModal.controller.js"></script>
           <script src="app/stamps/stampDetail/stampDetail.controller.js"></script>
           <script src="app/stamps/stamps.controller.js"></script>
           <script src="app/stamps/stamps.js"></script>
+          <script src="app/user/user.service.js"></script>
           <script src="components/modal/modal.service.js"></script>
           <script src="components/navbar/navbar.controller.js"></script>
           <!-- endinjector -->

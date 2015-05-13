@@ -6,19 +6,30 @@
     <div id="view-options" class="panel panel-default no-margin">
       <div class="panel-body no-padding">
         <!-- view mode -->
-        <div class="col-md-3 btn-group no-padding">
+        <div class="col-md-4 btn-group no-padding">
+          <span  class="nullable col-md-6" ng-show="showStamps">
+          <select class="form-control" ng-model="viewStamps" ng-init="viewStamps='Todas'">
+            <option value="Todas">Todas</option>
+            <option value="Artist" ng-if="globals.currentUser.userType=='ARTIST'">Estampas {{globals.currentUser.username}}</option>
+          </select>
+          </span>
+          <span  class="nullable col-md-6" ng-show="showStampsAdmin">
+          <select class="form-control" ng-model="viewStampsAdmin" ng-init="viewStampsAdmin='Todas'" ng-options="artist.id as artist.username for artist in artists">
+            <option value="Todas">-- Todas --</option>
+          </select>
+          </span>
           <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'grid'" tooltip="Ver en modo galleria">
             <span class="glyphicon glyphicon-th"></span>
           </label>
-          <label class="btn btn-default col-md-6" ng-model="viewOptions.viewMode" btn-radio="'list'" tooltip="Ver en modo lista">
+          <!-- <label class="btn btn-default col-md-3" ng-model="viewOptions.viewMode" btn-radio="'list'" tooltip="Ver en modo lista">
             <span class="glyphicon glyphicon-th-list"></span>
-          </label>
+          </label> -->
         </div>
         <!-- End view mode -->
         <!-- search box -->
-        <div class="col-md-6 no-padding" id="searchbox">
+        <div class="col-md-5 no-padding" id="searchbox">
           <div class="input-group no-padding">
-            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="filters.searchBox"></input>
+            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="searchValue"></input>
             <span class="input-group-btn">
               <button class="btn btn-default" type="button" aria-hidden="true" ng-click="filter=filterFuction">Buscar</button>
             </span>
@@ -26,9 +37,9 @@
         </div>
         <!-- End search box -->
         <!-- sort mode -->
-        <div class="col-md-3 no-padding">
+        <!-- <div class="col-md-3 no-padding dropdown-wrapper" >
           <div class="btn-group no-padding" dropdown>
-            <button class="btn btn-default" type="button" >Odernar por:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-default" type="button" >Odernar por:</button>
             <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
               <span class="caret"></span>
               <span class="sr-only"> Split!</span>
@@ -39,7 +50,7 @@
               <li><a href="">Calificacion</a></li>
             </ul>
           </div>
-        </div>
+        </div> -->
         <!-- End sort mode -->
       </div>
     </div>
@@ -49,7 +60,140 @@
     <div class="panel panel-info">
       <div class="panel-body stamp-catalog">
       	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
-        	<div ng-repeat="stamp in stamps" catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
+          <!-- Upload Stamp -->
+          <div ng-if="globals.currentUser.userType=='ARTIST'"class="grid-item">
+            <div class="add-stamp-item" ng-click="openModal('upload')">
+              <div>
+                <i></i>
+                <span>Subir Estampa</span>
+              </div>
+            </div>
+            <!-- Modal New Stamps -->
+            <script type="text/ng-template" id="createStampModal.html">
+                <!-- Modal add stamp -->
+                  <div class="modal-header">
+                    <h3 class="modal-title">Crear Estampa</h3>
+                    <button class="btn btn-danger close-button" ng-click="cancel()">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="newStamp" ng-submit="addStamp()">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Nombre</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.stampName" type="text" class="form-control"required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Precio</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.price"  type="number" class="form-control" required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>KeyWords</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.keywords" class="form-control">
+                        </div>
+                      </div>
+                      <fieldset><legend>Estampa</legend>
+                        <div ngf-drop="" ngf-select="" ng-model="files" ng-model-rejected="rejFiles" ngf-drag-over-class="{accept:'dragover', reject:'dragover-err', delay:100}" class="drop-box" ngf-multiple="false"  ngf-accept="'image/*'" ngf-drop-available="dropAvailable">
+                          <div class="inner-message" ng-show="!imageLoaded">
+                            <div ng-hide="dropAvailable">Tu navegador no soporta subir imagenes :(</div>
+                            <div ng-show="dropAvailable">Arrastra tu estampa aca o da clic para seleccionarla .
+                            </div>
+                          </div>
+                          <div class="image-load" ng-show="imageLoaded">
+                            <img src="{{stamp.url}}">
+                          </div>
+                        </div>
+                      </fieldset>
+                      <div class="progress-bar-wrapper">
+                        <progressbar class="progress-striped active" value="loadValue" type="info">
+                          <i>{{loadValue}} % </i>
+                        </progressbar>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="alert-wrapper col-md-8 no-padding">
+                          <label ng-show="showAlert" class="col-md-12" ng-class="alertError ? 'alert alert-danger' :'alert alert-success'">{{alertMessage}}</label>
+                        </div>
+                        <input type="submit" class="btn btn-default" value="Agregar" ng-show="addButton"/>
+                        
+                      </div>
+                    </form>
+                  </div>
+            </script>
+            <!-- End Modal New Stamps -->
+          </div>
+          <!-- Draw Stamp -->
+          <div ng-if="globals.currentUser.userType=='ARTIST'"class="grid-item">
+            <div class="add-stamp-item" ng-click="openModal('draw')">
+              <div>
+                <i></i>
+                <span>Dibujar Estampa</span>
+              </div>
+            </div>
+            <!-- Modal Draw Stamps -->
+            <script type="text/ng-template" id="drawStampModal.html">
+                <!-- Modal add stamp -->
+                  <div class="modal-header">
+                    <h3 class="modal-title">Crear Estampa</h3>
+                    <button class="btn btn-danger close-button" ng-click="cancel()">&times;</button>
+                  </div>
+                  <div class="modal-body">
+                    <form name="newStamp" ng-submit="uploadCanvas()">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Nombre</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.stampName" type="text" class="form-control"required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>Precio</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.price"  type="number" class="form-control" required/>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-4">
+                          <label>KeyWords</label>
+                        </div>
+                        <div class="col-md-8">
+                          <input ng-model="newStamp.keywords" class="form-control">
+                        </div>
+                      </div>
+                      <div class="draw-box" pw-canvas options="{color: model.myColor,height: 300,width:555}"></div>
+                      <div pw-color-selector="['#000', '#00f', '#0f0', '#f00']" color="model.myColor"></div>
+                      <div class="progress-bar-wrapper">
+                        <progressbar class="progress-striped active" value="loadValue" type="info">
+                          <i>{{loadValue}} % </i>
+                        </progressbar>
+                      </div>
+                      <div class="modal-footer">
+                        <div class="alert-wrapper col-md-8 no-padding">
+                          <label ng-show="showAlert" class="col-md-12" ng-class="alertError ? 'alert alert-danger' :'alert alert-success'">{{alertMessage}}</label>
+                        </div>
+
+                        <input type="submit" class="btn btn-default" value="Agregar" ng-show="addButton"/>
+                        
+                      </div>
+                    </form>
+                  </div>
+            </script>
+            <!-- End Modal New Stamps -->
+          </div>
+
+          <!-- End New Stamp -->
+        	<div ng-repeat="stamp in stamps | keyWordsFilter:searchValue " catalog-item stamp="stamp" view-mode="viewOptions['viewMode']"></div>
         </div>
       </div>
     </div>
