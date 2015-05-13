@@ -62,7 +62,7 @@
       	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
           <!-- Upload Stamp -->
           <div ng-if="globals.currentUser.userType=='ARTIST'"class="grid-item">
-            <div class="add-stamp-item" ng-click="open()">
+            <div class="add-stamp-item" ng-click="openModal('upload')">
               <div>
                 <i></i>
                 <span>Subir Estampa</span>
@@ -132,14 +132,14 @@
           </div>
           <!-- Draw Stamp -->
           <div ng-if="globals.currentUser.userType=='ARTIST'"class="grid-item">
-            <div class="add-stamp-item" ng-click="open()">
+            <div class="add-stamp-item" ng-click="openModal('draw')">
               <div>
                 <i></i>
                 <span>Dibujar Estampa</span>
               </div>
             </div>
             <!-- Modal Draw Stamps -->
-            <script type="text/ng-template" id="createStampModal.html">
+            <script type="text/ng-template" id="drawStampModal.html">
                 <!-- Modal add stamp -->
                   <div class="modal-header">
                     <h3 class="modal-title">Crear Estampa</h3>

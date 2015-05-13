@@ -69,11 +69,11 @@ angular.module('webAppApp')
       };
 
     });
-
-    $scope.open = function () {
-      $modal.open(
+    $scope.openModal=function(mode){
+      if(mode=="draw"){
+        $modal.open(
         {
-          templateUrl: 'createStampModal.html',
+          templateUrl: 'drawStampModal.html',
           controller: 'CreateStampModalCtrl',
           size: 's',
           backdrop: true,
@@ -84,6 +84,21 @@ angular.module('webAppApp')
           }
         }
       )
+      }else{
+        $modal.open(
+          {
+            templateUrl: 'createStampModal.html',
+            controller: 'CreateStampModalCtrl',
+            size: 's',
+            backdrop: true,
+             resolve: {
+                newStamp: function () {
+                    return $scope.newStamp;
+                },
+            }
+          }
+        )
+      }
     }
     $scope.newStamp={
       stampName:null,
