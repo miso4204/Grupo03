@@ -1,6 +1,7 @@
+<br>
 <div class="row">
         <!-- Detalle Carrito de Compras -->
-	<div class="wrapper1 col-md-7 col-md-offset-1">
+	<div class="wrapper1 col-md-7 col-md-offset-2">
 		<center><h2>Resumen Pedido</h2></center>
         <div class="wrapper2">
             <div ng-show="nroProdsCart
@@ -16,14 +17,14 @@
                 <div class="listprod col-md-8">
                   <div class="row">
                      <label class="prod col-md-2">Texto:</label>
-                     <label class="desprod col-md-2">{{product.text.value ? product.text.value: "Sin texto"}}</label>
+                     <label class="desprod col-md-10">{{product.text ? product.text: "Sin texto"}}</label>
                   </div>
                     <div class="row">
                       	<div class="col-md-2">
                         	<label class="prod">Color :</label> <br>
                         	<label class="prod">Talla :</label> 
                       	</div> 
-                      	<div class="col-md-2">
+                      	<div class="col-md-3">
                         	<label class="desprod">{{product.color}}</label> <br>
                         	<label class="desprod">{{product.size}}</label> 
                       	</div> 
@@ -31,9 +32,9 @@
                         	<label class="prod">Cantidad:</label> <br>
                         	<label class="prod">Valor:</label>  
                       	</div>
-                      	<div class="col-md-2">
+                      	<div class="col-md-3">
                         	<label class="desprod">1</label> <br>
-                        	<label class="desprod">$ {{(product.price)}}</label> 
+                        	<label class="desprod">$ {{(product.price | number:0)}}</label> 
                       	</div> 
                       	<div class="col-md-2">
                         	<a ng-click="deleteFromCart(product)" >Eliminar</a>
@@ -52,7 +53,7 @@
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                   <!-- <label class="prod"><h4>  {{getCantidad()}}</h4></label> <br> -->
-                  <label class="prod"><h4>$ {{getTotal()}}</h4></label> 
+                  <label class="prod"><h4>$ {{getTotal() | number:0}}</h4></label> 
                 </div>
           	</div>
       	</div>

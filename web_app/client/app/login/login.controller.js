@@ -3,7 +3,22 @@
 angular.module('webAppApp')
   .controller('LoginCtrl',['$scope', '$routeParams','$rootScope', '$location', 'loginService', 'registerService', 'Cart','sessionStorage',
 		function($scope,$routeParams,$rootScope,$location,loginService,registerService,Cart,sessionStorage){
-			$scope.loginForm={};
+			$rootScope.globals={};
+            if (sessionStorage.get("user")) {
+              if(!$rootScope.globals){
+                  $rootScope.globals={};
+              }
+              $rootScope.globals.currentUser=sessionStorage.get("user");
+              if(sessionStorage.get("products")){
+                  $rootScope.products=sessionStorage.get("products");
+              }
+            }
+            if($rootScope.globals.currentUser){
+                if($rootScope.globals.currentUser.authenticated)
+                    $location.path('/stamps');
+            }
+            
+            $scope.loginForm={};
 			$scope.registerForm={};
             $scope.products = [];
             $scope.dataUser = {};
@@ -12,9 +27,6 @@ angular.module('webAppApp')
             $scope.passwordConfirm = "";
             $scope.test=function(){
                 console.log("hola");
-            };
-            $scope.logout=function() {
-              loginService.ClearCredentials();
             };
 			$scope.login = function (credentials) {
 				loginService.login(credentials,function(response) {
@@ -31,13 +43,16 @@ angular.module('webAppApp')
             $scope.loadProducts=function(){
                 var result = {};
                 var user =sessionStorage.get("user");
-                result= Cart.get({id:user.userId},
-                    function(response){
-                        $rootScope.products=response.products;
-                        $rootScope.nroProdCart=$scope.products.length;
-                        sessionStorage.set('products',$rootScope.products);
+                if ($rootScope.globals.currentUser.userType=='CLIENT'){
+                    result= Cart.get({id:user.userId},
+                        function(response){
+                            $rootScope.products=response.products;
+                            $rootScope.nroProdCart=$rootScope.products.length;
+                            sessionStorage.set('products',$rootScope.products);
                     }
-                );
+                );    
+                }
+                
             };
 			$scope.getFieldCssClass=function(ngModelController){
 				if(ngModelController.$pristine) return "";

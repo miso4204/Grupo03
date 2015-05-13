@@ -5,7 +5,14 @@ angular.module('webAppApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngAnimate', 
+  'ngSanitize', 
+  'ngTable', 
+  'highcharts-ng',
+  'ngFileUpload',
+  'ngSocial',
+  'pw.canvas-painter',
 ])
   .config(function ($routeProvider,$locationProvider) {
     $routeProvider
@@ -38,8 +45,18 @@ angular.module('webAppApp', [
         templateUrl:'cart/cart.html',
         controller:'CartCtrl'
       })
+      .when('/report',{
+        templateUrl:'report/report.html',
+        controller:'ReportCtrl'
+      })
       .otherwise({
         redirectTo: '/login'
       });
     $locationProvider.html5Mode(true);
-  });
+  
+})
+.config(
+    ['$animateProvider',
+    function ($animateProvider) {
+        $animateProvider.classNameFilter(/carousel/);
+    }]);

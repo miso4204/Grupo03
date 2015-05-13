@@ -1,0 +1,50 @@
+<div layout="row">
+  <!-- ******************* -->
+  <!-- catalog panel -->
+  <div class="col-md-12 panel panel-info no-padding ">
+    <!-- view options -->
+    <div id="view-options" class="panel panel-default no-margin">
+      <div class="panel-body no-padding">
+        <!-- search box -->
+        <div class="col-md-9 no-padding" id="searchbox">
+          <div class="input-group no-padding">
+            <input class="form-control" type="text" placeholder="#Busqueda" id="sizing-addon1"  ng-model="filters.searchBox"></input>
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button" aria-hidden="true" ng-click="filter=filterFuction">Buscar</button>
+            </span>
+          </div>
+        </div>
+        <!-- End search box -->
+        <!-- sort mode -->
+        <div class="col-md-3 no-padding dropdown-wrapper">
+          <div class="btn-group no-padding" dropdown>
+            <button class="btn btn-default" type="button" >Odernar por:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            <button class="btn btn-default dropdown-toggle" type="button" dropdown-toggle>
+              <span class="caret"></span>
+              <span class="sr-only"> Split!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="">Precio mayor - menor</a></li>
+              <li><a href="">Precio menor - mayor</a></li>
+              <li><a href="">Calificacion</a></li>
+            </ul>
+          </div>
+        </div>
+        <!-- End sort mode -->
+      </div>
+    </div>
+    <!-- End view options -->
+
+    <!-- Stamps -->
+    <div class="panel panel-info">
+      <div class="panel-body stamp-catalog">
+      	<div class="{{viewOptions['viewMode']=='grid' ? 'masonry':'list'}}">
+        	<div ng-repeat="product in products track by $index" product-item product="product" view-mode="viewOptions['viewMode']"></div>
+        </div>
+      </div>
+    </div>
+    <!-- End Stamps -->
+  </div>
+  <!-- End catalog panel -->
+</div>
+ 

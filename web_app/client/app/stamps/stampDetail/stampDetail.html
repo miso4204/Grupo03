@@ -54,18 +54,18 @@
 					</div>
 					<!-- End shirt size -->
 					<!-- Shirt Color -->
-					<div class="shirt-color">
+					<!-- <div class="shirt-color">
 						<div class="label-wrapper">
 							<span> Color </span>
 						</div>
 						<div class="btn-group color-grid">
 		                  <label class="btn"  ng-model="currentProduct.color" ng-repeat="(color, props) in shirtOptions.color" btn-radio="'{{props.name}}'" style='background:{{props.code}}' title="{{props.name}}">&nbsp;</label>
 		                </div>
-					</div>	
+					</div>	 -->
 					<!-- End shirt color -->
 
 					<!-- Shirt text -->
-					<div class="shirt-text">
+					<!-- <div class="shirt-text">
 						<div class="label-wrapper">
 							<span> Texto </span>
 						</div>
@@ -73,7 +73,7 @@
 						<div class="btn-group color-grid">
 		                  <label class="btn"  ng-model="currentProduct.text.color" ng-repeat="(color, props) in shirtOptions.color" btn-radio="'{{props.name}}'" style='background:{{props.code}}' title="{{props.name}}"></label>
 		                </div>
-					</div>
+					</div> -->
 					<!-- End shirt text -->
 					<div class="social-box"></div>
 				</div>
@@ -89,14 +89,22 @@
 							<span class="item-desc col-md-6 no-padding">Camiseta</span>
 							<span class="item-price col-md-6 no-padding">$ {{shirtOptions.gender[currentProduct.gender].price}}</span>
 						</div>
-						<div clas="row">
+						<div clas="row" ng-show="offerShow">
+							<span class="item-desc col-md-6 no-padding">Descuento</span>
+							<span class="item-price col-md-6 no-padding"><font color="red">$ {{stamp.price - stamp.offerPrice}}</font></span>
+						</div>
+						<div clas="row" ng-show="totalShow">
 							<span class="item-desc col-md-6 no-padding">Total:</span>
 							<span class="item-price col-md-6 no-padding">$ {{stamp.price + shirtOptions.gender[currentProduct.gender].price}}</span>
+						</div>
+						<div clas="row" ng-show="offerShow">
+							<span class="item-desc col-md-6 no-padding">Total:</span>
+							<span class="item-price col-md-6 no-padding">$ {{stamp.price + shirtOptions.gender[currentProduct.gender].price - (stamp.price - stamp.offerPrice)}}</span>
 						</div>
 					</div>
 					<!-- End shirt Price -->
 					<!-- add to cart button -->
-					<div class="cart-pay-buttons">
+					<div class="cart-pay-buttons" ng-if="globals.currentUser.userType=='CLIENT'">
 						<div class="row">
 							<button class="btn btn-success col-md-12" ng-click="addToCart(currentProduct)">
 								<i class="fa fa-cart-plus"></i>
@@ -110,6 +118,13 @@
 									<span>Ir a pagar</span>
 								</button>
 							</a>
+						</div>
+					</div>
+					<div class="cart-pay-buttons" ng-if="globals.currentUser.userType=='ADMIN'">
+						<div class="row">
+							<button class="btn btn-success col-md-12" ng-click="addProduct(currentProduct)">
+								<span>Crear Producto</span>
+							</button>
 						</div>
 					</div>
 					<!-- End add to cart button -->
